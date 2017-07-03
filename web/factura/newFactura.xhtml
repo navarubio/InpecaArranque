@@ -31,7 +31,7 @@
                                 <p:outputLabel for="departamento" styleClass="text-ouput" value="DEPARTAMENTO" />
                                 <p:outputLabel id="departamento" value="#{requerimientosController.buscarDepartamento().departamento}" />
                                 <p:outputLabel for="control" styleClass="text-ouput" value="Nro. Control" />
-                                <p:inputMask id="control" mask="99-99999999" value="#{facturasController.factura.numerocontrol}" title="#{bundle.CreateFacturaTitle_controlfactura}" required="true"/>
+                                <p:inputMask id="control" mask="99-99999" value="#{facturasController.factura.numerocontrol}" title="#{bundle.CreateFacturaTitle_controlfactura}" required="true"/>
                                 <p:outputLabel for="client" styleClass="text-ouput" value="Cliente"/>
                                 <p:selectOneMenu id="client" value="#{facturasController.cliente}" converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" required="true"> 
                                     <p:ajax event="change" update="rif, direccioncliente, telefono"/>                              

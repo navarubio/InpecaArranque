@@ -68,6 +68,9 @@ public class Factura implements Serializable {
     @Column(name = "numerofact")
     private Integer numerofact;
     @Size(max = 11)
+    @Column(name = "serialfactura")
+    private String serialfactura;
+    @Size(max = 11)
     @Column(name = "numerocontrol")
     private String numerocontrol;
     @Column(name = "fecha")
@@ -122,6 +125,14 @@ public class Factura implements Serializable {
         this.numerofact = numerofact;
     }
 
+    public String getSerialfactura() {
+        return serialfactura;
+    }
+
+    public void setSerialfactura(String serialfactura) {
+        this.serialfactura = serialfactura;
+    }
+    
     public String getNumerocontrol() {
         return numerocontrol;
     }

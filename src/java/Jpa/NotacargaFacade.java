@@ -59,6 +59,8 @@ public class NotacargaFacade extends AbstractFacade<Notacarga> implements Notaca
             List<Notacarga> lista = query.getResultList();
             if (!lista.isEmpty()) {
                 ultima = lista.get(0);
+            }else{
+                ultima.setIdnotacarga(0);
             }
         } catch (Exception e) {
             throw e;

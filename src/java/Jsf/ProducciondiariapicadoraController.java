@@ -197,7 +197,8 @@ public class ProducciondiariapicadoraController implements Serializable {
                 movimientoinventariopicadoraEJB.create(moviinventariopro);
                 
 //                inventariopro = inventariopicadoraEJB.buscarAgregado(arti);
-                if(inventa==null){
+                if(inventariopro==null){
+                    inventariopro=new Inventariopicadora();
                     inventariopro.setCodigo(rq.getCodigo());
                     inventariopro.setCantidad(rq.getCantidad());
                     inventariopicadoraEJB.create(inventariopro);
@@ -211,6 +212,7 @@ public class ProducciondiariapicadoraController implements Serializable {
             }
             String fechapro = formateador.format(codPro.getFecha());
             correo = "PRODUCCION PICADORA DE FECHA: " + fechapro
+                    + "HRS TRITURACION: "+ codPro.getHorastrituracion()
                     + "   OBSERVACIONES: " + codPro.getObservaciones();
             subject = "Carga de ProduccionPicadora dia  " + fechapro;
             enviomail = new envioCorreo(correo, subject);

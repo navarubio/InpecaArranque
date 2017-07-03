@@ -72,7 +72,7 @@ public class FacturaFacade extends AbstractFacade<Factura> implements FacturaFac
         String consulta = null;
         Factura ultima = new Factura();
         int numeracion;
-        DecimalFormat myFormatter = new DecimalFormat("00000000"); 
+        DecimalFormat myFormatter = new DecimalFormat("00000"); 
         //formatear la cantidad 
         try {
             consulta = "Select f From Factura f Order By f.numerofact Desc";
@@ -98,7 +98,7 @@ public class FacturaFacade extends AbstractFacade<Factura> implements FacturaFac
         String consulta = null;
         Factura ultima = new Factura();
         int numeracion;
-        DecimalFormat myFormatter = new DecimalFormat("00000000"); 
+        DecimalFormat myFormatter = new DecimalFormat("00000"); 
         //formatear la cantidad 
         try {
             consulta = "Select f From Factura f Order By f.numerofact Desc";

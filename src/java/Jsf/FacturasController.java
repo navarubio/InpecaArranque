@@ -99,6 +99,7 @@ public class FacturasController implements Serializable {
     private List<Requerimiento> listarequerimiento = new ArrayList();
     private int id = 0;
     private List<Requerimiento> requerimientos = null;
+    private String siguiente;
 
     @Inject
     private Factura factura;
@@ -256,6 +257,7 @@ public class FacturasController implements Serializable {
             factura.setTotalgeneral(totaltotal());
             numero = numformat.format(factura.getTotalgeneral());
             cantidadenletras = numletras.Convertir(numero, true);
+            factura.setSerialfactura(siguiente);
             factura.setCantidadenletras(cantidadenletras);
             factura.setSaldopendiente(totaltotal());
             factura.setHora(fechaCadena);
@@ -320,8 +322,9 @@ public class FacturasController implements Serializable {
     }
 
     public String devolversiguientefactura() {
-        String siguiente;
+
         siguiente = facturaEJB.siguientefacturaformat();
+        
         return siguiente;
     }
 

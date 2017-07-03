@@ -649,10 +649,10 @@ public class PagosController implements Serializable {
                     } else if (visualizar == 7) {
                         saldop = ((compra.getMontopendiente() - pagocompra.getTotalpago()) - (compra.getMontopendiente() - montoapagar));
                     }
-                    if (saldop < 1) {
+                    if (saldop <= 0) {
                         tipo = 3;
                     } else {
-                        tipo = 4;
+                        tipo = 4; 
                     }
                     compra.setMontopendiente(saldop);
                     statusfactu = estatusfacturaEJB.cambiarestatusFactura(tipo);
