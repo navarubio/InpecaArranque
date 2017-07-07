@@ -104,7 +104,7 @@
                             </f:facet>
                             <h:outputText value="#{item.codigo.idplandecuenta.descripcioncuenta}"/>
                         </p:column>
-                        <p:column style="text-align: center" headerText="Asociar">                                
+                        <p:column style="text-align: center" headerText="Asociar"  width="50">                                
                             <p:commandLink actionListener="#{articuloController.asignarArticulo(item.codigo)}" update=":dialogo" oncomplete="PF('wdialogo').show();" >
                                 <h:graphicImage library="images" name="apply.png" width="20" height="20" alt="Clasificar Artículo"/> 
                             </p:commandLink>

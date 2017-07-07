@@ -59,7 +59,7 @@
                             </f:facet>
                             <h:outputText value="#{item.rifproveedor}"/>
                         </p:column-->                     
-                        <p:column style="width:20%">
+                        <p:column style="width:20%" filterBy="#{item.rifproveedor.razonsocial}" filterMatchMode="contains" filterStyle="width:120px;">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCompraTitle_razonsocial}"/>
                             </f:facet>
