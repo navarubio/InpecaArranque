@@ -7,6 +7,7 @@ import Jpa.ClienteFacadeLocal;
 import Jpa.DespachadorFacadeLocal;
 import Jpa.DespachopicadoraFacadeLocal;
 import Jpa.DetallenotacargaFacadeLocal;
+import Jpa.EmpresaFacadeLocal;
 import Jpa.InventariopicadoraFacadeLocal;
 import Jpa.MovimientoinventariopicadoraFacadeLocal;
 import Modelo.Notacarga;
@@ -21,6 +22,7 @@ import Modelo.Cliente;
 import Modelo.Despachador;
 import Modelo.Despachopicadora;
 import Modelo.Detallenotacarga;
+import Modelo.Empresa;
 import Modelo.Inventariopicadora;
 import Modelo.Movimientoinventariopicadora;
 import Modelo.Produccionpicadora;
@@ -75,6 +77,8 @@ public class NotacargaController implements Serializable {
     private MovimientoinventariopicadoraFacadeLocal movimientoinventariopicadoraEJB;
     @EJB
     private InventariopicadoraFacadeLocal inventariopicadoraEJB;
+    @EJB
+    private EmpresaFacadeLocal empresaEJB;
 
     private List<Notacarga> items = null;
     private Notacarga selected;
@@ -91,6 +95,9 @@ public class NotacargaController implements Serializable {
     private double totaliva = 0;
     private double totalsubtotal = 0;
     private Camion camion;
+    private envioCorreo enviomail;
+    private String correo;
+    private String correodespacho;
     private double mt3 = 0;
     @Inject
     private Notacarga nota;
@@ -113,6 +120,9 @@ public class NotacargaController implements Serializable {
     private List<Despachador> despachadores;
     private List<Camion> camiones;
     private List<Chofer> choferes;
+    private Empresa empresa;
+    SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
+    DecimalFormat formatearnumero = new DecimalFormat("###,###.##");
     @Inject
     private Despachopicadora despacho;
     @Inject
@@ -144,10 +154,10 @@ public class NotacargaController implements Serializable {
     }
 
     public void setSelected(Notacarga selected) {
-        if (selected!=null){
+        if (selected != null) {
             this.selected = selected;
             detallesnotafiltrados = detallenotacargaEJB.detallesfiltrados(selected);
-            despachosfiltrados = despachopicadoraEJB.despachosfiltrados(selected);            
+            despachosfiltrados = despachopicadoraEJB.despachosfiltrados(selected);
         }
     }
 
@@ -347,7 +357,7 @@ public class NotacargaController implements Serializable {
     public List<Notacarga> getItemsAvailableSelectOne() {
         return getFacade().findAll();
     }
-    
+
     public Notacarga prepareCreate() {
         selected = new Notacarga();
         initializeEmbeddableKey();
@@ -406,7 +416,7 @@ public class NotacargaController implements Serializable {
 
             codnota = ejbFacade.ultimaInsertada();
             number = codnota.getIdnotacarga();
-
+            String material = " ";
             for (Detallenotacarga rq : listadetallenota) {
                 Articulo arti = rq.getCodigo();
                 detalle.setIdnotacarga(codnota);
@@ -417,26 +427,28 @@ public class NotacargaController implements Serializable {
                 detalle.setIva(rq.getIva());
                 detalle.setTotalnota(rq.getTotalnota());
                 detalle.setPordespachar(rq.getCantidad());
+                material = material + detalle.getCodigo().getDescripcion() + " "
+                        + detalle.getCantidad()+ "Mt3 ";
                 detallenotacargaEJB.create(detalle);
+
             }
-//            String subject;
-//            String ultimafactura = ejbFacade.u();
-//            String fechafactu = formateador.format(factura.getFecha());
-//            correo = "FACTURA NRO: " + ultimafactura
-//                    + "  CONTROL: " + factura.getNumerocontrol()
-//                    + "  USUARIO: " + factura.getIdusuario().getNombre()
-//                    + "  DEPARTAMENTO: " + factura.getIdusuario().getIddepartamento().getDepartamento()
-//                    + "  FECHA: " + fechafactu
-//                    + "  CLIENTE: " + factura.getRifcliente().getRazonsocial()
-//                    + "  RIF: " + factura.getRifcliente().getRifcliente()
-//                    + "  SUBTOTAL: " + formatearnumero.format(factura.getBimponiblefact())
-//                    + "  IVA: " + formatearnumero.format(factura.getIvafact())
-//                    + "  TOTAL: " + formatearnumero.format(factura.getTotalgeneral())
-//                    + "  OBSERVACIONES: " + factura.getObservacionesfact();
-//
-//            subject = "Emisión de Factura N° " + ultimafactura;
-//            enviomail = new envioCorreo(correo, subject);
-//            enviomail.start();
+            String subject;
+            String ultimanota = "" + codnota.getIdnotacarga();
+            String fechafactu = formateador.format(selected.getFecha());
+            correo = "NOTA CARGA NRO: " + ultimanota
+                    + "  USUARIO: " + selected.getIdusuario().getNombre()
+                    + "  FECHA: " + fechafactu
+                    + "  CLIENTE: " + selected.getRifcliente().getRazonsocial()
+                    + "  RIF: " + selected.getRifcliente().getRifcliente()
+                    + "  AGREGADO: " + material
+                    + "  SUBTOTAL: " + formatearnumero.format(selected.getBimponible())
+                    + "  IVA: " + formatearnumero.format(selected.getIva())
+                    + "  TOTAL: " + formatearnumero.format(selected.getTotalgeneral())
+                    + "  OBSERVACIONES: " + selected.getObservacionesnotacarga();
+            empresa= empresaEJB.devolverEmpresabase();
+            subject = empresa.getNombrecomercial() + " Nota Carga N° " + ultimanota;
+            enviomail = new envioCorreo(correo, subject);
+            enviomail.start();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La nota de carga se registro exitosamente", "Aviso"));
             limpiarListaArreglo();
         } catch (Exception e) {
@@ -488,24 +500,24 @@ public class NotacargaController implements Serializable {
                         inventariopicadoraEJB.edit(inventariopro);
                     }
 
-        //            String subject;
-                    //            String ultimafactura = ejbFacade.u();
-                    //            String fechafactu = formateador.format(factura.getFecha());
-                    //            correo = "FACTURA NRO: " + ultimafactura
-                    //                    + "  CONTROL: " + factura.getNumerocontrol()
-                    //                    + "  USUARIO: " + factura.getIdusuario().getNombre()
-                    //                    + "  DEPARTAMENTO: " + factura.getIdusuario().getIddepartamento().getDepartamento()
-                    //                    + "  FECHA: " + fechafactu
-                    //                    + "  CLIENTE: " + factura.getRifcliente().getRazonsocial()
-                    //                    + "  RIF: " + factura.getRifcliente().getRifcliente()
-                    //                    + "  SUBTOTAL: " + formatearnumero.format(factura.getBimponiblefact())
-                    //                    + "  IVA: " + formatearnumero.format(factura.getIvafact())
-                    //                    + "  TOTAL: " + formatearnumero.format(factura.getTotalgeneral())
-                    //                    + "  OBSERVACIONES: " + factura.getObservacionesfact();
-                    //
-                    //            subject = "Emisión de Factura N° " + ultimafactura;
-                    //            enviomail = new envioCorreo(correo, subject);
-                    //            enviomail.start();
+//                    String subject;
+//                    String ultimafactura = ejbFacade.u();
+//                    String fechafactu = formateador.format(factura.getFecha());
+//                    correo = "FACTURA NRO: " + ultimafactura
+//                            + "  CONTROL: " + factura.getNumerocontrol()
+//                            + "  USUARIO: " + factura.getIdusuario().getNombre()
+//                            + "  DEPARTAMENTO: " + factura.getIdusuario().getIddepartamento().getDepartamento()
+//                            + "  FECHA: " + fechafactu
+//                            + "  CLIENTE: " + factura.getRifcliente().getRazonsocial()
+//                            + "  RIF: " + factura.getRifcliente().getRifcliente()
+//                            + "  SUBTOTAL: " + formatearnumero.format(factura.getBimponiblefact())
+//                            + "  IVA: " + formatearnumero.format(factura.getIvafact())
+//                            + "  TOTAL: " + formatearnumero.format(factura.getTotalgeneral())
+//                            + "  OBSERVACIONES: " + factura.getObservacionesfact();
+//
+//                    subject = "Emisión de Factura N° " + ultimafactura;
+//                    enviomail = new envioCorreo(correo, subject);
+//                    enviomail.start();
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La nota de despacho se registro exitosamente", "Aviso"));
                     limpiarListaArreglo();
                 } catch (Exception e) {
@@ -582,7 +594,7 @@ public class NotacargaController implements Serializable {
 
     public void asignarNotacarga(Notacarga notaselec) {
         this.idnota = notaselec.getIdnotacarga();
-        this.selected=notaselec;
+        this.selected = notaselec;
         this.notacargadialog = notaselec;
         detallesnotafiltrados = detallenotacargaEJB.detallesfiltrados(notaselec);
         detalle = detallesnotafiltrados.get(0);

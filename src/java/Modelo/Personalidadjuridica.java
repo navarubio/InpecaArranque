@@ -51,6 +51,8 @@ public class Personalidadjuridica implements Serializable {
     private Collection<Cliente> clienteCollection;
     @OneToMany(mappedBy = "idpersonalidad")
     private Collection<Proveedor> proveedorCollection;
+    @OneToMany(mappedBy = "idpersonalidad")
+    private Collection<Empresa> empresaCollection;
 
     public Personalidadjuridica() {
     }
@@ -99,6 +101,15 @@ public class Personalidadjuridica implements Serializable {
 
     public void setProveedorCollection(Collection<Proveedor> proveedorCollection) {
         this.proveedorCollection = proveedorCollection;
+    }
+
+    @XmlTransient
+    public Collection<Empresa> getEmpresaCollection() {
+        return empresaCollection;
+    }
+
+    public void setEmpresaCollection(Collection<Empresa> empresaCollection) {
+        this.empresaCollection = empresaCollection;
     }
 
     @Override

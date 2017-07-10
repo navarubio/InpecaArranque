@@ -68,7 +68,10 @@ public class Empresa implements Serializable {
     @JoinColumn(name = "idcontribuyente", referencedColumnName = "idcontribuyente")
     @ManyToOne
     private Contribuyente idcontribuyente;
- 
+    @JoinColumn(name = "idpersonalidad", referencedColumnName = "idpersonalidad")
+    @ManyToOne
+    private Personalidadjuridica idpersonalidad;
+  
     
     public Empresa() {
     }
@@ -147,6 +150,14 @@ public class Empresa implements Serializable {
 
     public void setIdcontribuyente(Contribuyente idcontribuyente) {
         this.idcontribuyente = idcontribuyente;
+    }
+
+    public Personalidadjuridica getIdpersonalidad() {
+        return idpersonalidad;
+    }
+
+    public void setIdpersonalidad(Personalidadjuridica idpersonalidad) {
+        this.idpersonalidad = idpersonalidad;
     }
 
   

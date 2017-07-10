@@ -712,12 +712,13 @@ public class PagosController implements Serializable {
                         + "  FECHA: " + fechapag
                         + "  PROVEEDOR: " + compra.getRifproveedor().getRazonsocial()
                         + "  RIF: " + compra.getRifproveedor().getRifproveedor()
-                        + "  TIPO PAGO: " + pagocompra.getIdtipopago().getTipopago()
+                        + "  FORMA PAGO: " + pagocompra.getIdtipopago().getTipopago()
                         + "  BANCO: " + pagocompra.getIdcuentabancaria().getIdbanco().getNombrebanco()
                         + "  TOTAL: " + formatearnumero.format(pagocompra.getTotalpago())
+                        + "  SALDO PENDIENTE: " + formatearnumero.format(pagocompra.getSaldopendiente())
                         + "  OBSERVACIONES: " + pagocompra.getObservacionespago();
 
-                subject = "Emisión de Pago N° " + pagocompra.getIdpagocompra();
+                subject = empresa.getNombrecomercial()+ " Emisión de Pago N° " + pagocompra.getIdpagocompra();
                 enviomail = new envioCorreo(correo, subject);
                 enviomail.start();
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Pago fue Almacenado"));

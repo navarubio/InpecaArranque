@@ -2,6 +2,7 @@ package Jsf;
 
 import Jpa.ArticuloFacadeLocal;
 import Jpa.DetalleproduccionpicadoraFacadeLocal;
+import Jpa.EmpresaFacadeLocal;
 import Jpa.InventariopicadoraFacadeLocal;
 import Jpa.MovimientoinventariopicadoraFacadeLocal;
 import Modelo.Produccionpicadora;
@@ -10,11 +11,13 @@ import Jsf.util.JsfUtil.PersistAction;
 import Jpa.ProduccionpicadoraFacadeLocal;
 import Modelo.Articulo;
 import Modelo.Detalleproduccionpicadora;
+import Modelo.Empresa;
 import Modelo.Inventariopicadora;
 import Modelo.Movimientoinventariopicadora;
 import Modelo.Usuario;
 
 import java.io.Serializable;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -48,6 +51,8 @@ public class ProducciondiariapicadoraController implements Serializable {
     private InventariopicadoraFacadeLocal inventariopicadoraEJB;
     @EJB
     private MovimientoinventariopicadoraFacadeLocal movimientoinventariopicadoraEJB;
+    @EJB
+    private EmpresaFacadeLocal empresaEJB;
     
     @Inject
     private Detalleproduccionpicadora detallepro;
@@ -68,6 +73,8 @@ public class ProducciondiariapicadoraController implements Serializable {
     private String correo;
     private Date fechaactual = new Date();
     private envioCorreo enviomail;
+    private Empresa empresa;
+
     private Inventariopicadora inventariomodificar=new Inventariopicadora();
 
     public ProducciondiariapicadoraController() {
@@ -183,12 +190,17 @@ public class ProducciondiariapicadoraController implements Serializable {
 
             codPro = ejbFacade.ultimoInsertado();
             String subject;
+            String material = " ";
+            double totalproduccion=0;
             for (Detalleproduccionpicadora rq : listadetallepro) {
                 Articulo arti = rq.getCodigo();
                 inventariopro = inventariopicadoraEJB.buscarAgregado(arti.getCodigo());
                 detallepro.setIdproduccionpicadora(codPro);
                 detallepro.setCodigo(arti);
                 detallepro.setCantidad(rq.getCantidad());
+                totalproduccion= totalproduccion+detallepro.getCantidad();
+                material = material + detallepro.getCodigo().getDescripcion() + " "
+                        + detallepro.getCantidad()+ "Mt3 ";
                 detalleproduccionpicadoraEJB.create(detallepro);
                 
                 moviinventariopro.setCodigo(arti);
@@ -211,10 +223,13 @@ public class ProducciondiariapicadoraController implements Serializable {
                 }
             }
             String fechapro = formateador.format(codPro.getFecha());
-            correo = "PRODUCCION PICADORA DE FECHA: " + fechapro
-                    + "HRS TRITURACION: "+ codPro.getHorastrituracion()
-                    + "   OBSERVACIONES: " + codPro.getObservaciones();
-            subject = "Carga de ProduccionPicadora dia  " + fechapro;
+            empresa= empresaEJB.devolverEmpresabase();
+            correo = "PRODUCCION PICADORA FECHA: " + fechapro
+                    + " HRS TRITURACION: "+ codPro.getHorastrituracion()
+                    + " AGREGADO TRITURADO: " + material
+                    + " TOTAL MT3 DIA: "+ totalproduccion 
+                    + " OBSERVACIONES: " + codPro.getObservaciones();
+            subject =empresa.getNombrecomercial()+ " Produccion Picadora Dia  " + fechapro;
             enviomail = new envioCorreo(correo, subject);
             enviomail.start();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "La Produccion fue Almacenado ",""));
