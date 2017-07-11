@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     auxiliarrequerimiento.`idauxiliarrequerimiento` AS auxiliarrequerimiento_idauxiliarrequerimiento,
+     auxiliarrequerimiento.`iddepartamento` AS auxiliarrequerimiento_iddepartamento,
+     auxiliarrequerimiento.`idestatusrequerimiento` AS auxiliarrequerimiento_idestatusrequerimiento,
+     auxiliarrequerimiento.`idusuario` AS auxiliarrequerimiento_idusuario,
+     auxiliarrequerimiento.`posibleproveedor` AS auxiliarrequerimiento_posibleproveedor,
+     auxiliarrequerimiento.`telefonoproveedor` AS auxiliarrequerimiento_telefonoproveedor,
+     auxiliarrequerimiento.`descripcion` AS auxiliarrequerimiento_descripcion,
+     auxiliarrequerimiento.`fecharequerimiento` AS auxiliarrequerimiento_fecharequerimiento,
+     auxiliarrequerimiento.`subtotal` AS auxiliarrequerimiento_subtotal,
+     auxiliarrequerimiento.`montoiva` AS auxiliarrequerimiento_montoiva,
+     auxiliarrequerimiento.`montototal` AS auxiliarrequerimiento_montototal,
+     departamento.`iddepartamento` AS departamento_iddepartamento,
+     departamento.`departamento` AS departamento_departamento,
+     estatusrequerimiento.`idestatusrequerimiento` AS estatusrequerimiento_idestatusrequerimiento,
+     estatusrequerimiento.`estatusrequerimiento` AS estatusrequerimiento_estatusrequerimiento
+FROM
+     `departamento` departamento INNER JOIN `auxiliarrequerimiento` auxiliarrequerimiento ON departamento.`iddepartamento` = auxiliarrequerimiento.`iddepartamento`
+     INNER JOIN `estatusrequerimiento` estatusrequerimiento ON auxiliarrequerimiento.`idestatusrequerimiento` = estatusrequerimiento.`idestatusrequerimiento` WHERE auxiliarrequerimiento.`idestatusrequerimiento` = 1]]>
+	</queryString>
+	<field name="auxiliarrequerimiento_idauxiliarrequerimiento" class="java.lang.Integer"/>
+	<field name="auxiliarrequerimiento_iddepartamento" class="java.lang.Integer"/>
+	<field name="auxiliarrequerimiento_idestatusrequerimiento" class="java.lang.Integer"/>
+	<field name="auxiliarrequerimiento_idusuario" class="java.lang.Integer"/>
+	<field name="auxiliarrequerimiento_posibleproveedor" class="java.lang.String"/>
+	<field name="auxiliarrequerimiento_telefonoproveedor" class="java.lang.String"/>
+	<field name="auxiliarrequerimiento_descripcion" class="java.lang.String"/>
+	<field name="auxiliarrequerimiento_fecharequerimiento" class="java.sql.Date"/>
+	<field name="auxiliarrequerimiento_subtotal" class="java.lang.Double"/>
+	<field name="auxiliarrequerimiento_montoiva" class="java.lang.Double"/>
+	<field name="auxiliarrequerimiento_montototal" class="java.lang.Double"/>
+	<field name="departamento_iddepartamento" class="java.lang.Integer"/>
+	<field name="departamento_departamento" class="java.lang.String"/>
+	<field name="estatusrequerimiento_idestatusrequerimiento" class="java.lang.Integer"/>
+	<field name="estatusrequerimiento_estatusrequerimiento" class="java.lang.String"/>
+	<group name="cliente_razonsocial">
+		<groupExpression><![CDATA[$F{auxiliarrequerimiento_idauxiliarrequerimiento}]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="227" height="13" uuid="1a7b2ecc-6866-457e-969d-177a2086da99"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA["INVERSIONES PEDREAÑEZ, C.A".]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="13" width="100" height="12" uuid="5bced9d0-4f76-44cb-a41f-2dbec357a268"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[RIF J-26720565-9]]></text>
+			</staticText>
+			<image>
+				<reportElement x="634" y="-3" width="118" height="47" uuid="753d1aab-962a-4e5f-8f4f-aa1d3635fa60"/>
+				<imageExpression><![CDATA["D:\\APLICACIONES JAVA SE - EE\\SistemaINPECA\\Inpeca\\web\\resources\\images\\LogoInpeca.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="25" width="335" height="12" uuid="bdbcbfdf-13f1-43c7-ad3b-a8080e5a1e53"/>
+				<textElement>
+					<font size="8" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[AV. 3H Entre calles 78 y 79 Residencias Republica PB Local 01 Maracaibo Estado Zulia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="154" y="3" width="394" height="20" uuid="34867c07-73a8-48ed-9283-8f2ca4018671"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RELACION GENERAL DE REQUERIMIENTOS SOLICITADOS]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="54" height="20" uuid="67466b27-1919-471e-a9c0-d8c58651b4f7"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[NUMERO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="54" y="4" width="63" height="20" uuid="c3d1b701-c5d1-4c06-aafb-3efc4b5915ef"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="117" y="5" width="89" height="20" uuid="b68e8447-e6c1-4aaf-b608-807ce6c13682"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEPARTAMENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="216" y="5" width="60" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PROVEEDOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="398" y="5" width="85" height="20" uuid="38855cd7-dfb8-4edd-ada4-37fc12b40c74"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[REQUERIMIENTO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="609" y="4" width="58" height="20" uuid="9e60caad-2501-4c9b-8af6-015026238256"/>
+				<textElement textAlignment="Right">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="677" y="4" width="75" height="20" uuid="dc84d994-5c7c-446f-883b-feb704f7d549"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ESTATUS]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="26" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="54" height="22" uuid="8cb3009c-0bf2-49bf-b073-2169639c3def"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auxiliarrequerimiento_idauxiliarrequerimiento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="54" y="0" width="63" height="22" uuid="c059d5e7-f733-44c5-a55b-4b4015878a0a"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auxiliarrequerimiento_fecharequerimiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="117" y="0" width="99" height="22" uuid="a522a60c-dc1f-46a3-8fb8-ae81de4500a8"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{departamento_departamento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="216" y="0" width="182" height="22" uuid="b5d4ce44-0a4e-41f4-97c2-f313850ff390"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auxiliarrequerimiento_posibleproveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="398" y="0" width="211" height="22" uuid="6c24e338-9d81-42dc-aa07-d5ab5359ef3f"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auxiliarrequerimiento_descripcion}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="609" y="0" width="58" height="22" uuid="898be46b-b0b4-49e6-8e89-961abf8f3735"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{auxiliarrequerimiento_montototal}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="677" y="0" width="75" height="22" uuid="f0b519ae-ba61-43f9-8ef5-bc594a5b6687"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{estatusrequerimiento_estatusrequerimiento}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="33" width="100" height="9" uuid="981c901a-0250-4a68-b429-9e601a083caa"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="589" y="33" width="99" height="20" uuid="692bb79a-4fae-49ee-895c-7bd376903665"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="688" y="33" width="40" height="20" uuid="b973ba96-b3ae-4dee-8dfc-169761e1622e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="298" y="33" width="100" height="9" uuid="03ad79b6-f9ca-4593-92ce-0d78eec316e0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poor Richard" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISMACONTAB WEB ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
