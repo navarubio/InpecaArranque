@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="452"/>
+	<property name="ireport.x" value="308"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="estatus" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaini" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      auxiliarrequerimiento.`idauxiliarrequerimiento` AS auxiliarrequerimiento_idauxiliarrequerimiento,
@@ -51,7 +60,7 @@ FROM
      INNER JOIN `estatusrequerimiento` estatusrequerimiento ON auxiliarrequerimiento.`idestatusrequerimiento` = estatusrequerimiento.`idestatusrequerimiento`
      INNER JOIN `compra` compra ON auxiliarrequerimiento.`idauxiliarrequerimiento` = compra.`idauxiliarrequerimiento`
      INNER JOIN `proveedor` proveedor ON compra.`rifproveedor` = proveedor.`rifproveedor`
-     INNER JOIN `estatusfactura` estatusfactura ON compra.`idestatusfactura` = estatusfactura.`idestatusfactura`]]>
+     INNER JOIN `estatusfactura` estatusfactura ON compra.`idestatusfactura` = estatusfactura.`idestatusfactura`  WHERE compra.`idestatusfactura`= $P{estatus} AND  compra.`fechaorden` BETWEEN $P{fechaini} AND $P{fechafin}  ORDER BY  compra.`fechaorden`]]>
 	</queryString>
 	<field name="auxiliarrequerimiento_idauxiliarrequerimiento" class="java.lang.Integer"/>
 	<field name="auxiliarrequerimiento_iddepartamento" class="java.lang.Integer"/>
@@ -132,12 +141,36 @@ FROM
 	<pageHeader>
 		<band height="23" splitType="Stretch">
 			<staticText>
-				<reportElement x="154" y="3" width="394" height="20" uuid="34867c07-73a8-48ed-9283-8f2ca4018671"/>
+				<reportElement x="194" y="3" width="269" height="20" uuid="34867c07-73a8-48ed-9283-8f2ca4018671"/>
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[RELACION GENERAL DE COMPRAS EFECTUADAS]]></text>
+				<text><![CDATA[RELACION DE COMPRAS EFECTUADAS]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="463" y="3" width="58" height="20" uuid="8269259b-810c-46e9-ada5-ed5377cd98b2"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESDE:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="589" y="3" width="58" height="20" uuid="dc719b5f-bf04-41e4-bfa1-6b764d1d081c"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HASTA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="521" y="3" width="68" height="20" uuid="f2048613-5b0f-4e1e-ae3d-da1c4e87e6f9"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="647" y="3" width="58" height="20" uuid="0df15acf-7fc6-4283-acb0-d325362d08cd"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -150,21 +183,14 @@ FROM
 				<text><![CDATA[COMPRA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="108" y="5" width="63" height="20" uuid="c3d1b701-c5d1-4c06-aafb-3efc4b5915ef"/>
+				<reportElement x="54" y="5" width="63" height="20" uuid="c3d1b701-c5d1-4c06-aafb-3efc4b5915ef"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="171" y="5" width="89" height="20" uuid="b68e8447-e6c1-4aaf-b608-807ce6c13682"/>
-				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
-				</textElement>
-				<text><![CDATA[DPTO]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="270" y="5" width="60" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
+				<reportElement x="117" y="4" width="60" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -199,11 +225,11 @@ FROM
 				<text><![CDATA[IVA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="54" y="4" width="54" height="20" uuid="f279fc5e-c79e-4a42-8337-1376301c0df2"/>
-				<textElement textAlignment="Center">
+				<reportElement x="298" y="5" width="87" height="20" uuid="6915f41f-11d3-4021-b266-0e8b3b5677e9"/>
+				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>
-				<text><![CDATA[REQ.]]></text>
+				<text><![CDATA[DESCRIPCION]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -217,21 +243,14 @@ FROM
 				<textFieldExpression><![CDATA[$F{compra_idcompra}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="108" y="0" width="63" height="22" uuid="c059d5e7-f733-44c5-a55b-4b4015878a0a"/>
+				<reportElement x="54" y="0" width="63" height="22" uuid="c059d5e7-f733-44c5-a55b-4b4015878a0a"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_fechaorden}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="171" y="0" width="99" height="22" uuid="a522a60c-dc1f-46a3-8fb8-ae81de4500a8"/>
-				<textElement textAlignment="Center">
-					<font size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{departamento_departamento}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="270" y="0" width="182" height="22" uuid="b5d4ce44-0a4e-41f4-97c2-f313850ff390"/>
+				<reportElement x="116" y="0" width="182" height="22" uuid="b5d4ce44-0a4e-41f4-97c2-f313850ff390"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -266,11 +285,11 @@ FROM
 				<textFieldExpression><![CDATA[$F{compra_iva}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="56" y="0" width="52" height="22" uuid="a07c1551-e30b-4e89-90e8-aace4aec30b5"/>
-				<textElement textAlignment="Center">
+				<reportElement x="298" y="0" width="165" height="22" uuid="dd213b40-fe5a-4a73-9109-8581f78272b9"/>
+				<textElement>
 					<font size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{compra_idauxiliarrequerimiento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{compra_observacionescompra}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

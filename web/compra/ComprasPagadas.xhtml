@@ -74,7 +74,7 @@
                                 <f:convertDateTime pattern="dd/MM/yyyy" />
                             </h:outputText>
                         </p:column>
-                        <p:column width="150" >
+                        <p:column width="150" filterBy="#{item.observacionescompra}" filterMatchMode="contains" filterStyle="width:120px;">
                             <f:facet name="header">
                                 <h:outputText value="#{bundle.ListCompraTitle_observacionescompra}"/>
                             </f:facet>

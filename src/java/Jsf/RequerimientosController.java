@@ -413,8 +413,8 @@ public class RequerimientosController implements Serializable {
             correo = "CODIGO: REQ-" + auxrequer.getIdauxiliarrequerimiento()
                     + "  SOLICITANTE: " + auxrequer.getIdusuario().getNombre()
                     + "  DEPARTAMENTO: " + auxrequer.getIddepartamento()
-                    + "  MATERIAL O SERVICIO: "+material
                     + "  FECHA: " + fechareque
+                    + "  MATERIAL O SERVICIO: "+material
                     + "  SOLICITUD: " + auxrequer.getDescripcion()
                     + "  MONTO ESTIMADO: "+ formatearnumero.format (auxrequer.getMontototal());
             subject = empresa.getNombrecomercial()+ " Requerimiento REQ-" + requer.getIdauxiliarrequerimiento().getIdauxiliarrequerimiento();
