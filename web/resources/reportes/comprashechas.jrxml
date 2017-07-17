@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="308"/>
+	<property name="ireport.x" value="345"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="estatus" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -103,6 +103,18 @@ FROM
 	<field name="proveedor_idusuario" class="java.lang.Integer"/>
 	<field name="estatusfactura_idestatusfactura" class="java.lang.Integer"/>
 	<field name="estatusfactura_estatusfactura" class="java.lang.String"/>
+	<variable name="compra_subtotal_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_subtotal}]]></variableExpression>
+	</variable>
+	<variable name="compra_iva_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_iva}]]></variableExpression>
+	</variable>
+	<variable name="compra_total_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_total}]]></variableExpression>
+	</variable>
+	<variable name="compra_total_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_total}]]></variableExpression>
+	</variable>
 	<group name="cliente_razonsocial">
 		<groupExpression><![CDATA[$F{auxiliarrequerimiento_idauxiliarrequerimiento}]]></groupExpression>
 	</group>
@@ -134,7 +146,7 @@ FROM
 				<textElement>
 					<font size="8" isItalic="false"/>
 				</textElement>
-				<text><![CDATA[AV. 3H Entre calles 78 y 79 Residencias Republica PB Local 01 Maracaibo Estado Zulia]]></text>
+				<text><![CDATA[AV. 3H Entre calles 78 y 79 Residencias Republica PB Local 01 Maracaibo Estado Zulia ]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -145,7 +157,7 @@ FROM
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[RELACION DE COMPRAS EFECTUADAS]]></text>
+				<text><![CDATA[RELACION DE COMPRAS]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="463" y="3" width="58" height="20" uuid="8269259b-810c-46e9-ada5-ed5377cd98b2"/>
@@ -204,7 +216,7 @@ FROM
 				<text><![CDATA[SUB TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="609" y="4" width="58" height="20" uuid="9e60caad-2501-4c9b-8af6-015026238256"/>
+				<reportElement x="609" y="4" width="68" height="20" uuid="9e60caad-2501-4c9b-8af6-015026238256"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -264,7 +276,7 @@ FROM
 				<textFieldExpression><![CDATA[$F{compra_subtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="609" y="0" width="58" height="22" uuid="898be46b-b0b4-49e6-8e89-961abf8f3735"/>
+				<reportElement x="609" y="0" width="68" height="22" uuid="898be46b-b0b4-49e6-8e89-961abf8f3735"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
@@ -329,6 +341,35 @@ FROM
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="49" splitType="Stretch">
+			<textField pattern="#,##0.00">
+				<reportElement x="463" y="10" width="85" height="17" uuid="5305ee0b-087b-472f-b955-31eb889ad5b5"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compra_subtotal_1}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="376" y="10" width="87" height="17" uuid="6b0a4b24-0d99-4530-8288-5cce20ba5335"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTALES]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement x="551" y="10" width="58" height="17" uuid="60972b7b-c6cf-4b4b-b13c-606f1300372e"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compra_iva_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="609" y="10" width="68" height="17" uuid="7e336b2b-edc3-4b70-af02-009744608c5a"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compra_total_1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

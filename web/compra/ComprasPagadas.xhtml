@@ -21,9 +21,30 @@
                     <img src="../resources/images/LogoInpeca.jpg" width="155" height="58" alt="Logo Inpeca" />
                 </div>     
                 <img src="../resources/images/carritocompras.png" width="70" height="70" alt="Solicitudes" align="right" />
+                <p:panel id="panel1" header="#{bundlebancario.ListMovimientobancarioTitle}">
+                    <p:panelGrid columns="1" >
+                        <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="true" >
+                            <p:panelGrid columns="8" styleClass="ui-custompanelgrid1">
+                                <p:outputLabel for="status" value="Estatus" styleClass="text-ouput"/>
+                                <p:selectOneMenu id="status" value="#{compraController.estatusfact}" converter="omnifaces.SelectItemsConverter" required="true" > 
+                                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione"/>
+                                    <f:selectItems value="#{estatusfacturaController.items}"
+                                                   var="idbancoItem"
+                                                   itemLabel="#{idbancoItem.estatusfactura}"  itemValue="#{idbancoItem}" /> 
+                                </p:selectOneMenu>
+                                <p:outputLabel for="fechadesde" value="Fecha Desde" />
+                                <p:calendar size="10"  locale="es" id="fechadesde" pattern="dd/MM/yyyy" value="#{compraController.fechadesde}" showOn="button" navigator="true" required="true"/>                                
+                                <p:outputLabel for="fechahasta" value="Fecha Hasta" />
+                                <p:calendar size="10"  locale="es" id="fechahasta" pattern="dd/MM/yyyy" value="#{compraController.fechahasta}" showOn="button" navigator="true" required="true"/>                                
 
-                <p:panel header="#{bundle.ListCompraTitle}">
-                    <p:dataTable id="datalist" value="#{compraController.comprasPagadas}" var="item"
+                                <p:commandButton value="Buscar" icon="ui-icon-check" actionListener="#{compraController.actualizar()}" update="panelart"/>
+                                <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="#{bundle.Imprimir}" actionListener="#{compraController.verMovimientoCompras()}" ajax="false" onclick="form.target = '_blank'"/>
+                            </p:panelGrid>
+                        </p:fieldset>
+                    </p:panelGrid>
+                </p:panel>
+                <p:panel id="panelart" header="#{bundle.ListCompraTitle}">
+                    <p:dataTable id="datalist" value="#{compraController.comprasfiltradas}" var="item"
                                  selectionMode="single" selection="#{compraController.compraseleccionada}"
                                  paginator="true"
                                  rowKey="#{item.idcompra}"

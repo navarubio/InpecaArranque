@@ -6,6 +6,10 @@
 package Jpa;
 
 import Modelo.Compra;
+import Modelo.Cuentabancaria;
+import Modelo.Estatusfactura;
+import Modelo.Movimientobancario;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -97,4 +101,23 @@ public class CompraFacade extends AbstractFacade<Compra> implements CompraFacade
         return lista;
     }  
     
+    @Override
+    public List<Compra> buscarcomprasFiltradas (Estatusfactura status, Date fechaini, Date fechafinish) {
+        String consulta;
+        List<Compra> lista = null;
+        try {
+            consulta = "From Compra c where c.idestatusfactura.idestatusfactura= ?1 and c.fechaorden between ?2 and ?3 order by c.fechaorden";
+            Query query = em.createQuery(consulta);
+            query.setParameter(1, status.getIdestatusfactura());
+            query.setParameter(2, fechaini);
+            query.setParameter(3, fechafinish);
+
+            lista = query.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
+    }
+    
+
 }

@@ -14,6 +14,7 @@ import Modelo.Pagocompra;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -47,12 +48,16 @@ public class CompraController implements Serializable {
     private List<Compra> comprasactivas = null;
     private List<Compra> comprasporautorizar = null;
     private List<Compra> compraspagadas = null;
+    private List <Compra> comprasfiltradas;
     private List<Estatusfactura> estatusfactxpagar = null;
     private List<Detallecompra> detallecompraFiltrados;
     private List<Pagocompra> pagosporidcompra;
     private Compra selected;
     private Compra compraseleccionada;
+    private Estatusfactura estatusfact;
     private PagosController pagoscontroller;
+    private Date fechadesde;
+    private Date fechahasta;    
 
     public CompraController() {
     }
@@ -81,6 +86,36 @@ public class CompraController implements Serializable {
             this.selected = compraseleccionada;
             asignar();
         }
+    }
+    public Date getFechadesde() {
+        return fechadesde;
+    }
+
+    public void setFechadesde(Date fechadesde) {
+        this.fechadesde = fechadesde;
+    }
+
+    public Date getFechahasta() {
+        return fechahasta;
+    }
+
+    public void setFechahasta(Date fechahasta) {
+        this.fechahasta = fechahasta;
+    }
+    public List<Compra> getComprasfiltradas() {
+        return comprasfiltradas;
+    }
+
+    public void setComprasfiltradas(List<Compra> comprasfiltradas) {
+        this.comprasfiltradas = comprasfiltradas;
+    }
+
+    public Estatusfactura getEstatusfact() {
+        return estatusfact;
+    }
+
+    public void setEstatusfact(Estatusfactura estatusfact) {
+        this.estatusfact = estatusfact;
     }
 
     public Compra getCompraseleccionada() {
@@ -179,6 +214,10 @@ public class CompraController implements Serializable {
         return selected;
     }
 
+    public void actualizar(){
+        comprasfiltradas= ejbFacade.buscarcomprasFiltradas(estatusfact, fechadesde, fechahasta);
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("CompraCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -324,6 +363,20 @@ public class CompraController implements Serializable {
         String ruta = servletContext.getRealPath("/resources/reportes/ordendecompra.jasper");
 
         rArticulo.getOrdendeCompra(ruta, codigocompra);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
+        public void verMovimientoCompras() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        reporteArticulo rArticulo = new reporteArticulo();
+
+        int codigoestatus = estatusfact.getIdestatusfactura() ;
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/resources/reportes/comprashechas.jasper");
+
+        rArticulo.getMovimientoCompras(ruta, codigoestatus,fechadesde,fechahasta);
         FacesContext.getCurrentInstance().responseComplete();
     }
 

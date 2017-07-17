@@ -6,6 +6,8 @@
 package Jpa;
 
 import Modelo.Compra;
+import Modelo.Estatusfactura;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -37,4 +39,6 @@ public interface CompraFacadeLocal {
     List<Compra> buscarcomprasporPagar();
     
     List<Compra> buscarcomprasPagadas();
+    
+    List<Compra> buscarcomprasFiltradas (Estatusfactura status, Date fechaini, Date fechafinish);
 }
