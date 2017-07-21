@@ -22,7 +22,7 @@
                 <img src="../resources/images/Payloader2.png" width="120" height="70" alt="Solicitudes" align="right" />
 
                 <p:panel header="#{bundlepicadora.ListMaquinariapicadoraTitle}">
-                    <p:dataTable id="datalist" value="#{maquinariapicadoraController.items}" var="item" style="width: 1100px;"
+                    <p:dataTable id="datalist" value="#{maquinariapicadoraController.items}" var="item" style="width: 1180px;"
                                  selectionMode="single" selection="#{maquinariapicadoraController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idmaquinariapicadora}"
@@ -63,6 +63,13 @@
                             </f:facet>
                             <h:outputText value="#{item.idmedida.medida}"/>
                         </p:column>
+                        <p:column  width="80" style="text-align: center">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlepicadora.ListMaquinariapicadoraTitle_idgravamen}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idgravamen.alicuota} %"/>
+                        </p:column>
+                        
                         <p:column width="200">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlepicadora.ListMaquinariapicadoraTitle_proveedor}"/>

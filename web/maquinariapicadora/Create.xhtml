@@ -15,7 +15,7 @@
                         <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_serialmaquinaria}" for="serialmaquinaria" />
                         <p:inputText id="serialmaquinaria" value="#{maquinariapicadoraController.selected.serialmaquinaria}" title="#{bundlepicadora.CreateMaquinariapicadoraTitle_serialmaquinaria}"/>
                         <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_descripcion}" for="descripcion" />
-                        <p:inputText id="descripcion" value="#{maquinariapicadoraController.selected.descripcion}" title="#{bundlepicadora.CreateMaquinariapicadoraTitle_descripcion}" />
+                        <p:inputText id="descripcion" value="#{maquinariapicadoraController.selected.descripcion}" title="#{bundlepicadora.CreateMaquinariapicadoraTitle_descripcion}" size="50" />
                         <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_idtipomaquinaria}" for="idtipomaquinaria" />
                         <p:selectOneMenu id="idtipomaquinaria" value="#{maquinariapicadoraController.selected.idtipomaquinaria}"  >
                             <f:selectItems value="#{tipomaquinariaController.itemsAvailableSelectOne}"
@@ -28,6 +28,12 @@
                                            var="idmedidaItem"
                                            itemValue="#{idmedidaItem}" />
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_idgravamen}" for="idgravamen"  />
+                        <p:selectOneMenu id="idgravamen" value="#{maquinariapicadoraController.selected.idgravamen}" converter="omnifaces.SelectItemsConverter" >
+                            <f:selectItems value="#{gravamenController.itemsAvailableSelectOne}"
+                                           var="idgravamenItem"
+                                           itemLabel="#{idgravamenItem.categoria} #{idgravamenItem.alicuota}"  itemValue="#{idgravamenItem}" />
+                        </p:selectOneMenu>                        
                         <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_rifproveedor}" for="rifproveedor"  />
                         <p:selectOneMenu id="rifproveedor" value="#{maquinariapicadoraController.selected.rifproveedor}" converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" >
                             <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"

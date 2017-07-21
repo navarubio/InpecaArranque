@@ -29,6 +29,12 @@
                                            var="idmedidaItem"
                                            itemValue="#{idmedidaItem}" />
                         </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_idgravamen}" for="idgravamen"  />
+                        <p:selectOneMenu id="idgravamen" value="#{maquinariapicadoraController.selected.idgravamen}" converter="omnifaces.SelectItemsConverter" >
+                            <f:selectItems value="#{gravamenController.itemsAvailableSelectOne}"
+                                           var="idgravamenItem"
+                                           itemLabel="#{idgravamenItem.categoria} #{idgravamenItem.alicuota}"  itemValue="#{idgravamenItem}" />
+                        </p:selectOneMenu>                                                
                         <p:outputLabel value="#{bundlepicadora.CreateMaquinariapicadoraLabel_rifproveedor}" for="rifproveedor"  />
                         <p:selectOneMenu id="rifproveedor" value="#{maquinariapicadoraController.selected.rifproveedor}" converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
                             <f:selectItems value="#{proveedorController.itemsAvailableSelectOne}"
