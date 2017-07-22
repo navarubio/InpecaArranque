@@ -906,6 +906,7 @@ public class AsientosespecificosController implements Serializable {
             this.listadetalleslibrodiario.add(detalleanexo);
             detalleaanexar.setDebe(0.0);
             detalleaanexar.setHaber(0.0);
+            cuentaseleccionada=0;
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Cuenta fue amexada"));
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "La Cuenta Seleccionada no es de movimiento"));

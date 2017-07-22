@@ -35,7 +35,7 @@
                             </p:panelGrid>                                
                         </p:fieldset>
                         <p:fieldset legend="Registros Contables"  toggleable="true" toggleSpeed="500" collapsed="false" >
-                            <p:panelGrid columns="6" styleClass="ui-custompanelgrid3" > 
+                            <p:panelGrid id="grilla" columns="6" styleClass="ui-custompanelgrid3" > 
                                 <p:outputLabel for="descripcioncta" value="Cuenta" styleClass="text-ouput"/>
                                 <p:outputLabel for="codigocta" value="Codigo" styleClass="text-ouput"/>
                                 <!--p:outputLabel for="saldoactual" value="Saldo Cta" styleClass="text-ouput"/-->
@@ -54,7 +54,7 @@
                                 <!--p:outputLabel id="saldoactual" value=".{asientosventasController.detalleaanexar.idplandecuenta.saldogeneral}" styleClass="optionalLbl"/-->
                                 <p:inputText id="debe"  size="20" value="#{asientosespecificosController.detalleaanexar.debe}" style="text-align:right"/>
                                 <p:inputText id="haber"  size="20" value="#{asientosespecificosController.detalleaanexar.haber}" style="text-align:right"/>                               
-                                <p:commandButton value="Anexar" icon="ui-icon-plusthick"  action="#{asientosespecificosController.anexarregistro()}" update=":formulario:listadoasiento,:growl"/>   
+                                <p:commandButton value="Anexar" icon="ui-icon-plusthick"  action="#{asientosespecificosController.anexarregistro()}" update="listadoasiento,panelcontab,:growl"/>   
                             </p:panelGrid>                                
                         </p:fieldset>
 
