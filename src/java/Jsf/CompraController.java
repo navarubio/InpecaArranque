@@ -10,10 +10,12 @@ import Jpa.EstatusfacturaFacadeLocal;
 import Jpa.PagocompraFacadeLocal;
 import Modelo.Detallecompra;
 import Modelo.Estatusfactura;
+import Modelo.Factura;
 import Modelo.Pagocompra;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -48,7 +50,7 @@ public class CompraController implements Serializable {
     private List<Compra> comprasactivas = null;
     private List<Compra> comprasporautorizar = null;
     private List<Compra> compraspagadas = null;
-    private List <Compra> comprasfiltradas;
+    private List <Compra> comprasfiltradas=null;
     private List<Estatusfactura> estatusfactxpagar = null;
     private List<Detallecompra> detallecompraFiltrados;
     private List<Pagocompra> pagosporidcompra;
@@ -244,6 +246,40 @@ public class CompraController implements Serializable {
         return items;
     }
 
+    public String getSubtotalGeneral() {
+        double total = 0;
+        
+        if (comprasfiltradas!=null){
+            for(Compra  inventa : getComprasfiltradas()) {
+                total += inventa.getSubtotal();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    public String getIvaGeneral() {
+        double total = 0;
+        
+        if (comprasfiltradas!=null){
+            for(Compra inventa : getComprasfiltradas()) {
+                total += inventa.getIva();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalGeneral() {
+        double total = 0;
+        
+        if (comprasfiltradas!=null){
+            for(Compra inventa : getComprasfiltradas()) {
+                total += inventa.getTotal();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {
             setEmbeddableKeys();

@@ -22,9 +22,30 @@
                     <img src="../resources/images/LogoInpeca.jpg" width="155" height="58" alt="Logo Inpeca" />
                 </div>     
                 <img src="../resources/images/venntasfiscales.png" width="70" height="70" alt="Solicitudes" align="right" />
+                <p:panel id="panel1" header="#{bundlebancario.ListMovimientobancarioTitle}">
+                    <p:panelGrid columns="1" >
+                        <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="false" >
+                            <p:panelGrid columns="8" styleClass="ui-custompanelgrid1">
+                                <p:outputLabel for="status" value="Estatus" styleClass="text-ouput"/>
+                                <p:selectOneMenu id="status" value="#{facturaController.estatusfactutaventa}" converter="omnifaces.SelectItemsConverter" required="true" > 
+                                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione"/>
+                                    <f:selectItems value="#{estatusfacturaventaController.items}"
+                                                   var="idbancoItem"
+                                                   itemLabel="#{idbancoItem.estatusfacturaventa}"  itemValue="#{idbancoItem}" /> 
+                                </p:selectOneMenu>
+                                <p:outputLabel for="fechadesde" value="Fecha Desde" />
+                                <p:calendar size="10"  locale="es" id="fechadesde" pattern="dd/MM/yyyy" value="#{facturaController.fechadesde}" showOn="button" navigator="true" required="true"/>                                
+                                <p:outputLabel for="fechahasta" value="Fecha Hasta" />
+                                <p:calendar size="10"  locale="es" id="fechahasta" pattern="dd/MM/yyyy" value="#{facturaController.fechahasta}" showOn="button" navigator="true" required="true"/>                                
 
-                <p:panel header="#{bundlefactura.ListFacturaTitle}">
-                    <p:dataTable id="datalist" value="#{facturaController.facturasactivas}" var="item" widgetVar="facturas"
+                                <p:commandButton value="Buscar" icon="ui-icon-check" actionListener="#{facturaController.actualizar()}" update="panelart"/>
+                                <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="#{bundle.Imprimir}" actionListener="#{compraController.verMovimientoCompras()}" ajax="false" onclick="form.target = '_blank'"/>
+                            </p:panelGrid>
+                        </p:fieldset>
+                    </p:panelGrid>
+                </p:panel>
+                <p:panel id="panelart" header="#{bundlefactura.ListFacturaTitle}">
+                    <p:dataTable id="datalist" value="#{facturaController.facturasfiltradas}" var="item" widgetVar="facturas"
                                  selectionMode="single" selection="#{facturaController.selected}"
                                  paginator="true"
                                  rowKey="#{item.numerofact}"
@@ -113,6 +134,15 @@
                                 <h:graphicImage library="images" name="dolarfinal.png" width="30" height="30" alt="Pagar Compra"/>
                             </h:commandLink>      
                         </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="6" style="text-align:right" footerText="TOTALES:" />
+                                <p:column footerText="#{facturaController.subtotalGeneral}" style="text-align: right" />
+                                <p:column footerText="#{facturaController.ivaGeneral}" style="text-align: right" />
+                                <p:column footerText="#{facturaController.totalGeneral}" style="text-align: right" />
+
+                            </p:row>
+                        </p:columnGroup>
                         <f:facet name="footer">                         
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlefactura.Create}" actionListener="#{facturaController.prepareCreate}" update=":FacturaCreateForm" oncomplete="PF('FacturaCreateDialog').show()" disabled="true"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlefactura.View}" update=":FacturaViewForm" oncomplete="PF('FacturaViewDialog').show()" disabled="#{empty facturaController.selected}"/>

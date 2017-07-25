@@ -5,7 +5,9 @@
  */
 package Jpa;
 
+import Modelo.Estatusfacturaventa;
 import Modelo.Factura;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -42,4 +44,5 @@ public interface FacturaFacadeLocal {
     
     String  ultimafacturaformat();
     
+    List<Factura> buscarfacturasFiltradas (Estatusfacturaventa status, Date fechaini, Date fechafinish);
 }

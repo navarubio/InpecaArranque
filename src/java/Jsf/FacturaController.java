@@ -10,11 +10,13 @@ import Modelo.Cobroventa;
 import Modelo.Detallefactura;
 import Modelo.Estatusfactura;
 import Modelo.Estatusfacturaventa;
+import Modelo.Inventariopicadora;
 
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -47,9 +49,13 @@ public class FacturaController implements Serializable {
     private List<Estatusfacturaventa> estatusfact;
     private List<Estatusfacturaventa> estatusfactxcobrar;
     private List<Factura> facturasactivas = null;
+    private List <Factura> facturasfiltradas=null;
     private List<Cobroventa> cobrosporfactura = null;
     private Factura selected;
     private List<Detallefactura> detallesporfactura = null;
+    private Date fechadesde;
+    private Date fechahasta; 
+    private  Estatusfacturaventa estatusfactutaventa;
 
     public FacturaController() {
     }
@@ -79,6 +85,22 @@ public class FacturaController implements Serializable {
         return estatusfact;
     }
 
+    public Estatusfacturaventa getEstatusfactutaventa() {
+        return estatusfactutaventa;
+    }
+
+    public void setEstatusfactutaventa(Estatusfacturaventa estatusfactutaventa) {
+        this.estatusfactutaventa = estatusfactutaventa;
+    }
+
+    public List<Factura> getFacturasfiltradas() {
+        return facturasfiltradas;
+    }
+
+    public void setFacturasfiltradas(List<Factura> facturasfiltradas) {
+        this.facturasfiltradas = facturasfiltradas;
+    }
+
     public void setEstatusfact(List<Estatusfacturaventa> estatusfact) {
         this.estatusfact = estatusfact;
     }
@@ -99,6 +121,21 @@ public class FacturaController implements Serializable {
         this.estatusfactxcobrar = estatusfactxcobrar;
     }
 
+    public Date getFechadesde() {
+        return fechadesde;
+    }
+
+    public void setFechadesde(Date fechadesde) {
+        this.fechadesde = fechadesde;
+    }
+
+    public Date getFechahasta() {
+        return fechahasta;
+    }
+
+    public void setFechahasta(Date fechahasta) {
+        this.fechahasta = fechahasta;
+    }
 
     /*public List<Factura> getFact() {
      return items;
@@ -131,6 +168,10 @@ public class FacturaController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public void actualizar(){
+        facturasfiltradas= ejbFacade.buscarfacturasFiltradas(estatusfactutaventa, fechadesde, fechahasta);
+    }
     /*@PostConstruct
      public void init(){
      items = new ArrayList<Factura>();
@@ -145,7 +186,41 @@ public class FacturaController implements Serializable {
 
      return new DecimalFormat("###,###.###").format(total);
      }*/
+    public String getSubtotalGeneral() {
+        double total = 0;
+        
+        if (facturasfiltradas!=null){
+            for(Factura inventa : getFacturasfiltradas()) {
+                total += inventa.getBimponiblefact();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
 
+    }
+    public String getIvaGeneral() {
+        double total = 0;
+        
+        if (facturasfiltradas!=null){
+            for(Factura inventa : getFacturasfiltradas()) {
+                total += inventa.getIvafact();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalGeneral() {
+        double total = 0;
+        
+        if (facturasfiltradas!=null){
+            for(Factura inventa : getFacturasfiltradas()) {
+                total += inventa.getTotalgeneral();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundlefactura").getString("FacturaCreated"));
         if (!JsfUtil.isValidationFailed()) {

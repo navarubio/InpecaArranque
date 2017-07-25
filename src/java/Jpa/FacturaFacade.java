@@ -5,8 +5,12 @@
  */
 package Jpa;
 
+import Modelo.Compra;
+import Modelo.Estatusfactura;
+import Modelo.Estatusfacturaventa;
 import Modelo.Factura;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -149,4 +153,23 @@ public class FacturaFacade extends AbstractFacade<Factura> implements FacturaFac
         }
         return lista;
     }
+    
+    @Override
+    public List<Factura> buscarfacturasFiltradas (Estatusfacturaventa status, Date fechaini, Date fechafinish) {
+        String consulta;
+        List<Factura> lista = null;
+        try {
+            consulta = "From Factura f where f.idestatusfacturaventa.idestatusfacturaventa= ?1 and f.fecha between ?2 and ?3 order by f.fecha";
+            Query query = em.createQuery(consulta);
+            query.setParameter(1, status.getIdestatusfacturaventa());
+            query.setParameter(2, fechaini);
+            query.setParameter(3, fechafinish);
+
+            lista = query.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
+    }
+
 }

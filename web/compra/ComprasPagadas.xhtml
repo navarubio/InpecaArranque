@@ -163,6 +163,14 @@
                                 <h:graphicImage library="images" name="imprimir.png" width="30" height="30" alt="Ver OrdenPago"/>
                             </h:commandLink>      
                         </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="6" style="text-align:right" footerText="TOTALES:" />
+                                <p:column footerText="#{compraController.subtotalGeneral}" style="text-align: right" />
+                                <p:column footerText="#{compraController.ivaGeneral}" style="text-align: right" />
+                                <p:column footerText="#{compraController.totalGeneral}" style="text-align: right" />
+                            </p:row>
+                        </p:columnGroup>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{compraController.prepareCreate}" update=":CompraCreateForm" oncomplete="PF('CompraCreateDialog').show()"/>
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CompraViewForm" oncomplete="PF('CompraViewDialog').show()" disabled="#{empty compraController.selected}"/>
