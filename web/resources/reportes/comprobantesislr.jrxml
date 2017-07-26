@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="1c85435c-dfaf-4939-95a8-6e6d35b737f1">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="fechaini" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     comprobanteislref.`idcomprobanteislref` AS comprobanteislref_idcomprobanteislref,
+     comprobanteislref.`comprobante` AS comprobanteislref_comprobante,
+     comprobanteislref.`fecha` AS comprobanteislref_fecha,
+     comprobanteislref.`rifproveedor` AS comprobanteislref_rifproveedor,
+     comprobanteislref.`totalgeneral` AS comprobanteislref_totalgeneral,
+     comprobanteislref.`totalbimponible` AS comprobanteislref_totalbimponible,
+     comprobanteislref.`totalislrretenido` AS comprobanteislref_totalislrretenido,
+     comprobanteislref.`idestatuscomprobante` AS comprobanteislref_idestatuscomprobante,
+     proveedor.`rifproveedor` AS proveedor_rifproveedor,
+     proveedor.`razonsocial` AS proveedor_razonsocial,
+     proveedor.`direccionfiscal` AS proveedor_direccionfiscal,
+     proveedor.`telefonos` AS proveedor_telefonos,
+     proveedor.`correo` AS proveedor_correo,
+     proveedor.`fechainscripcion` AS proveedor_fechainscripcion,
+     proveedor.`personacontacto` AS proveedor_personacontacto,
+     proveedor.`telefonocontacto` AS proveedor_telefonocontacto,
+     proveedor.`idtipoproveedor` AS proveedor_idtipoproveedor,
+     proveedor.`idpersonalidad` AS proveedor_idpersonalidad,
+     proveedor.`idusuario` AS proveedor_idusuario,
+     proveedor.`idresidencia` AS proveedor_idresidencia
+FROM
+     `proveedor` proveedor INNER JOIN `comprobanteislref` comprobanteislref ON proveedor.`rifproveedor` = comprobanteislref.`rifproveedor`  WHERE comprobanteislref.`fecha` BETWEEN $P{fechaini} AND $P{fechafin}  ORDER BY  comprobanteislref.`fecha`]]>
+	</queryString>
+	<field name="comprobanteislref_idcomprobanteislref" class="java.lang.Integer"/>
+	<field name="comprobanteislref_comprobante" class="java.lang.String"/>
+	<field name="comprobanteislref_fecha" class="java.sql.Date"/>
+	<field name="comprobanteislref_rifproveedor" class="java.lang.String"/>
+	<field name="comprobanteislref_totalgeneral" class="java.lang.Double"/>
+	<field name="comprobanteislref_totalbimponible" class="java.lang.Double"/>
+	<field name="comprobanteislref_totalislrretenido" class="java.lang.Double"/>
+	<field name="comprobanteislref_idestatuscomprobante" class="java.lang.Integer"/>
+	<field name="proveedor_rifproveedor" class="java.lang.String"/>
+	<field name="proveedor_razonsocial" class="java.lang.String"/>
+	<field name="proveedor_direccionfiscal" class="java.lang.String"/>
+	<field name="proveedor_telefonos" class="java.lang.String"/>
+	<field name="proveedor_correo" class="java.lang.String"/>
+	<field name="proveedor_fechainscripcion" class="java.sql.Date"/>
+	<field name="proveedor_personacontacto" class="java.lang.String"/>
+	<field name="proveedor_telefonocontacto" class="java.lang.String"/>
+	<field name="proveedor_idtipoproveedor" class="java.lang.Integer"/>
+	<field name="proveedor_idpersonalidad" class="java.lang.Integer"/>
+	<field name="proveedor_idusuario" class="java.lang.Integer"/>
+	<field name="proveedor_idresidencia" class="java.lang.Integer"/>
+	<variable name="comprobanteivaef_totalivaretenido_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalislrretenido}]]></variableExpression>
+	</variable>
+	<variable name="comprobanteivaef_totaliva_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalgeneral}]]></variableExpression>
+	</variable>
+	<variable name="comprobanteivaef_totalbimponible_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalbimponible}]]></variableExpression>
+	</variable>
+	<variable name="comprobanteivaef_totalgeneral_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalgeneral}]]></variableExpression>
+	</variable>
+	<variable name="comprobanteislref_totalgeneral_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalgeneral}]]></variableExpression>
+	</variable>
+	<variable name="comprobanteislref_totalbimponible_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalbimponible}]]></variableExpression>
+	</variable>
+	<variable name="comprobanteislref_totalislrretenido_1" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{comprobanteislref_totalislrretenido}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="55" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="3" width="215" height="13" uuid="b6060599-8956-407a-89f2-25af4d4af165"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA["INVERSIONES PEDREAÑEZ, C.A".]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="28" width="335" height="12" uuid="d2920c2a-a1de-4ae8-bc13-53501899a92b"/>
+				<textElement>
+					<font size="8" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[AV. 3H Entre calles 78 y 79 Residencias Republica PB Local 01 Maracaibo Estado Zulia]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="16" width="100" height="12" uuid="b055a2c1-356d-418f-8a24-0d080c817fc0"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[RIF J-26720565-9]]></text>
+			</staticText>
+			<image>
+				<reportElement x="634" y="3" width="118" height="47" uuid="92fe40e1-ef08-48bb-b595-344e385308d8"/>
+				<imageExpression><![CDATA["D:\\APLICACIONES JAVA SE - EE\\SistemaINPECA\\Inpeca\\web\\resources\\images\\LogoInpeca.jpg"]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="91" y="2" width="357" height="20" uuid="974d580b-a994-4e15-9b13-fec98af54726"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Comprobantes de Retencion de ISLR emitidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="594" y="2" width="54" height="20" uuid="8026f69c-cfe9-4d78-b7d4-c21a6c2a4eed"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="448" y="2" width="64" height="20" uuid="d15e3a28-8005-425c-a72a-ae17500eb6cf"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="658" y="2" width="69" height="20" uuid="fb586cf6-fa34-436b-adee-7498b2981c8b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="522" y="2" width="66" height="20" uuid="53a9e833-590a-4345-8e6d-d352c747048b"/>
+				<textElement verticalAlignment="Middle">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="2" width="45" height="20" uuid="a54e0930-90b6-4269-b7d1-0b35656938d9"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="2" width="84" height="19" uuid="0b0c832c-4510-406d-8def-f1ee40a1f3cd"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPROBANTE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="2" width="60" height="20" uuid="933c8d0c-1f15-4240-9685-f1ade95927c4"/>
+				<textElement textAlignment="Center">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RIF]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="189" y="2" width="100" height="20" uuid="b26d731a-a990-404d-b031-6a965774cdd6"/>
+				<textElement>
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[RAZON SOCIAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="385" y="2" width="80" height="20" uuid="6f718d0f-21c4-4eb3-b937-0ceadb61ace9"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTAL GENERAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="465" y="2" width="79" height="20" uuid="4f45b0a2-d01c-49e0-b826-3c050d088a77"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SUBTOTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="550" y="0" width="84" height="20" uuid="c85a6bee-f0cf-46a2-b661-a19fadfe9026"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ISLR RETENIDO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="21" splitType="Stretch">
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="0" width="45" height="20" uuid="dbe82b0d-7eb3-4151-9982-65548fd8d598"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobanteislref_fecha}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="1" width="84" height="20" uuid="86d3b87d-0a81-40ac-afa3-7156e4b4d6e5"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobanteislref_comprobante}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="0" width="60" height="20" uuid="05f3e6cf-d636-4a2a-8659-58ea491d4e66"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobanteislref_rifproveedor}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="189" y="1" width="196" height="20" uuid="769512a0-b651-450c-82a9-c9a5add64897"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{proveedor_razonsocial}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="385" y="1" width="80" height="20" uuid="a16cd4cc-01d7-4616-899a-b96f74b6dbf1"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobanteislref_totalgeneral}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="465" y="0" width="79" height="20" uuid="2949c456-37e2-4e0d-9596-b7ae8c08260d"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobanteislref_totalbimponible}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="550" y="0" width="84" height="20" uuid="74932397-9be9-48ee-adea-16bf445ea35a"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{comprobanteislref_totalislrretenido}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="594" y="10" width="104" height="20" uuid="c12c1433-493d-48cf-b7b8-db23bc43ac67"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="698" y="10" width="40" height="21" uuid="46b3a696-8e57-4184-8c3d-f04828818965"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="308" y="10" width="100" height="9" uuid="54e65088-7c2e-4aa8-9b50-cdb79498954e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poor Richard" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISMACONTAB WEB ]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="10" y="10" width="100" height="9" uuid="fa1fc114-2946-40eb-b043-429876850fcd"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch">
+			<staticText>
+				<reportElement x="264" y="12" width="108" height="20" uuid="461fb7af-d6ac-4015-b401-4da8f3bdf4ad"/>
+				<textElement textAlignment="Right" verticalAlignment="Top">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TOTALES ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="264" y="9" width="434" height="1" uuid="168ef22b-e06a-415b-b34a-fe5df641949f"/>
+			</line>
+			<textField pattern="#,##0.00">
+				<reportElement x="372" y="12" width="93" height="20" uuid="48974541-60ea-4f48-a2cd-079a1ef41c12"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{comprobanteislref_totalgeneral_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="465" y="12" width="85" height="20" uuid="0a5be5d7-d4de-43d2-8acc-d0d2de39bf50"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{comprobanteislref_totalbimponible_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="550" y="12" width="84" height="20" uuid="892b6834-67bf-4975-9e11-db845d44610f"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{comprobanteislref_totalislrretenido_1}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -50,7 +50,7 @@
                                  paginator="true"
                                  rowKey="#{item.numerofact}"
                                  rows="20"
-                                 rowsPerPageTemplate="10,20,30,40,50" 
+                                 rowsPerPageTemplate="20,30,40,50" 
                                  rowStyleClass="#{item.idestatusfacturaventa.idestatusfacturaventa == 3 ? 'facturaabonada' : null} #{item.idestatusfacturaventa.idestatusfacturaventa == 2 ? 'facturaporcobrar' : null}">
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton printButtom"/>

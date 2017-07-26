@@ -5,8 +5,12 @@ import Jsf.util.JsfUtil;
 import Jsf.util.JsfUtil.PersistAction;
 import Jpa.ComprobanteivaefFacade;
 import Jpa.ComprobanteivaefFacadeLocal;
+import Modelo.Factura;
 
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.view.ViewScoped;
+import javax.servlet.ServletContext;
 
 @Named("comprobanteivaefController")
 @ViewScoped
@@ -29,6 +34,9 @@ public class ComprobanteivaefController implements Serializable {
     private Jpa.ComprobanteivaefFacadeLocal ejbFacade;
     private List<Comprobanteivaef> items = null;
     private Comprobanteivaef selected;
+    private Date fechadesde;
+    private Date fechahasta; 
+    private List <Comprobanteivaef> comprobantesfiltrados=null;
 
     public ComprobanteivaefController() {
     }
@@ -56,7 +64,82 @@ public class ComprobanteivaefController implements Serializable {
         initializeEmbeddableKey();
         return selected;
     }
+    
+    public Date getFechadesde() {
+        return fechadesde;
+    }
 
+    public void setFechadesde(Date fechadesde) {
+        this.fechadesde = fechadesde;
+    }
+
+    public Date getFechahasta() {
+        return fechahasta;
+    }
+
+    public void setFechahasta(Date fechahasta) {
+        this.fechahasta = fechahasta;
+    }
+
+    public List<Comprobanteivaef> getComprobantesfiltrados() {
+        return comprobantesfiltrados;
+    }
+
+    public void setComprobantesfiltrados(List<Comprobanteivaef> comprobantesfiltrados) {
+        this.comprobantesfiltrados = comprobantesfiltrados;
+    }
+    
+    public void actualizar(){
+        comprobantesfiltrados= ejbFacade.buscarcomprobantesFiltrados(fechadesde, fechahasta);
+    }
+    
+    public String getSubtotalGeneral() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteivaef inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotalbimponible();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    public String getIvaGeneral() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteivaef inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotaliva();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalGeneral() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteivaef inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotalgeneral();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalRetenido() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteivaef inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotalivaretenido();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundletributos").getString("ComprobanteivaefCreated"));
         if (!JsfUtil.isValidationFailed()) {
@@ -162,6 +245,19 @@ public class ComprobanteivaefController implements Serializable {
             }
         }
 
+    }
+    
+    public void verComprobantesivaef() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        reporteArticulo rArticulo = new reporteArticulo();
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/resources/reportes/comprobantesiva.jasper");
+
+        rArticulo.getMovimientoComprobantesiva(ruta, fechadesde,fechahasta);
+        FacesContext.getCurrentInstance().responseComplete();
     }
 
 }

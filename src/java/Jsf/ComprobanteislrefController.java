@@ -5,8 +5,12 @@ import Jsf.util.JsfUtil;
 import Jsf.util.JsfUtil.PersistAction;
 import Jpa.ComprobanteislrefFacade;
 import Jpa.ComprobanteislrefFacadeLocal;
+import Modelo.Comprobanteivaef;
 
 import java.io.Serializable;
+import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -20,6 +24,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.FacesConverter;
 import javax.faces.view.ViewScoped;
+import javax.servlet.ServletContext;
 
 @Named("comprobanteislrefController")
 @ViewScoped
@@ -29,6 +34,9 @@ public class ComprobanteislrefController implements Serializable {
     private Jpa.ComprobanteislrefFacadeLocal ejbFacade;
     private List<Comprobanteislref> items = null;
     private Comprobanteislref selected;
+    private Date fechadesde;
+    private Date fechahasta; 
+    private List <Comprobanteislref> comprobantesfiltrados=null;
 
     public ComprobanteislrefController() {
     }
@@ -55,6 +63,70 @@ public class ComprobanteislrefController implements Serializable {
         selected = new Comprobanteislref();
         initializeEmbeddableKey();
         return selected;
+    }
+    
+    public Date getFechadesde() {
+        return fechadesde;
+    }
+
+    public void setFechadesde(Date fechadesde) {
+        this.fechadesde = fechadesde;
+    }
+
+    public Date getFechahasta() {
+        return fechahasta;
+    }
+
+    public void setFechahasta(Date fechahasta) {
+        this.fechahasta = fechahasta;
+    }
+
+    public List<Comprobanteislref> getComprobantesfiltrados() {
+        return comprobantesfiltrados;
+    }
+
+    public void setComprobantesfiltrados(List<Comprobanteislref> comprobantesfiltrados) {
+        this.comprobantesfiltrados = comprobantesfiltrados;
+    }
+    
+    public void actualizar(){
+        comprobantesfiltrados= ejbFacade.buscarcomprobantesFiltrados(fechadesde, fechahasta);
+    }
+    
+    public String getSubtotalGeneral() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteislref inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotalbimponible();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalGeneral() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteislref inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotalgeneral();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalRetenido() {
+        double total = 0;
+        
+        if (comprobantesfiltrados!=null){
+            for(Comprobanteislref inventa : getComprobantesfiltrados()) {
+                total += inventa.getTotalislrretenido();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
     }
 
     public void create() {
@@ -162,6 +234,18 @@ public class ComprobanteislrefController implements Serializable {
             }
         }
 
+    }
+    public void verComprobantesislref() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        reporteArticulo rArticulo = new reporteArticulo();
+
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/resources/reportes/comprobantesislr.jasper");
+
+        rArticulo.getMovimientoComprobantesiva(ruta, fechadesde,fechahasta);
+        FacesContext.getCurrentInstance().responseComplete();
     }
 
 }

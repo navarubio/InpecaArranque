@@ -8,6 +8,7 @@ package Jpa;
 import Modelo.Comprobanteislref;
 import Modelo.Comprobanteivaef;
 import Modelo.Factura;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -34,5 +35,6 @@ public interface ComprobanteislrefFacadeLocal {
     
     String  siguientecomprobanteformat(); 
     
+    List<Comprobanteislref> buscarcomprobantesFiltrados (Date fechaini, Date fechafinish);
     
 }

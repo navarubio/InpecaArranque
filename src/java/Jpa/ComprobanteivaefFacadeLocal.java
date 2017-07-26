@@ -7,6 +7,7 @@ package Jpa;
 
 import Modelo.Comprobanteivaef;
 import Modelo.Factura;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -32,6 +33,8 @@ public interface ComprobanteivaefFacadeLocal {
     int count();
     
     String  siguientecomprobanteformat(); 
+    
+    List<Comprobanteivaef> buscarcomprobantesFiltrados (Date fechaini, Date fechafinish);
     
     
 }

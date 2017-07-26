@@ -23,7 +23,7 @@
                 <img src="../resources/images/carritocompras.png" width="70" height="70" alt="Solicitudes" align="right" />
                 <p:panel id="panel1" header="#{bundlebancario.ListMovimientobancarioTitle}">
                     <p:panelGrid columns="1" >
-                        <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="true" >
+                        <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="false" >
                             <p:panelGrid columns="8" styleClass="ui-custompanelgrid1">
                                 <p:outputLabel for="status" value="Estatus" styleClass="text-ouput"/>
                                 <p:selectOneMenu id="status" value="#{compraController.estatusfact}" converter="omnifaces.SelectItemsConverter" required="true" > 

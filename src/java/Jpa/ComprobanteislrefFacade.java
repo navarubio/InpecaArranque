@@ -7,6 +7,7 @@ package Jpa;
 
 import Modelo.Comprobanteislref;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -56,5 +57,22 @@ public class ComprobanteislrefFacade extends AbstractFacade<Comprobanteislref> i
 
         String output = myFormatter.format(numeracion);
         return output;
+    }
+    
+    @Override
+    public List<Comprobanteislref> buscarcomprobantesFiltrados (Date fechaini, Date fechafinish) {
+        String consulta;
+        List<Comprobanteislref> lista = null;
+        try {
+            consulta = "From Comprobanteislref c where c.fecha between ?1 and ?2 order by c.fecha";
+            Query query = em.createQuery(consulta);
+            query.setParameter(1, fechaini);
+            query.setParameter(2, fechafinish);
+
+            lista = query.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
     }
 }

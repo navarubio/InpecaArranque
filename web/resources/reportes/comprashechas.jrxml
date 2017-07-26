@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="345"/>
+	<property name="ireport.x" value="270"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="estatus" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -161,14 +161,14 @@ FROM
 			</staticText>
 			<staticText>
 				<reportElement x="463" y="3" width="58" height="20" uuid="8269259b-810c-46e9-ada5-ed5377cd98b2"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[DESDE:]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="589" y="3" width="58" height="20" uuid="dc719b5f-bf04-41e4-bfa1-6b764d1d081c"/>
-				<textElement textAlignment="Center">
+				<textElement textAlignment="Right">
 					<font size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HASTA:]]></text>
@@ -179,7 +179,7 @@ FROM
 				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="647" y="3" width="58" height="20" uuid="0df15acf-7fc6-4283-acb0-d325362d08cd"/>
+				<reportElement x="647" y="3" width="70" height="20" uuid="0df15acf-7fc6-4283-acb0-d325362d08cd"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
 			</textField>
@@ -342,13 +342,6 @@ FROM
 	</pageFooter>
 	<summary>
 		<band height="49" splitType="Stretch">
-			<textField pattern="#,##0.00">
-				<reportElement x="463" y="10" width="85" height="17" uuid="5305ee0b-087b-472f-b955-31eb889ad5b5"/>
-				<textElement textAlignment="Right">
-					<font size="8" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{compra_subtotal_1}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="376" y="10" width="87" height="17" uuid="6b0a4b24-0d99-4530-8288-5cce20ba5335"/>
 				<textElement textAlignment="Center">
@@ -357,18 +350,25 @@ FROM
 				<text><![CDATA[TOTALES]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="551" y="10" width="58" height="17" uuid="60972b7b-c6cf-4b4b-b13c-606f1300372e"/>
+				<reportElement x="609" y="10" width="68" height="17" uuid="928643c5-159c-4fcc-b1de-78bedf6bac53"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{compra_total_1}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="551" y="10" width="58" height="17" uuid="0ec8ec2b-915b-4c5d-a107-4de743617312"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{compra_iva_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="609" y="10" width="68" height="17" uuid="7e336b2b-edc3-4b70-af02-009744608c5a"/>
+				<reportElement x="466" y="10" width="85" height="17" uuid="f646dfc7-9664-4d2a-a537-ba014582e9b7"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{compra_total_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{compra_subtotal_1}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

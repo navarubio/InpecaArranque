@@ -5,13 +5,18 @@
  */
 package Jpa;
 
+import Jsf.reporteArticulo;
 import Modelo.Comprobanteivaef;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.servlet.ServletContext;
 
 /**
  *
@@ -55,6 +60,23 @@ public class ComprobanteivaefFacade extends AbstractFacade<Comprobanteivaef> imp
         
         String output = myFormatter.format(numeracion);
         return output;
+    }
+    
+    @Override
+    public List<Comprobanteivaef> buscarcomprobantesFiltrados (Date fechaini, Date fechafinish) {
+        String consulta;
+        List<Comprobanteivaef> lista = null;
+        try {
+            consulta = "From Comprobanteivaef c where c.fecha between ?1 and ?2 order by c.fecha";
+            Query query = em.createQuery(consulta);
+            query.setParameter(1, fechaini);
+            query.setParameter(2, fechafinish);
+
+            lista = query.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
     }
     
 }
