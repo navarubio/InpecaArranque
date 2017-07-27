@@ -7,6 +7,7 @@ package Jpa;
 
 import Modelo.Compra;
 import Modelo.Pagocompra;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Local;
 
@@ -38,5 +39,7 @@ public interface PagocompraFacadeLocal {
     public Pagocompra buscarpagototal(Compra compr);
     
     int ultimopago();
+    
+    List<Pagocompra> buscarpagoscompraFiltrados (Date fechaini, Date fechafinish);
     
 }

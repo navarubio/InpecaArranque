@@ -21,8 +21,7 @@
                     <img src="../resources/images/LogoInpeca.jpg" width="155" height="58" alt="Logo Inpeca" />
                 </div>     
                 <img src="../resources/images/kthememgr_1.png" width="70" height="70" alt="Solicitudes" align="right" />
-
-                <p:panel header="#{bundle.ListPagoCompraTitle_cabecera}">
+                <p:panel id="panelart" header="#{bundle.ListPagoCompraTitle_cabecera}">
                     <p:dataTable id="datalist" value="#{pagocompraController.pagosefectuados}" var="item" widgetVar="pagos"
                                  selectionMode="single" selection="#{pagocompraController.selected}"
                                  paginator="true"

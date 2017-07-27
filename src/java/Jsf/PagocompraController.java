@@ -4,8 +4,10 @@ import Modelo.Pagocompra;
 import Jsf.util.JsfUtil;
 import Jsf.util.JsfUtil.PersistAction;
 import Jpa.PagocompraFacadeLocal;
+import Modelo.Compra;
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -35,7 +37,8 @@ public class PagocompraController implements Serializable {
     private List<Pagocompra> pagosporcompra;
     private Pagocompra pagocompra;
     private List<Pagocompra> pagocomprasactivas=null;
-    
+    private Date fechadesde;
+    private Date fechahasta;  
 
     public PagocompraController() {
     }
@@ -62,6 +65,34 @@ public class PagocompraController implements Serializable {
         selected = new Pagocompra();
         initializeEmbeddableKey();
         return selected;
+    }
+
+    public Date getFechadesde() {
+        return fechadesde;
+    }
+
+    public void setFechadesde(Date fechadesde) {
+        this.fechadesde = fechadesde;
+    }
+
+    public Date getFechahasta() {
+        return fechahasta;
+    }
+
+    public void setFechahasta(Date fechahasta) {
+        this.fechahasta = fechahasta;
+    }
+
+    public List<Pagocompra> getPagosporcompra() {
+        return pagosporcompra;
+    }
+
+    public void setPagosporcompra(List<Pagocompra> pagosporcompra) {
+        this.pagosporcompra = pagosporcompra;
+    }
+   
+    public void actualizar(){
+        pagosporcompra= ejbFacade.buscarpagoscompraFiltrados(fechadesde, fechahasta);
     }
 
     public void create() {

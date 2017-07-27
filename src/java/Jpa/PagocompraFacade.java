@@ -6,7 +6,9 @@
 package Jpa;
 
 import Modelo.Compra;
+import Modelo.Comprobanteivaef;
 import Modelo.Pagocompra;
+import java.util.Date;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -100,4 +102,22 @@ public class PagocompraFacade extends AbstractFacade<Pagocompra> implements Pago
         numeracion = ultima.getIdpagocompra();
         return numeracion;
     }
+    
+    @Override
+    public List<Pagocompra> buscarpagoscompraFiltrados (Date fechaini, Date fechafinish) {
+        String consulta;
+        List<Pagocompra> lista = null;
+        try {
+            consulta = "From Pagocompra p where p.fechapago between ?1 and ?2 order by p.fechapago";
+            Query query = em.createQuery(consulta);
+            query.setParameter(1, fechaini);
+            query.setParameter(2, fechafinish);
+
+            lista = query.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
+    }
+    
 }
