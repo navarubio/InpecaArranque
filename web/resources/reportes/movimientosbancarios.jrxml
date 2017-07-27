@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="419"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="cuenta" class="java.lang.Integer"/>
+	<parameter name="fechaini" class="java.util.Date"/>
+	<parameter name="fechafin" class="java.util.Date"/>
+	<queryString>
+		<![CDATA[SELECT
+     banco.`idbanco` AS banco_idbanco,
+     banco.`nombrebanco` AS banco_nombrebanco,
+     banco.`telefonos` AS banco_telefonos,
+     cuentabancaria.`idcuentabancaria` AS cuentabancaria_idcuentabancaria,
+     cuentabancaria.`idbanco` AS cuentabancaria_idbanco,
+     cuentabancaria.`numerocuenta` AS cuentabancaria_numerocuenta,
+     cuentabancaria.`saldo` AS cuentabancaria_saldo,
+     cuentabancaria.`idplandecuenta` AS cuentabancaria_idplandecuenta,
+     movimientobancario.`idmovimiento` AS movimientobancario_idmovimiento,
+     movimientobancario.`idcuentabancaria` AS movimientobancario_idcuentabancaria,
+     movimientobancario.`fecha` AS movimientobancario_fecha,
+     movimientobancario.`saldoanterior` AS movimientobancario_saldoanterior,
+     movimientobancario.`debito` AS movimientobancario_debito,
+     movimientobancario.`idpagocompra` AS movimientobancario_idpagocompra,
+     movimientobancario.`credito` AS movimientobancario_credito,
+     movimientobancario.`idcobroventa` AS movimientobancario_idcobroventa,
+     movimientobancario.`idotroingreso` AS movimientobancario_idotroingreso,
+     movimientobancario.`saldoactual` AS movimientobancario_saldoactual,
+     pagocompra.`idpagocompra` AS pagocompra_idpagocompra,
+     pagocompra.`idcompra` AS pagocompra_idcompra,
+     pagocompra.`idtipopago` AS pagocompra_idtipopago,
+     pagocompra.`idcuentabancaria` AS pagocompra_idcuentabancaria,
+     pagocompra.`idbanco` AS pagocompra_idbanco,
+     pagocompra.`cuentareceptora` AS pagocompra_cuentareceptora,
+     pagocompra.`totalpago` AS pagocompra_totalpago,
+     pagocompra.`aprobacion` AS pagocompra_aprobacion,
+     pagocompra.`fechapago` AS pagocompra_fechapago,
+     pagocompra.`idplandecuenta` AS pagocompra_idplandecuenta,
+     pagocompra.`saldopendiente` AS pagocompra_saldopendiente,
+     pagocompra.`montoretenido` AS pagocompra_montoretenido,
+     pagocompra.`observacionespago` AS pagocompra_observacionespago,
+     pagocompra.`idmaestro` AS pagocompra_idmaestro
+FROM
+     `banco` banco INNER JOIN `cuentabancaria` cuentabancaria ON banco.`idbanco` = cuentabancaria.`idbanco`
+     INNER JOIN `movimientobancario` movimientobancario ON cuentabancaria.`idcuentabancaria` = movimientobancario.`idcuentabancaria`
+     INNER JOIN `pagocompra` pagocompra ON movimientobancario.`idpagocompra` = pagocompra.`idpagocompra`
+WHERE
+     cuentabancaria.`idcuentabancaria` = $P{cuenta}
+ AND movimientobancario.`fecha` BETWEEN $P{fechaini} AND $P{fechafin}
+ORDER BY
+     cuentabancaria.`numerocuenta` ASC,
+     movimientobancario.`idmovimiento` ASC]]>
+	</queryString>
+	<field name="banco_idbanco" class="java.lang.Integer"/>
+	<field name="banco_nombrebanco" class="java.lang.String"/>
+	<field name="banco_telefonos" class="java.lang.String"/>
+	<field name="cuentabancaria_idcuentabancaria" class="java.lang.Integer"/>
+	<field name="cuentabancaria_idbanco" class="java.lang.Integer"/>
+	<field name="cuentabancaria_numerocuenta" class="java.lang.String"/>
+	<field name="cuentabancaria_saldo" class="java.lang.Double"/>
+	<field name="cuentabancaria_idplandecuenta" class="java.lang.Integer"/>
+	<field name="movimientobancario_idmovimiento" class="java.lang.Integer"/>
+	<field name="movimientobancario_idcuentabancaria" class="java.lang.Integer"/>
+	<field name="movimientobancario_fecha" class="java.sql.Date"/>
+	<field name="movimientobancario_saldoanterior" class="java.lang.Double"/>
+	<field name="movimientobancario_debito" class="java.lang.Double"/>
+	<field name="movimientobancario_idpagocompra" class="java.lang.Integer"/>
+	<field name="movimientobancario_credito" class="java.lang.Double"/>
+	<field name="movimientobancario_idcobroventa" class="java.lang.Integer"/>
+	<field name="movimientobancario_idotroingreso" class="java.lang.Integer"/>
+	<field name="movimientobancario_saldoactual" class="java.lang.Double"/>
+	<field name="pagocompra_idpagocompra" class="java.lang.Integer"/>
+	<field name="pagocompra_idcompra" class="java.lang.Integer"/>
+	<field name="pagocompra_idtipopago" class="java.lang.Integer"/>
+	<field name="pagocompra_idcuentabancaria" class="java.lang.Integer"/>
+	<field name="pagocompra_idbanco" class="java.lang.Integer"/>
+	<field name="pagocompra_cuentareceptora" class="java.lang.String"/>
+	<field name="pagocompra_totalpago" class="java.lang.Double"/>
+	<field name="pagocompra_aprobacion" class="java.lang.String"/>
+	<field name="pagocompra_fechapago" class="java.sql.Date"/>
+	<field name="pagocompra_idplandecuenta" class="java.lang.Integer"/>
+	<field name="pagocompra_saldopendiente" class="java.lang.Double"/>
+	<field name="pagocompra_montoretenido" class="java.lang.Double"/>
+	<field name="pagocompra_observacionespago" class="java.lang.String"/>
+	<field name="pagocompra_idmaestro" class="java.lang.Integer"/>
+	<group name="cliente_razonsocial">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="50" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="-3" width="215" height="13" uuid="1a7b2ecc-6866-457e-969d-177a2086da99"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA["INVERSIONES PEDREAÑEZ, C.A".]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="10" width="100" height="12" uuid="5bced9d0-4f76-44cb-a41f-2dbec357a268"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[RIF J-26720565-9]]></text>
+			</staticText>
+			<image>
+				<reportElement x="634" y="-6" width="118" height="47" uuid="753d1aab-962a-4e5f-8f4f-aa1d3635fa60"/>
+				<imageExpression><![CDATA["D:\\APLICACIONES JAVA SE - EE\\SistemaINPECA\\Inpeca\\web\\resources\\images\\LogoInpeca.jpg"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="0" y="22" width="335" height="12" uuid="bdbcbfdf-13f1-43c7-ad3b-a8080e5a1e53"/>
+				<textElement>
+					<font size="8" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[AV. 3H Entre calles 78 y 79 Residencias Republica PB Local 01 Maracaibo Estado Zulia]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="28" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="427" height="20" uuid="34867c07-73a8-48ed-9283-8f2ca4018671"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Movimientos Bancarios Efectuados ]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="502" y="0" width="76" height="20" uuid="8a1618ae-55db-4bfd-892a-e88fc5ca76e9"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="638" y="0" width="79" height="20" uuid="ee131293-c81b-43fa-9f12-f9ec41fde927"/>
+				<textElement>
+					<font size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="438" y="0" width="64" height="20" uuid="a12782d1-9746-497e-a0c3-837bd3f8c9b5"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Desde:]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="584" y="0" width="54" height="20" uuid="fbe50f82-97c3-4db4-9124-9bee01e20628"/>
+				<textElement textAlignment="Right">
+					<font size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Hasta:]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="57" height="20" uuid="67466b27-1919-471e-a9c0-d8c58651b4f7"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FECHA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="57" y="4" width="72" height="20" uuid="c3d1b701-c5d1-4c06-aafb-3efc4b5915ef"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[BANCO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="129" y="4" width="113" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="242" y="4" width="85" height="20" uuid="38855cd7-dfb8-4edd-ada4-37fc12b40c74"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO ANTERIOR]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="378" y="4" width="60" height="20" uuid="9e60caad-2501-4c9b-8af6-015026238256"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CREDITOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="438" y="4" width="83" height="19" uuid="dc84d994-5c7c-446f-883b-feb704f7d549"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SALDO ACTUAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="327" y="4" width="51" height="20" uuid="f230e4a1-5fca-4f7e-88ad-7e52e9165429"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DEBITOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="531" y="4" width="221" height="19" uuid="ddf220f7-08e2-4d13-a97f-412bd337286f"/>
+				<textElement verticalAlignment="Middle">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="24" width="752" height="1" uuid="7d8805ed-349d-4fdf-9515-5a4e01698033"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="57" y="2" width="72" height="20" uuid="f4cfbcf0-2d9c-45e4-900c-11c389bc202e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{banco_nombrebanco}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="129" y="2" width="113" height="20" uuid="8a32f7fa-8ec1-443e-afd4-595c597c4e05"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{cuentabancaria_numerocuenta}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="242" y="2" width="74" height="20" uuid="2cee8ad1-4bef-4e6c-81c8-dceb5bf54051"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimientobancario_saldoanterior}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="316" y="2" width="62" height="20" forecolor="#000000" uuid="816af8a7-255a-45a8-a006-162ea15efc27"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimientobancario_debito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00" isBlankWhenNull="true">
+				<reportElement x="378" y="2" width="60" height="20" forecolor="#000000" uuid="193fbe09-cbd9-4c51-b6eb-6197eb659600"/>
+				<textElement textAlignment="Right">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimientobancario_credito}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement x="448" y="2" width="73" height="20" uuid="59c44fb4-c3d9-4aa9-a5a4-a00d3e755b9d"/>
+				<textElement textAlignment="Right">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimientobancario_saldoactual}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="0" y="2" width="57" height="20" uuid="e7b709d4-477b-481a-af4e-adb782078559"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{movimientobancario_fecha}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="33" width="100" height="9" uuid="981c901a-0250-4a68-b429-9e601a083caa"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="584" y="33" width="104" height="20" uuid="692bb79a-4fae-49ee-895c-7bd376903665"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="688" y="33" width="40" height="21" uuid="b973ba96-b3ae-4dee-8dfc-169761e1622e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="298" y="33" width="100" height="9" uuid="03ad79b6-f9ca-4593-92ce-0d78eec316e0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poor Richard" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISMACONTAB WEB ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

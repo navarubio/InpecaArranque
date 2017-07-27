@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
+	<parameter name="estatus" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechaini" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fechafin" class="java.util.Date">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT
      factura.`numerofact` AS factura_numerofact,
@@ -35,7 +44,9 @@
      estatusfacturaventa.`estatusfacturaventa` AS estatusfacturaventa_estatusfacturaventa
 FROM
      `cliente` cliente INNER JOIN `factura` factura ON cliente.`rifcliente` = factura.`rifcliente`
-     INNER JOIN `estatusfacturaventa` estatusfacturaventa ON factura.`idestatusfacturaventa` = estatusfacturaventa.`idestatusfacturaventa` order by factura.`numerofact`]]>
+     INNER JOIN `estatusfacturaventa` estatusfacturaventa ON factura.`idestatusfacturaventa` = estatusfacturaventa.`idestatusfacturaventa`
+
+WHERE factura.`idestatusfacturaventa`= $P{estatus} AND  factura.`fecha` BETWEEN $P{fechaini} AND $P{fechafin}  ORDER BY  factura.`fecha`]]>
 	</queryString>
 	<field name="factura_numerofact" class="java.lang.Integer"/>
 	<field name="factura_numerocontrol" class="java.lang.String"/>
@@ -116,8 +127,32 @@ FROM
 				<textElement textAlignment="Center">
 					<font size="12" isBold="true"/>
 				</textElement>
-				<text><![CDATA[RELACION GENERAL DE FACTURAS EMITIDAS]]></text>
+				<text><![CDATA[RELACION DE FACTURAS EMITIDAS]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="464" y="3" width="58" height="20" uuid="b6b59eff-b6c3-4b44-92ea-fa4ea1c26391"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESDE:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="522" y="3" width="68" height="20" uuid="9d33b19e-7706-4dbe-a591-cff2cce6676d"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{fechaini}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="590" y="3" width="58" height="20" uuid="86d921c4-fb4b-4bb8-a549-999ae8455b9d"/>
+				<textElement textAlignment="Right">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[HASTA:]]></text>
+			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="648" y="3" width="70" height="20" uuid="023518dd-9a31-4ab6-9cde-5546737f7a54"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$P{fechafin}]]></textFieldExpression>
+			</textField>
 		</band>
 	</pageHeader>
 	<columnHeader>
@@ -137,21 +172,21 @@ FROM
 				<text><![CDATA[CONTROL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="130" y="5" width="64" height="20" uuid="b68e8447-e6c1-4aaf-b608-807ce6c13682"/>
+				<reportElement x="130" y="5" width="53" height="20" uuid="b68e8447-e6c1-4aaf-b608-807ce6c13682"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[FECHA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="194" y="5" width="60" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
+				<reportElement x="184" y="5" width="43" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[HORA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="358" y="5" width="54" height="20" uuid="38855cd7-dfb8-4edd-ada4-37fc12b40c74"/>
+				<reportElement x="287" y="5" width="125" height="20" uuid="38855cd7-dfb8-4edd-ada4-37fc12b40c74"/>
 				<textElement>
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -165,28 +200,28 @@ FROM
 				<text><![CDATA[SUBTOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="571" y="5" width="41" height="20" uuid="dc84d994-5c7c-446f-883b-feb704f7d549"/>
+				<reportElement x="571" y="5" width="44" height="20" uuid="dc84d994-5c7c-446f-883b-feb704f7d549"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[IVA %]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="615" y="4" width="73" height="18" uuid="2e29e04d-a838-4d1f-8834-21388a7bce3b"/>
+				<reportElement x="619" y="4" width="73" height="18" uuid="2e29e04d-a838-4d1f-8834-21388a7bce3b"/>
 				<textElement textAlignment="Right">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="696" y="5" width="56" height="18" uuid="936f89d3-e2a9-4179-a7bc-09a69d198964"/>
+				<reportElement x="696" y="5" width="46" height="18" uuid="936f89d3-e2a9-4179-a7bc-09a69d198964"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
 				<text><![CDATA[ESTATUS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="266" y="5" width="54" height="20" uuid="13c6c1da-618d-4cfe-80ee-84d07e66b050"/>
+				<reportElement x="229" y="5" width="54" height="20" uuid="13c6c1da-618d-4cfe-80ee-84d07e66b050"/>
 				<textElement textAlignment="Center">
 					<font size="9" isBold="true"/>
 				</textElement>
@@ -211,14 +246,14 @@ FROM
 				<textFieldExpression><![CDATA[$F{factura_numerocontrol}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="130" y="0" width="64" height="22" uuid="a522a60c-dc1f-46a3-8fb8-ae81de4500a8"/>
+				<reportElement x="130" y="0" width="53" height="22" uuid="a522a60c-dc1f-46a3-8fb8-ae81de4500a8"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{factura_fecha}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="194" y="0" width="60" height="22" uuid="a88a62a8-956d-42bc-8819-3d6a28b4abcd"/>
+				<reportElement x="184" y="0" width="43" height="22" uuid="a88a62a8-956d-42bc-8819-3d6a28b4abcd"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
@@ -232,35 +267,35 @@ FROM
 				<textFieldExpression><![CDATA[$F{factura_bimponiblefact}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="560" y="1" width="52" height="21" uuid="898be46b-b0b4-49e6-8e89-961abf8f3735"/>
+				<reportElement x="560" y="1" width="55" height="21" uuid="898be46b-b0b4-49e6-8e89-961abf8f3735"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{factura_ivafact}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="615" y="1" width="73" height="21" uuid="72d2bace-c810-4359-afa2-125ec0ded227"/>
+				<reportElement x="619" y="1" width="73" height="21" uuid="72d2bace-c810-4359-afa2-125ec0ded227"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{factura_totalgeneral}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="688" y="1" width="68" height="21" uuid="7c56c956-fc84-4edc-ae09-feef8d01ee8d"/>
+				<reportElement x="696" y="1" width="46" height="21" uuid="7c56c956-fc84-4edc-ae09-feef8d01ee8d"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{estatusfacturaventa_estatusfacturaventa}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="266" y="0" width="54" height="22" uuid="a10345b0-2637-4fb7-9ce2-5f76c138aa4b"/>
+				<reportElement x="229" y="0" width="54" height="22" uuid="a10345b0-2637-4fb7-9ce2-5f76c138aa4b"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{cliente_rifcliente}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="335" y="2" width="160" height="22" uuid="b5d4ce44-0a4e-41f4-97c2-f313850ff390"/>
+				<reportElement x="287" y="2" width="212" height="22" uuid="b5d4ce44-0a4e-41f4-97c2-f313850ff390"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
@@ -308,37 +343,37 @@ FROM
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch">
+		<band height="36" splitType="Stretch">
 			<textField pattern="#,##0.00">
-				<reportElement x="560" y="22" width="55" height="20" uuid="04fb1610-dba5-493c-bf7e-76cfab5fe48c"/>
+				<reportElement x="560" y="14" width="52" height="20" uuid="04fb1610-dba5-493c-bf7e-76cfab5fe48c"/>
 				<textElement textAlignment="Right">
-					<font size="9"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sumaiva}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="460" y="22" width="100" height="20" uuid="788a55c3-15dd-42b4-9f38-48f22127aa16"/>
+				<reportElement x="503" y="14" width="57" height="20" uuid="788a55c3-15dd-42b4-9f38-48f22127aa16"/>
 				<textElement textAlignment="Right">
-					<font size="9"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sumasubtotal}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="615" y="22" width="60" height="20" uuid="3ffb49a2-93e4-43a1-a578-80f3b6fdc7d1"/>
+				<reportElement x="615" y="14" width="73" height="20" uuid="3ffb49a2-93e4-43a1-a578-80f3b6fdc7d1"/>
 				<textElement textAlignment="Right">
-					<font size="9"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sumatotal}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="354" y="22" width="100" height="20" uuid="953284d1-d4be-4652-855c-379355f3605c"/>
+				<reportElement x="354" y="14" width="100" height="20" uuid="953284d1-d4be-4652-855c-379355f3605c"/>
 				<textElement>
 					<font isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTAL FACTURADO]]></text>
 			</staticText>
 			<line>
-				<reportElement x="477" y="41" width="198" height="1" uuid="4dc9b2cf-d766-41a9-8c3b-0438e68a2051"/>
+				<reportElement x="454" y="11" width="234" height="1" uuid="4dc9b2cf-d766-41a9-8c3b-0438e68a2051"/>
 			</line>
 		</band>
 	</summary>

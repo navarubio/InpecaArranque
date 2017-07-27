@@ -39,7 +39,7 @@
                                 <p:calendar size="10"  locale="es" id="fechahasta" pattern="dd/MM/yyyy" value="#{facturaController.fechahasta}" showOn="button" navigator="true" required="true"/>                                
 
                                 <p:commandButton value="Buscar" icon="ui-icon-check" actionListener="#{facturaController.actualizar()}" update="panelart"/>
-                                <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="#{bundle.Imprimir}" actionListener="#{compraController.verMovimientoCompras()}" ajax="false" onclick="form.target = '_blank'"/>
+                                <p:commandButton id="printButtom"  type="submit" icon="ui-icon-print"   value="#{bundle.Imprimir}" actionListener="#{facturaController.verFacturasEmitidas()}" ajax="false" onclick="form.target = '_blank'"/>
                             </p:panelGrid>
                         </p:fieldset>
                     </p:panelGrid>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
 	<property name="ireport.zoom" value="1.5"/>
-	<property name="ireport.x" value="270"/>
+	<property name="ireport.x" value="457"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="estatus" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
@@ -113,6 +113,15 @@ FROM
 		<variableExpression><![CDATA[$F{compra_total}]]></variableExpression>
 	</variable>
 	<variable name="compra_total_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_total}]]></variableExpression>
+	</variable>
+	<variable name="compra_subtotal_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_subtotal}]]></variableExpression>
+	</variable>
+	<variable name="compra_iva_2" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{compra_iva}]]></variableExpression>
+	</variable>
+	<variable name="compra_total_3" class="java.lang.Double" calculation="Sum">
 		<variableExpression><![CDATA[$F{compra_total}]]></variableExpression>
 	</variable>
 	<group name="cliente_razonsocial">
@@ -345,31 +354,34 @@ FROM
 			<staticText>
 				<reportElement x="376" y="10" width="87" height="17" uuid="6b0a4b24-0d99-4530-8288-5cce20ba5335"/>
 				<textElement textAlignment="Center">
-					<font size="9" isBold="true"/>
+					<font size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[TOTALES]]></text>
 			</staticText>
 			<textField pattern="#,##0.00">
-				<reportElement x="609" y="10" width="68" height="17" uuid="928643c5-159c-4fcc-b1de-78bedf6bac53"/>
+				<reportElement x="463" y="10" width="85" height="17" uuid="0d895fb6-6d45-47ae-8970-b3798daabb2a"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{compra_total_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{compra_subtotal_2}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="551" y="10" width="58" height="17" uuid="0ec8ec2b-915b-4c5d-a107-4de743617312"/>
+				<reportElement x="551" y="10" width="58" height="17" uuid="ca2629bd-df11-467e-a952-6eb9a9414a65"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{compra_iva_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{compra_iva_2}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="466" y="10" width="85" height="17" uuid="f646dfc7-9664-4d2a-a537-ba014582e9b7"/>
+				<reportElement x="609" y="10" width="68" height="17" uuid="55817c33-a5f8-4736-bcd3-985f1adbcdd8"/>
 				<textElement textAlignment="Right">
 					<font size="8" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{compra_subtotal_1}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$V{compra_total_3}]]></textFieldExpression>
 			</textField>
+			<line>
+				<reportElement x="463" y="4" width="212" height="1" uuid="da346128-1505-4852-841e-6c3abe49f096"/>
+			</line>
 		</band>
 	</summary>
 </jasperReport>

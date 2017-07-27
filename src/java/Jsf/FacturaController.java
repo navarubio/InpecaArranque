@@ -360,4 +360,18 @@ public class FacturaController implements Serializable {
         rArticulo.getFactura(ruta, codigofactu);
         FacesContext.getCurrentInstance().responseComplete();
     }
+    
+    public void verFacturasEmitidas() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+
+        //Instancia hacia la clase reporteClientes        
+        reporteArticulo rArticulo = new reporteArticulo();
+
+        int codigoestatus = estatusfactutaventa.getIdestatusfacturaventa();
+        FacesContext facesContext = FacesContext.getCurrentInstance();
+        ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
+        String ruta = servletContext.getRealPath("/resources/reportes/facturasemitidas.jasper");
+
+        rArticulo.getMovimientoFacturas(ruta, codigoestatus,fechadesde,fechahasta);
+        FacesContext.getCurrentInstance().responseComplete();
+    }
 }

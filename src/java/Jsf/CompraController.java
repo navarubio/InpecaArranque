@@ -402,7 +402,7 @@ public class CompraController implements Serializable {
         FacesContext.getCurrentInstance().responseComplete();
     }
 
-        public void verMovimientoCompras() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
+    public void verMovimientoCompras() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reporteClientes        
         reporteArticulo rArticulo = new reporteArticulo();
