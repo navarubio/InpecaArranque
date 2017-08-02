@@ -40,7 +40,7 @@ public class DetalleproduccionpicadoraFacade extends AbstractFacade<Detalleprodu
         String consulta;
         List<Detalleproduccionpicadora> lista = null;
         try {
-            consulta = "SELECT p FROM Produccionpicadora t JOIN t.Detalleproduccionpicadora p t.fecha between ?1 and ?2";
+            consulta = "SELECT p FROM Produccionpicadora p JOIN Detalleproduccionpicadora d where p.idproduccionpicadora=d.idproduccionpicadora and p.fecha between ?1 and ?2";
             Query query = em.createQuery(consulta);
             query.setParameter(1, fechaini);
             query.setParameter(2, fechafinish);

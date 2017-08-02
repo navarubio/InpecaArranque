@@ -66,4 +66,6 @@ public class MovimientobancarioFacade extends AbstractFacade<Movimientobancario>
         return lista;
     }
     
+    
+    
 }

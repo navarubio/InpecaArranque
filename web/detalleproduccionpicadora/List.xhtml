@@ -25,15 +25,8 @@
                     <p:panelGrid columns="1" >
                         <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="true" >
                             <p:panelGrid columns="8" styleClass="ui-custompanelgrid1">
-                                <p:outputLabel for="agregado" value="Agregado" styleClass="text-ouput"/>
-                                <p:selectOneMenu id="agregado" value="#{detallesproduccionpicadoraController.articuloelegido}" converter="omnifaces.SelectItemsConverter" required="true" > 
-                                    <f:selectItem noSelectionOption="true" itemLabel="Seleccione"/>
-                                    <f:selectItems value="#{detallesproduccionpicadoraController.articulos}"
-                                                   var="articuloItem"
-                                                   itemLabel="#{articuloItem.descripcion}"  itemValue="#{articuloItem}" /> 
-                                </p:selectOneMenu>
-                              <p:outputLabel for="fechadesde" value="Fecha Desde" />
-                              <p:calendar size="10"  locale="es" id="fechadesde" pattern="dd/MM/yyyy" value="#{detallesproduccionpicadoraController.fechadesde}" showOn="button" navigator="true" required="true"/>                                
+                                <p:outputLabel for="fechadesde" value="Fecha Desde" />
+                                <p:calendar size="10"  locale="es" id="fechadesde" pattern="dd/MM/yyyy" value="#{detallesproduccionpicadoraController.fechadesde}" showOn="button" navigator="true" required="true"/>                                
                                 <p:outputLabel for="fechahasta" value="Fecha Hasta" />
                                 <p:calendar size="10"  locale="es" id="fechahasta" pattern="dd/MM/yyyy" value="#{detallesproduccionpicadoraController.fechahasta}" showOn="button" navigator="true" required="true"/>                                
 

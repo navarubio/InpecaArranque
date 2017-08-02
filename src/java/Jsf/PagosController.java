@@ -435,6 +435,8 @@ public class PagosController implements Serializable {
         this.ivaretenido=0;
         this.islrretenido=0;
         this.compra = compr;
+        this.banco=null;
+        this.pagocompra.setIdcuentabancaria(null);
         this.pagocompra.setTotalpago(compra.getTotal());
         this.montoapagar = compra.getTotal();
         this.idCompra = compr.getIdcompra();
@@ -705,6 +707,7 @@ public class PagosController implements Serializable {
                 movimientobancario.setSaldoactual(saldoactualbanco);
                 movimientobancario.setIdpagocompra(pagocompra);
                 movimientoBancarioEJB.create(movimientobancario);
+                
                 
                 String subject;
                 String fechapag = formateador.format(pagocompra.getFechapago());

@@ -163,7 +163,8 @@
                                     </p:selectOneMenu>
                                     <p:outputLabel for="cuentabanco" value="Cuenta Bancaria" styleClass="text-ouput"/>
                                     <p:selectOneMenu id="cuentabanco" value="#{pagosController.pagocompra.idcuentabancaria}" converter="omnifaces.SelectItemsConverter"  required="true">
-                                        <p:ajax event="change" update="saldocuenta"/>                              
+                                        <p:ajax event="change" update="saldocuenta"/>
+                                        <f:selectItem noSelectionOption="true" itemLabel="Seleccione"/>
                                         <f:selectItems value="#{pagosController.lstCuentasSelecc}"
                                                        var="cuentaporbancoItem"
                                                        itemLabel="#{cuentaporbancoItem.numerocuenta}" itemValue="#{cuentaporbancoItem}"/>

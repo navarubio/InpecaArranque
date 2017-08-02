@@ -22,7 +22,7 @@
                     </div>      
                     <img src="../resources/images/kwallet2.png" width="70" height="70" alt="Clientes" align="right" />
 
-                    <p:panel id="panel1" header="ASIENTO DE COBRO DE FACTURA">
+                    <p:panel id="panel1" header="ASIENTO DE EMISION DE FACTURA">
                         <p:panelGrid columns="2">
                             <p:fieldset legend="Datos Facturación" >
                                 <p:panelGrid columns="4" styleClass="ui-custompanelgrid" >
@@ -95,7 +95,8 @@
                     <p:panel id="panelart"  >
                         <p:dataTable id="listado" value="#{asientosventasController.detallesfacturafiltrados}"
                                      var="req" emptyMessage="No hay articulos para mostrar" 
-                                     rowStyleClass="#{asientosventasController.visualizar== 6 || asientosventasController.visualizar== 7 ? 'facturaabonadaporcobrar' : null}">
+                                     rowStyleClass="#{req.codigo.idplandecuenta.idplandecuenta != null ? 'articulosinclasificar' : null}">
+
                             <p:column style="width:8%"  headerText="Codigo Articulo">
                                 <h:outputText value="#{req.codigo.codigo}" />
                             </p:column>
