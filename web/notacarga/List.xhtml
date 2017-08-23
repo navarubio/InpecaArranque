@@ -88,7 +88,9 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundlenotacarga.ListNotacargaTitle_pendiente}"/>
                             </f:facet>
-                            <h:outputText value="#{item.pendiente}"/>
+                            <h:outputText value="#{item.pendiente}">
+                                <f:convertNumber type="currency" currencySymbol=" " />
+                            </h:outputText>
                         </p:column>
                         <p:column style="text-align: center" headerText="Despachar">
                             <p:commandLink actionListener="#{notacargaController.asignarNotacarga(item)}"  update=":dialogo" oncomplete="PF('wdialogo').show();" >
@@ -99,7 +101,6 @@
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlenotacarga.Create}" actionListener="#{notacargaController.prepareCreate}" update=":NotacargaCreateForm" action="/notacarga/newNotacarga.xhtml" />
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlenotacarga.View}" update=":NotacargaViewForm" oncomplete="PF('NotacargaViewDialog').show()" disabled="#{empty notacargaController.selected}"/>
                             <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlenotacarga.Edit}" update=":NotacargaEditForm" oncomplete="PF('NotacargaEditDialog').show()" disabled="#{empty notacargaController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlenotacarga.Delete}" actionListener="#{notacargaController.destroy}" update=":growl,datalist" disabled="#{empty notacargaController.selected}"/>
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

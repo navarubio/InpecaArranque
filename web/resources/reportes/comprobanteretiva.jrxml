@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c84cd74-2f43-40af-a87d-8979663c88b5">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="14"/>
+	<property name="ireport.x" value="105"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -628,56 +628,56 @@ WHERE
 	<detail>
 		<band height="19">
 			<textField>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="48" y="0" width="49" height="18" uuid="d12a2c69-1d24-4f93-a5d2-475ec60aa3f9"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="48" y="0" width="49" height="18" uuid="d12a2c69-1d24-4f93-a5d2-475ec60aa3f9"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_numerofactura}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="0" y="0" width="48" height="18" isRemoveLineWhenBlank="true" uuid="a273f498-921a-43b2-9717-397e9be6619b"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="0" y="0" width="48" height="18" isRemoveLineWhenBlank="true" uuid="a273f498-921a-43b2-9717-397e9be6619b"/>
 				<textElement>
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_fechafactura}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="98" y="0" width="65" height="18" uuid="ee400ac4-cf40-42bd-af37-a2b5ea53f3f9"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="98" y="0" width="65" height="18" uuid="ee400ac4-cf40-42bd-af37-a2b5ea53f3f9"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_controlfactura}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="377" y="0" width="69" height="18" uuid="153e0749-f502-4250-bc19-e7049a285e98"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="377" y="0" width="69" height="18" uuid="153e0749-f502-4250-bc19-e7049a285e98"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionivaef_totalcompra}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="513" y="0" width="67" height="18" uuid="497bab61-6dd4-44c7-a5f9-0e3a644447d2"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="513" y="0" width="67" height="18" uuid="497bab61-6dd4-44c7-a5f9-0e3a644447d2"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionivaef_bimponible}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="613" y="0" width="67" height="18" uuid="69e03c63-f17c-445c-8f52-547ecfe110b5"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="613" y="0" width="67" height="18" uuid="69e03c63-f17c-445c-8f52-547ecfe110b5"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionivaef_totalivacompra}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="685" y="0" width="67" height="18" uuid="de3bd6bd-1a75-4e30-a86d-0e013c425f28"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="685" y="0" width="67" height="18" uuid="de3bd6bd-1a75-4e30-a86d-0e013c425f28"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionivaef_totalivaretenido}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement positionType="Float" stretchType="RelativeToTallestObject" x="586" y="0" width="27" height="18" uuid="b69977ac-0503-4de1-9bfa-68843da11206"/>
+				<reportElement positionType="Float" stretchType="RelativeToTallestObject" isPrintRepeatedValues="false" x="586" y="0" width="27" height="18" uuid="b69977ac-0503-4de1-9bfa-68843da11206"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>

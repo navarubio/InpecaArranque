@@ -92,7 +92,7 @@
                 <p:fieldset legend="Notas de Despacho">
                     <p:panel id="notadespacho">
                         <h:panelGrid id= "areadespacho" columns="1" width="800">
-                            <p:dataTable id="datalist" value="#{notacargaController.despachosfiltrados}" style="width: 900px" var="item" widgetVar="pagos"
+                            <p:dataTable id="datalist" value="#{notacargaController.despachosfiltrados}" style="width: 1100px" var="item" widgetVar="pagos"
                                          paginator="false"
                                          rows="20"
                                          >
@@ -116,13 +116,13 @@
                                     </f:facet>
                                     <h:outputText value="#{item.serial}"/>
                                 </p:column>
-                                <p:column style="text-align: center">
+                                <p:column width="80" style="text-align: center">
                                     <f:facet name="header">
                                         <h:outputText value="#{bundlepicadora.ListDespachopicadoraTitle_idcamion}"/>
                                     </f:facet>
                                     <h:outputText value="#{item.idcamion.color} #{item.idcamion.placas}"/>
                                 </p:column>
-                                <p:column style="text-align: center">
+                                <p:column width="80" style="text-align: center">
                                     <f:facet name="header">
                                         <h:outputText value="#{bundlepicadora.ListDespachopicadoraTitle_codigo}"/>
                                     </f:facet>

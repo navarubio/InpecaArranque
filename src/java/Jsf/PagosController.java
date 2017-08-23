@@ -745,7 +745,7 @@ public class PagosController implements Serializable {
                 detalleretencionivaef.setTotalivacompra(compra.getIva());
                 detalleretencionivaefEJB.create(detalleretencionivaef);
             }
-            if (detallecompra.getCodigo().getIdgrupo().getIdgrupo() == 2) {
+            if (tipocompra == 2) {
                 detalleretencionislref.setIdcompra(compra);
                 detalleretencionislref.setTotalcompra(compra.getTotal());
                 detalleretencionislref.setBimponible(compra.getSubtotal());

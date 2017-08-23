@@ -568,63 +568,63 @@ WHERE
 	<detail>
 		<band height="32" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="60" height="18" uuid="d12a2c69-1d24-4f93-a5d2-475ec60aa3f9"/>
+				<reportElement isPrintRepeatedValues="false" x="0" y="0" width="60" height="18" uuid="d12a2c69-1d24-4f93-a5d2-475ec60aa3f9"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_numerofactura}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="60" y="0" width="60" height="18" uuid="ee400ac4-cf40-42bd-af37-a2b5ea53f3f9"/>
+				<reportElement isPrintRepeatedValues="false" x="60" y="0" width="60" height="18" uuid="ee400ac4-cf40-42bd-af37-a2b5ea53f3f9"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_controlfactura}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
-				<reportElement x="120" y="0" width="58" height="18" uuid="8cfd314d-d329-4aee-a095-9e461868f148"/>
+				<reportElement isPrintRepeatedValues="false" x="120" y="0" width="58" height="18" uuid="8cfd314d-d329-4aee-a095-9e461868f148"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{compra_fechafactura}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="178" y="0" width="74" height="18" uuid="0b85e7b9-1df8-4179-b133-e0dd181ddb05"/>
+				<reportElement isPrintRepeatedValues="false" x="178" y="0" width="74" height="18" uuid="0b85e7b9-1df8-4179-b133-e0dd181ddb05"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionislref_totalcompra}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="262" y="0" width="95" height="32" uuid="f5eee234-7cbf-4439-ac55-aa5dc6297017"/>
+				<reportElement isPrintRepeatedValues="false" x="262" y="0" width="95" height="32" uuid="f5eee234-7cbf-4439-ac55-aa5dc6297017"/>
 				<textElement textAlignment="Center">
 					<font size="6"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{tiporetencionislr_descripcionservicio}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="358" y="0" width="66" height="18" uuid="30fbc221-b7ea-47ba-b929-1035ce88c79a"/>
+				<reportElement isPrintRepeatedValues="false" x="358" y="0" width="66" height="18" uuid="30fbc221-b7ea-47ba-b929-1035ce88c79a"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionislref_bimponible}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="427" y="0" width="31" height="18" uuid="1617032b-7fea-4552-badd-b821740534c8"/>
+				<reportElement isPrintRepeatedValues="false" x="427" y="0" width="31" height="18" uuid="1617032b-7fea-4552-badd-b821740534c8"/>
 				<textElement textAlignment="Center">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionislref_procentajeretencion}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="513" y="0" width="67" height="18" uuid="bf5844db-21dd-46ac-ae3f-35480fc9273c"/>
+				<reportElement isPrintRepeatedValues="false" x="513" y="0" width="67" height="18" uuid="bf5844db-21dd-46ac-ae3f-35480fc9273c"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{detalleretencionislref_totalislrretenido}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement x="458" y="0" width="45" height="18" uuid="8c932a79-bd29-47b3-82b3-5277ad02d44e"/>
+				<reportElement isPrintRepeatedValues="false" x="458" y="0" width="45" height="18" uuid="8c932a79-bd29-47b3-82b3-5277ad02d44e"/>
 				<textElement textAlignment="Right">
 					<font size="8"/>
 				</textElement>
