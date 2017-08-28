@@ -251,6 +251,7 @@ public class ComprobantesivaController implements Serializable {
     @PostConstruct
     public void init() {
         detalleretivafiltrados.clear();
+        
        
     }
     

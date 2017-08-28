@@ -53,25 +53,25 @@
                             </f:facet>
                             <h:outputText value="#{item.hora}"/>
                         </p:column>
-                        <p:column style="text-align: center">
+                        <p:column style="text-align: center" filterBy="#{item.serial}" filterMatchMode="contains" filterStyle="width:50px;">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlepicadora.ListDespachopicadoraTitle_serial}"/>
                             </f:facet>
                             <h:outputText value="#{item.serial}"/>
                         </p:column>
-                        <p:column style="text-align: center">
+                        <p:column style="text-align: center" width="150" filterBy="#{item.idcamion.placas}" filterMatchMode="contains">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlepicadora.ListDespachopicadoraTitle_idcamion}"/>
                             </f:facet>
                             <h:outputText value="#{item.idcamion.color}  #{item.idcamion.placas}"/>
                         </p:column>
-                        <p:column >
+                        <p:column  style="text-align: center" width="150" filterBy="#{item.idchofer.nombre}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundlepicadora.ListDespachopicadoraTitle_idchofer}"/>
                             </f:facet>
                             <h:outputText value="#{item.idchofer.nombre}"/>
                         </p:column>
-                        <p:column>
+                        <p:column width="300">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlepicadora.ListDespachopicadoraTitle_agregado}"/>
                             </f:facet>

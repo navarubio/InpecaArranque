@@ -38,7 +38,7 @@
                 </p:panel>
                 <p:panel id="panelart">
                     <p:dataTable id="datalist" value="#{detallesproduccionpicadoraController.items}" var="item"
-                                 selectionMode="single" selection="#{detalleproduccionpicadoraController.selected}" style="width: 800px;"
+                                 selectionMode="single" selection="#{detalleproduccionpicadoraController.selected}" style="width: 900px;"
                                  paginator="true"
                                  rowKey="#{item.iddetalleproduccionpicadora}"
                                  rows="25"
@@ -70,7 +70,7 @@
                             <h:outputText value="#{item.codigo.codigo}"/>
                         </p:column>
 
-                        <p:column width="150" filterBy="#{item.codigo.descripcion}" filterMatchMode="contains" >
+                        <p:column width="250" filterBy="#{item.codigo.descripcion}" filterMatchMode="contains" >
                             <f:facet name="header">
                                 <h:outputText value="#{bundlefactura.ListDetallefacturaTitle_articulo}"/>
                             </f:facet>

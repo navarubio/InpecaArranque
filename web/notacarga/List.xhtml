@@ -94,9 +94,22 @@
                         </p:column>
                         <p:column style="text-align: center" headerText="Despachar">
                             <p:commandLink actionListener="#{notacargaController.asignarNotacarga(item)}"  update=":dialogo" oncomplete="PF('wdialogo').show();" >
-                                <h:graphicImage library="images" name="iconoexcavadora.png" width="30" height="30" alt="Despacho"/> 
+                                <h:graphicImage library="images" name="iconoexcavadora.png" width="30" height="30" alt="Despacho"
+                                                rendered="#{item.pendiente > 0 ? true:false}"/> 
+                                     
                             </p:commandLink>
                         </p:column>
+                        <p:columnGroup type="footer">
+                            <p:row>
+                                <p:column colspan="3" style="text-align:right" footerText="TOTALES:" />
+                                <p:column footerText="#{notacargaController.totalCantidad}" style="text-align: center" />
+                                <p:column footerText="#{notacargaController.subtotalGeneral}" style="text-align: right" />
+                                <p:column footerText="#{notacargaController.ivaGeneral}" style="text-align: right" />
+                                <p:column footerText="#{notacargaController.totalGeneral}" style="text-align: right" />
+                                <p:column footerText="#{notacargaController.totalPendiente}" style="text-align: center" />                                
+                            </p:row>
+                        </p:columnGroup>
+
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlenotacarga.Create}" actionListener="#{notacargaController.prepareCreate}" update=":NotacargaCreateForm" action="/notacarga/newNotacarga.xhtml" />
                             <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlenotacarga.View}" update=":NotacargaViewForm" oncomplete="PF('NotacargaViewDialog').show()" disabled="#{empty notacargaController.selected}"/>

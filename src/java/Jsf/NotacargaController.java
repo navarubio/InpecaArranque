@@ -19,6 +19,7 @@ import Modelo.Articulo;
 import Modelo.Camion;
 import Modelo.Chofer;
 import Modelo.Cliente;
+import Modelo.Compra;
 import Modelo.Despachador;
 import Modelo.Despachopicadora;
 import Modelo.Detallenotacarga;
@@ -607,5 +608,63 @@ public class NotacargaController implements Serializable {
         articulo = detalle.getCodigo();
 //        compraautorizada = compraselec;
     }
+    
+    public String getSubtotalGeneral() {
+        double total = 0;
+        
+        if (items!=null){
+            for(Notacarga  inventa : items) {
+                total += inventa.getBimponible();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
 
+    }
+    public String getIvaGeneral() {
+        double total = 0;
+        
+        if (items!=null){
+            for(Notacarga inventa : items) {
+                total += inventa.getIva();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalGeneral() {
+        double total = 0;
+        
+        if (items!=null){
+            for(Notacarga inventa : items) {
+                total += inventa.getTotalgeneral();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+    
+    public String getTotalCantidad() {
+        double total = 0;
+        
+        if (items!=null){
+            for(Notacarga inventa : items) {
+                total += inventa.getCantidad();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
+
+    public String getTotalPendiente() {
+        double total = 0;
+        
+        if (items!=null){
+            for(Notacarga inventa : items) {
+                total += inventa.getPendiente();
+            }
+        }
+        return new DecimalFormat("###,###.##").format(total);
+
+    }
 }
