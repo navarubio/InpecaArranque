@@ -23,7 +23,7 @@
                 <img src="../resources/images/contabilidadblank.png" width="70" height="70" alt="Clientes" align="right" />
 
                 <p:panel header="#{bundlecontabilidad.ListMaestromovimientoTitle}">
-                    <p:dataTable id="datalist" value="#{maestromovimientoController.items}" var="item"
+                    <p:dataTable id="datalist" value="#{maestromovimientoController.itemsordenados}" var="item"
                                  selectionMode="single" selection="#{maestromovimientoController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idmaestro}"
@@ -73,16 +73,6 @@
                         </p:column>
                         <p:column style="text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="#{bundlecontabilidad.ListMaestromovimientoTitle_numerofact}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.numerofact}"/>
-                            <h:commandLink action="/factura/facturaasiento.xhtml" actionListener="#{asientosventasController.asignarfactura(item.numerofact, item)}" > 
-                                <h:graphicImage library="images" name="contable1.png" width="30" height="30" alt="Facturas"
-                                                rendered="#{item.numerofact!= null? true:false}"/>  
-                            </h:commandLink>      
-                        </p:column>
-                        <p:column style="text-align: center">
-                            <f:facet name="header">
                                 <h:outputText value="#{bundlecontabilidad.ListMaestromovimientoTitle_idautorizacion}"/>
                             </f:facet>
                             <h:outputText value="#{item.idautorizacion}"/>
@@ -96,10 +86,20 @@
                                                 rendered="#{item.idpagocompra!= null? true:false}"/>  
                             </h:commandLink>  
                             <h:outputText value="#{item.idpagocompra}"/>
+                        </p:column>                        
+                        <p:column style="text-align: center">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlecontabilidad.ListMaestromovimientoTitle_numerofact}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.numerofact}"/>
+                            <h:commandLink action="/factura/facturaasiento.xhtml" actionListener="#{asientosventasController.asignarfactura(item.numerofact, item)}" > 
+                                <h:graphicImage library="images" name="contable1.png" width="30" height="30" alt="Facturas"
+                                                rendered="#{item.numerofact!= null? true:false}"/>  
+                            </h:commandLink>      
                         </p:column>
                         <p:column style="text-align: center">
                             <f:facet name="header">
-                                <h:outputText value="#{bundlecontabilidad.ListMaestromovimientoTitle_idcobroventa}"/>
+                                <h:outputText value="#{bundlecontabilidad.ListMaestromovimientoTitle_idcobrofactura}"/>
                             </f:facet>
                             <h:commandLink action="/factura/facturaasiento.xhtml" actionListener="#{asientosventasController.asignarpagofactura(item.idcobroventa, item)}" >
                                 <h:graphicImage library="images" name="contable1.png" width="30" height="30" alt="Cobros"

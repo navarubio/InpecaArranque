@@ -212,7 +212,7 @@
                                                  converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
                                     <p:ajax event="change" update="codigocta"/>
                                     <!--f:selectItem itemLabel="SIN APLICAR" itemValue="0" noSelectionOption="false" /-->
-                                    <f:selectItems value="#{plandecuentaController.itemsordenados}"
+                                    <f:selectItems value="#{plandecuentasController.itemsordenados}"
                                                    var="subespecificocontableItem"
                                                    itemValue="#{subespecificocontableItem.idplandecuenta}" /> 
                                 </p:selectOneMenu>
@@ -278,7 +278,7 @@
                                              converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains">
                                 <!--p:ajax event="change" update="codigcta"/-->
                                 <!--f:selectItem itemLabel="SIN APLICAR" itemValue="0" noSelectionOption="false" /-->
-                                <f:selectItems value="#{plandecuentaController.itemsordenados}"
+                                <f:selectItems value="#{plandecuentasController.itemsordenados}"
                                                var="subespecificocontableItem"
                                                itemValue="#{subespecificocontableItem.idplandecuenta}" /> 
                             </p:selectOneMenu>

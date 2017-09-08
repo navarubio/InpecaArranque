@@ -31,4 +31,6 @@ public interface MaestromovimientoFacadeLocal {
 
     int count();
     
+    List<Maestromovimiento> MovimientosOrdenadosFecha();
+    
 }

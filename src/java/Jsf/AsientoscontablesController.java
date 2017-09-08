@@ -1014,15 +1014,18 @@ public class AsientoscontablesController implements Serializable {
         }
 
         Detallelibrodiario detallelibro = new Detallelibrodiario();
-
-        int codctahaber = 21115;
+        int codctahaber = 0;
+        if (arti.getIdgrupo().getIdgrupo()<3){
+            codctahaber = 21115;
+        }else if (arti.getIdgrupo().getIdgrupo()==3){        
+            codctahaber = 211110;    
+        }
         Plandecuenta cuentaporpagar = plandecuentaEJB.buscarcuenta(codctahaber);
         detallelibro.setIdplandecuenta(cuentaporpagar);
         detallelibro.setHaber(compra.getTotal());
         detallelibro.setIddetallelibrodiario(id);
         this.listadetalleslibrodiario.add(detallelibro);
         id++;
-
     }
 
     public void anexarpagocompra() {

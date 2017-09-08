@@ -51,6 +51,14 @@
                                 </p:selectOneMenu>
                                 <p:outputLabel for="rif" value="R.I.F." styleClass="optionalLbl"/>
                                 <p:outputLabel id="rif" value="#{compraController.selected.rifproveedor}" styleClass="optionalLbl"/>
+ 
+                                <p:outputLabel value="Fecha Factura" for="fechafactu" />
+                                <p:calendar id="fechafactu" pattern="dd/MM/yyyy" value="#{compraController.selected.fechafactura}" title="#{bundle.EditCompraTitle_fechaorden}"  showOn="button" locale="es" required="true"/>                                
+                                <p:outputLabel for="factu" value="Nro Factura" styleClass="optionalLbl"/>
+                                <p:inputText id="factu" value="#{compraController.selected.numerofactura }" styleClass="optionalLbl"/>
+                                <p:outputLabel for="control" value="Nro Control" styleClass="optionalLbl"/>
+                                <p:inputText id="control" value="#{compraController.selected.controlfactura}" styleClass="optionalLbl"/>
+
                             </p:panelGrid>
                         </p:fieldset>
                         <p:panelGrid columns="2">

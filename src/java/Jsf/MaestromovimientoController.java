@@ -82,6 +82,14 @@ public class MaestromovimientoController implements Serializable {
         }
         return items;
     }
+    
+    public List<Maestromovimiento> getItemsordenados() {
+        if (items == null) {
+            items = getFacade().MovimientosOrdenadosFecha();
+        }
+        return items;
+    }
+    
 
     private void persist(PersistAction persistAction, String successMessage) {
         if (selected != null) {

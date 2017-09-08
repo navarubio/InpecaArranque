@@ -30,8 +30,8 @@
                                  rowsPerPageTemplate="20,30,40,50,60"
                                  >
 
-                        <p:ajax event="rowSelect"   update="createButton "/>
-                        <p:ajax event="rowUnselect" update="createButton "/>
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton "/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton "/>
 
                         <p:column filterBy="#{item.idpagocompra}"  filterMatchMode="exact" width="70" filterStyle="width:50px;" >
                             <f:facet name="header">
@@ -106,9 +106,9 @@
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{pagocompraController.prepareCreate}" update=":CompraCreateForm" oncomplete="PF('CompraCreateDialog').show()" disabled="true"/>
-                            <!--p:commandButton id="viewButton"   icon="ui-icon-search" value=".{bundle.View}" update=":CompraViewForm" oncomplete="PF('CompraViewDialog').show()" disabled=".{empty pagocompraController.selected}" />
-                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value=".{bundle.Edit}" update=":CompraEditForm" oncomplete="PF('CompraEditDialog').show()" disabled=".{empty pagocompraController.selected}"/>
-                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value=".{bundle.Delete}" actionListener=".{pagocompraController.destroy}" update=":growl,datalist" disabled=".{empty pagocompraController.selected}"/-->
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":CompraViewForm" oncomplete="PF('CompraViewDialog').show()" disabled="#{empty pagocompraController.selected}" />
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":CompraEditForm" oncomplete="PF('CompraEditDialog').show()" disabled="#{empty pagocompraController.selected}"/>
+                            <!--p:commandButton id="deleteButton" icon="ui-icon-trash"  value=".{bundle.Delete}" actionListener=".{pagocompraController.destroy}" update=":growl,datalist" disabled=".{empty pagocompraController.selected}"/-->
                         </f:facet>
                     </p:dataTable>
                 </p:panel>

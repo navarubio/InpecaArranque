@@ -40,6 +40,9 @@ public class TiporetencionislrFacade extends AbstractFacade<Tiporetencionislr> i
         int idpersonalidad = persona;
         int idresidencia = residen;
         int idsubgrupo = subg;
+        if (idpersonalidad==3){
+            idpersonalidad=1;
+        }
         try {
             consulta = "From Tiporetencionislr t where t.idsubgrupo.idsubgrupo= ?1 and t.idpersonalidad.idpersonalidad= ?2 and t.idresidencia.idresidencia= ?3";
             Query query = em.createQuery(consulta);
@@ -61,6 +64,9 @@ public class TiporetencionislrFacade extends AbstractFacade<Tiporetencionislr> i
         String consulta;
         int idpersonalidad = persona.getIdpersonalidad();
         int idresidencia= residencia.getIdresidencia();
+        if (idpersonalidad==3){
+            idpersonalidad=1;
+        }
         List<Tiporetencionislr> lista = null;
         try {
             consulta = "From Tiporetencionislr t where t.idpersonalidad.idpersonalidad= ?1 and t.idresidencia.idresidencia= ?2 ";

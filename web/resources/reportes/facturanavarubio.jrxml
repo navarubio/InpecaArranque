@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="792" pageHeight="612" orientation="Landscape" columnWidth="752" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7c84cd74-2f43-40af-a87d-8979663c88b5">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="49"/>
 	<property name="ireport.y" value="0"/>
 	<style name="table">
 		<box>
@@ -79,7 +79,7 @@
 FROM
      `cliente` cliente INNER JOIN `factura` factura ON cliente.`rifcliente` = factura.`rifcliente`
      INNER JOIN `detallefactura` detallefactura ON factura.`numerofact` = detallefactura.`numerofact`
-     INNER JOIN `articulo` articulo ON detallefactura.`codigo` = articulo.`codigo` WHERE factura.`numerofact` = $P{numfactura} order by articulo.`codigo` desc]]>
+     INNER JOIN `articulo` articulo ON detallefactura.`codigo` = articulo.`codigo` WHERE factura.`numerofact` = $P{numfactura} order by detallefactura.`iddetallefact` ]]>
 	</queryString>
 	<field name="factura_numerofact" class="java.lang.Integer"/>
 	<field name="factura_serialfactura" class="java.lang.String"/>

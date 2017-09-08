@@ -613,7 +613,8 @@ public class AsientosotrosingresosController implements Serializable {
             this.movimientoegreso = ingresoespecifico.get(1);
             librodiario.setDescripcionasiento("P/R INGRESO ING- " + otroingreso.getIdotroingreso() + " POR TRASPASO DESDE " + movimientoegreso.getIdcuentabancaria().getIdbanco().getNombrebanco()  + " AL " + movimientoingreso.getIdcuentabancaria().getIdbanco().getNombrebanco());
         } else {
-            librodiario.setDescripcionasiento("P/R INGRESO ING- " + otroingreso.getIdotroingreso() + " POR CONCEPTO DE " + otroingreso.getIdtipoingreso().getTipoingreso());
+//            librodiario.setDescripcionasiento("P/R INGRESO ING- " + otroingreso.getIdotroingreso() + " POR CONCEPTO DE " + otroingreso.getIdtipoingreso().getTipoingreso());
+            librodiario.setDescripcionasiento("P/R INGRESO ING- " + otroingreso.getIdotroingreso() + " POR CONCEPTO DE " + otroingreso.getIdtipoingreso().getTipoingreso() +" "+ otroingreso.getObservaciones());
         }
         listadetalleslibrodiario = detallesasiento();
         librodiario.setFecha(otroingreso.getFechaingreso());
