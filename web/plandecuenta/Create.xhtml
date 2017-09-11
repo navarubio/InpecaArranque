@@ -38,7 +38,7 @@
                                            itemValue="#{especificocontableItem.idespecificocontable}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlecontable.CreatePlandecuentaLabel_subespecificocontable}" for="subespecificocontable" />
-                        <p:selectOneMenu id="subespecificocontable" value="#{plandecuentaController.selected.idsubespecificocontable}" converter="omnifaces.SelectItemsConverter"  required="true" requiredMessage="#{bundlecontable.EditPlandecuentaRequiredMessage_subespecificocontable}">
+                        <p:selectOneMenu id="subespecificocontable" value="#{plandecuentaController.selected.idsubespecificocontable}" converter="omnifaces.SelectItemsConverter"  required="true" requiredMessage="#{bundlecontable.EditPlandecuentaRequiredMessage_subespecificocontable} " filter="true" filterMatchMode="contains">
                             <p:ajax event="change" update="out1"/>
                             <f:selectItem itemLabel="SIN APLICAR" itemValue="0" noSelectionOption="false" />
                             <f:selectItems value="#{plandecuentaController.lstSubespecificos}"

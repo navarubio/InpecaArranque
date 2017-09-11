@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="plandecuentas" pageWidth="612" pageHeight="792" columnWidth="572" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3ddba77e-51be-47ac-8b24-c3354df35f82">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     empresa.`rif` AS empresa_rif,
+     empresa.`razonsocial` AS empresa_razonsocial,
+     empresa.`nombrecomercial` AS empresa_nombrecomercial,
+     empresa.`direccionfiscal` AS empresa_direccionfiscal,
+     empresa.`telefonos` AS empresa_telefonos,
+     empresa.`presidente` AS empresa_presidente,
+     empresa.`administrador` AS empresa_administrador,
+     empresa.`contador` AS empresa_contador,
+     empresa.`idcontribuyente` AS empresa_idcontribuyente,
+     empresa.`idpersonalidad` AS empresa_idpersonalidad,
+     plandecuenta.`idplandecuenta` AS plandecuenta_idplandecuenta,
+     plandecuenta.`idgrupocontable` AS plandecuenta_idgrupocontable,
+     plandecuenta.`idsubgrupocontable` AS plandecuenta_idsubgrupocontable,
+     plandecuenta.`idespecificocontable` AS plandecuenta_idespecificocontable,
+     plandecuenta.`idsubespecificocontable` AS plandecuenta_idsubespecificocontable,
+     plandecuenta.`idgeneralcuenta` AS plandecuenta_idgeneralcuenta,
+     plandecuenta.`descripcioncuenta` AS plandecuenta_descripcioncuenta,
+     plandecuenta.`idtipocuentacontable` AS plandecuenta_idtipocuentacontable,
+     plandecuenta.`idtiposaldocontable` AS plandecuenta_idtiposaldocontable,
+     plandecuenta.`saldogeneral` AS plandecuenta_saldogeneral,
+     plandecuenta.`idtipopartidacontable` AS plandecuenta_idtipopartidacontable,
+     plandecuenta.`fujodeefectivo` AS plandecuenta_fujodeefectivo,
+     tipocuentacontable.`idtipocuentacontable` AS tipocuentacontable_idtipocuentacontable,
+     tipocuentacontable.`tipocuentacontable` AS tipocuentacontable_tipocuentacontable,
+     tiposaldocontable.`idtiposaldocontable` AS tiposaldocontable_idtiposaldocontable,
+     tiposaldocontable.`tiposaldocontable` AS tiposaldocontable_tiposaldocontable,
+     tipopartidacontable.`idtipopartidacontable` AS tipopartidacontable_idtipopartidacontable,
+     tipopartidacontable.`tipopartidacontable` AS tipopartidacontable_tipopartidacontable
+FROM
+     `tipocuentacontable` tipocuentacontable RIGHT OUTER JOIN `plandecuenta` plandecuenta ON tipocuentacontable.`idtipocuentacontable` = plandecuenta.`idtipocuentacontable`
+     LEFT OUTER JOIN `tiposaldocontable` tiposaldocontable ON plandecuenta.`idtiposaldocontable` = tiposaldocontable.`idtiposaldocontable`
+     LEFT OUTER JOIN `tipopartidacontable` tipopartidacontable ON plandecuenta.`idtipopartidacontable` = tipopartidacontable.`idtipopartidacontable`,
+     `empresa` empresa
+ORDER BY
+
+	plandecuenta.`idgrupocontable`, plandecuenta.`idsubgrupocontable`,plandecuenta.`idespecificocontable`,      plandecuenta.`idsubespecificocontable`, plandecuenta.`idgeneralcuenta` ASC]]>
+	</queryString>
+	<field name="empresa_rif" class="java.lang.String"/>
+	<field name="empresa_razonsocial" class="java.lang.String"/>
+	<field name="empresa_nombrecomercial" class="java.lang.String"/>
+	<field name="empresa_direccionfiscal" class="java.lang.String"/>
+	<field name="empresa_telefonos" class="java.lang.String"/>
+	<field name="empresa_presidente" class="java.lang.String"/>
+	<field name="empresa_administrador" class="java.lang.String"/>
+	<field name="empresa_contador" class="java.lang.String"/>
+	<field name="empresa_idcontribuyente" class="java.lang.Integer"/>
+	<field name="empresa_idpersonalidad" class="java.lang.Integer"/>
+	<field name="plandecuenta_idplandecuenta" class="java.lang.Integer"/>
+	<field name="plandecuenta_idgrupocontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_idsubgrupocontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_idespecificocontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_idsubespecificocontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_idgeneralcuenta" class="java.lang.Integer"/>
+	<field name="plandecuenta_descripcioncuenta" class="java.lang.String"/>
+	<field name="plandecuenta_idtipocuentacontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_idtiposaldocontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_saldogeneral" class="java.lang.Double"/>
+	<field name="plandecuenta_idtipopartidacontable" class="java.lang.Integer"/>
+	<field name="plandecuenta_fujodeefectivo" class="java.lang.Integer"/>
+	<field name="tipocuentacontable_idtipocuentacontable" class="java.lang.Integer"/>
+	<field name="tipocuentacontable_tipocuentacontable" class="java.lang.String"/>
+	<field name="tiposaldocontable_idtiposaldocontable" class="java.lang.Integer"/>
+	<field name="tiposaldocontable_tiposaldocontable" class="java.lang.String"/>
+	<field name="tipopartidacontable_idtipopartidacontable" class="java.lang.Integer"/>
+	<field name="tipopartidacontable_tipopartidacontable" class="java.lang.String"/>
+	<group name="cliente_razonsocial">
+		<groupExpression><![CDATA[]]></groupExpression>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="44" splitType="Stretch">
+			<image>
+				<reportElement x="452" y="-3" width="118" height="47" uuid="753d1aab-962a-4e5f-8f4f-aa1d3635fa60"/>
+				<imageExpression><![CDATA["D:\\APLICACIONES JAVA SE - EE\\SistemaINPECA\\Inpeca\\web\\resources\\images\\LogoInpeca.jpg"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="0" y="0" width="330" height="13" uuid="8fae7ee8-7bfc-41af-af8a-80a7d7dabc4a"/>
+				<textElement>
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_razonsocial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="13" width="207" height="12" uuid="a32400ac-ef5c-4401-8a8b-9b9567774b0a"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_rif}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="25" width="376" height="19" uuid="ab7c6eb5-b342-4bdd-ac57-340d3573233d"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{empresa_direccionfiscal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="23" splitType="Stretch">
+			<staticText>
+				<reportElement x="154" y="3" width="278" height="20" uuid="34867c07-73a8-48ed-9283-8f2ca4018671"/>
+				<textElement textAlignment="Center">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[PLAN GENERAL DE CUENTAS CONTABLES ]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="25" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="4" width="54" height="20" uuid="67466b27-1919-471e-a9c0-d8c58651b4f7"/>
+				<textElement>
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CODIGO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="56" y="5" width="192" height="20" uuid="07b03ad7-74e4-46e9-bf19-1bd21d576f7d"/>
+				<textElement textAlignment="Justified">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[DESCRIPCION DE CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="319" y="5" width="68" height="20" uuid="38855cd7-dfb8-4edd-ada4-37fc12b40c74"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO SALDO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="248" y="5" width="71" height="20" uuid="bf4efdc4-8754-4ca1-be95-535d6136c4be"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO CUENTA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="387" y="5" width="68" height="20" uuid="5bb2469d-ee8c-40e5-b012-8d392c284d89"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[TIPO PARTIDA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="5" width="88" height="19" uuid="b81a43a3-dd7d-486e-8257-0e0cdd62fac1"/>
+				<textElement textAlignment="Center">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[FLUJO EFECTIVO]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="15" splitType="Stretch">
+			<textField>
+				<reportElement x="56" y="0" width="192" height="11" uuid="a969b4fa-e0da-48c2-a9a3-8909babed2bd"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plandecuenta_descripcioncuenta}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="10" y="0" width="46" height="11" uuid="3c8bef93-2cb1-4d37-8be0-123f382c23a6"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plandecuenta_idplandecuenta}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="248" y="0" width="71" height="11" uuid="de82f41b-db0f-4aa2-86f2-a23cf1a1f92e"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipocuentacontable_tipocuentacontable}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="319" y="0" width="68" height="11" uuid="d7c65ed8-a11d-4f97-9c26-57f0ff9997d3"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tiposaldocontable_tiposaldocontable}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="387" y="0" width="68" height="11" uuid="2019ea54-c0e9-4bb5-a10d-bc095b15be73"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{tipopartidacontable_tipopartidacontable}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="484" y="0" width="25" height="11" uuid="6bd12a61-fbab-49c6-8903-27e3e30b06cf"/>
+				<textElement textAlignment="Center">
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{plandecuenta_fujodeefectivo}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="33" width="100" height="9" uuid="981c901a-0250-4a68-b429-9e601a083caa"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="432" y="33" width="99" height="20" uuid="692bb79a-4fae-49ee-895c-7bd376903665"/>
+				<textElement textAlignment="Right">
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Página "+$V{PAGE_NUMBER}+" de"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="531" y="33" width="40" height="21" uuid="b973ba96-b3ae-4dee-8dfc-169761e1622e"/>
+				<textElement>
+					<font size="6"/>
+				</textElement>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="207" y="33" width="100" height="9" uuid="03ad79b6-f9ca-4593-92ce-0d78eec316e0"/>
+				<textElement textAlignment="Center">
+					<font fontName="Poor Richard" size="6" isBold="true"/>
+				</textElement>
+				<text><![CDATA[SISMACONTAB WEB ]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

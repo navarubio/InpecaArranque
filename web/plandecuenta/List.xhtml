@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
-
+        <f:event type="preRenderView" listener="#{plandecuentasController.itemsordenados} "/>
 
         <ui:define name="title">
             <h:outputText value="#{bundlecontable.ListPlandecuentaTitle}"></h:outputText>
@@ -86,12 +86,6 @@
                                 <f:convertNumber type="currency" currencySymbol=" " />
                             </h:outputText>
                         </p:column>
-                        <p:column style="text-align: right">
-                            <f:facet name="header">
-                                <h:outputText value="#{bundlecontable.ListPlandecuentaTitle_fujodeefectivo}"/>
-                            </f:facet>
-                            <h:outputText value="#{item.fujodeefectivo}"/>
-                        </p:column>
                         <p:column style="text-align: center">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlecontable.ListPlandecuentaTitle_idtipocuentacontable}"/>
@@ -109,6 +103,12 @@
                                 <h:outputText value="#{bundlecontable.ListPlandecuentaTitle_idtipopartidacontable}"/>
                             </f:facet>
                             <h:outputText value="#{item.idtipopartidacontable.tipopartidacontable}"/>
+                        </p:column>
+                        <p:column style="text-align: center">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlecontable.ListPlandecuentaTitle_fujodeefectivo}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.fujodeefectivo}"/>
                         </p:column>
                         <p:columnGroup type="footer">
                             <p:row>

@@ -5,6 +5,7 @@ import Jsf.util.JsfUtil;
 import Jsf.util.JsfUtil.PersistAction;
 import Jpa.PlandecuentaFacade;
 import Jpa.PlandecuentaFacadeLocal;
+import Modelo.Compra;
 import Modelo.Especificocontable;
 import Modelo.Grupocontable;
 import Modelo.Subespecificocontable;
@@ -43,6 +44,7 @@ public class PlandecuentaController implements Serializable {
 
     private List<Plandecuenta> items = null;
     private Plandecuenta selected;
+    private Plandecuenta cuentaseleccionada;
 
     private List<Grupocontable> lstGrupos;
     private List<Subgrupocontable> lstSubgrupos;
@@ -90,11 +92,15 @@ public class PlandecuentaController implements Serializable {
     }
 
     public Plandecuenta getSelected() {
+
         return selected;
     }
-
+    
     public void setSelected(Plandecuenta selected) {
         this.selected = selected;
+        refrescarSubgrupos();
+        refrescarEspecificos();
+        refrescarSubespecificos();
     }
 
     protected void setEmbeddableKeys() {

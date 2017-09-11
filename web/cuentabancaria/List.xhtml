@@ -22,7 +22,7 @@
                 <img src="../resources/images/banco.png" width="70" height="70" alt="Clientes" align="right" />
 
                 <p:panel header="#{bundlebanco.ListCuentabancariaTitle}">
-                    <p:dataTable id="datalist" value="#{cuentasbancariasController.items}" var="item"
+                    <p:dataTable id="datalist" value="#{cuentasbancariasController.items}" var="item" style="width:1200px"
                                  selectionMode="single" selection="#{cuentabancariaController.selected}"
                                  paginator="true"
                                  rowKey="#{item.idcuentabancaria}"
@@ -60,11 +60,11 @@
                                 <f:convertNumber type="currency" currencySymbol=" " />
                             </h:outputText>
                         </p:column>
-                        <p:column>
+                        <p:column width="450">
                             <f:facet name="header">
                                 <h:outputText value="#{bundlebanco.ListCuentabancariaTitle_idplandecuenta}"/>
                             </f:facet>
-                            <h:outputText value="#{item.idplandecuenta}"/>
+                            <h:outputText value="#{item.idplandecuenta.idplandecuenta}  #{item.idplandecuenta.descripcioncuenta} "/>
                         </p:column>
                         <f:facet name="footer">
                             <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlebanco.Create}" actionListener="#{cuentabancariaController.prepareCreate}" update=":CuentabancariaCreateForm" oncomplete="PF('CuentabancariaCreateDialog').show()"/>

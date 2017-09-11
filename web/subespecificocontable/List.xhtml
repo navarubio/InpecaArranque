@@ -7,7 +7,7 @@
       xmlns:p="http://primefaces.org/ui">
 
     <ui:composition template="/template.xhtml">
-
+        <f:event type="preRenderView" listener="#{subespecificocontableController.items} "/>
 
         <ui:define name="title">
             <h:outputText value="#{bundlecontable.ListSubespecificocontableTitle}"></h:outputText>
@@ -20,8 +20,8 @@
                                  selectionMode="single" selection="#{subespecificocontableController.selected}"
                                  paginator="true"
                                  rowKey="#{item.codigocuenta}"
-                                 rows="25"
-                                 rowsPerPageTemplate="20,30,40,50"
+                                 rows="30"
+                                 rowsPerPageTemplate="30,40,50"
                                  >
 
                         <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>

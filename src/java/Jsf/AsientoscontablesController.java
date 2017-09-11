@@ -145,7 +145,7 @@ public class AsientoscontablesController implements Serializable {
     private Usuario usa;
     private Departamento dpto;
     private Compra codCompra;
-    private Empresa empresa;
+    
     private int visualizar = 0;
     private int tipocompra = 1;
     private double montoUT = 0;
@@ -209,10 +209,11 @@ public class AsientoscontablesController implements Serializable {
     private Librodiario librodiario;
     @Inject
     private Detallelibrodiario detallelibroventa;
-
     @Inject
     private Libromayor libromayor;
-
+    @Inject
+    private Empresa empresa;
+    
     public List<Detallelibrodiario> getListadetalleslibrodiario() {
         return listadetalleslibrodiario;
     }
@@ -692,7 +693,7 @@ public class AsientoscontablesController implements Serializable {
         librodiario.setFecha(compra.getFechaorden());
         Detallecompra detal = detallecompraFiltrados.get(0);
         Articulo artic = detal.getCodigo();
-        librodiario.setDescripcionasiento("P/R COMPRA CMP-" + compra.getIdcompra() + " " + artic.getDescripcion());
+        librodiario.setDescripcionasiento("P/R COMPRA CMP-" + compra.getIdcompra() + " " + artic.getDescripcion()+ ", "+compra.getIdauxiliarrequerimiento().getDescripcion());
 //        this.compra.setIdauxiliarrequerimiento(auxiliar);
     }
 
@@ -714,7 +715,7 @@ public class AsientoscontablesController implements Serializable {
         detallecompraFiltrados = detallecompraAuxiliar();
         listadetalleslibrodiario = detallesasientopago();
         librodiario.setFecha(compra.getFechaorden());
-        librodiario.setDescripcionasiento("P/R PAGO DE COMPRA CMP-" + compra.getIdcompra());
+        librodiario.setDescripcionasiento("P/R PAGO DE COMPRA CMP-" + compra.getIdcompra()+", "+pagocompra.getObservacionespago());
 //        this.compra.setIdauxiliarrequerimiento(auxiliar);
     }
 
@@ -1034,8 +1035,8 @@ public class AsientoscontablesController implements Serializable {
         visualizar = 0;
 
         Detallelibrodiario detallelibro = new Detallelibrodiario();
-
-        int codctadebe = 21115;
+        empresa=empresaEJB.devolverEmpresabase();
+        int codctadebe = empresa.getCtaxpagarproved();
         Plandecuenta cuentaporpagar = plandecuentaEJB.buscarcuenta(codctadebe);
         detallelibro.setIdplandecuenta(cuentaporpagar);
         double saldop = pagocompra.getSaldopendiente();
