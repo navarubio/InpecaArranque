@@ -85,7 +85,7 @@
                                 <h:graphicImage library="images" name="contable1.png" width="30" height="30" alt="Compras"
                                                 rendered="#{item.idpagocompra!= null? true:false}"/>  
                             </h:commandLink>  
-                            <h:outputText value="#{item.idpagocompra}"/>
+                            <h:outputText value="#{item.idpagocompra.idcompra}"/>
                         </p:column>                        
                         <p:column style="text-align: center">
                             <f:facet name="header">
@@ -105,7 +105,7 @@
                                 <h:graphicImage library="images" name="contable1.png" width="30" height="30" alt="Cobros"
                                                 rendered="#{item.idcobroventa!= null? true:false}"/>  
                             </h:commandLink>                            
-                            <h:outputText value="#{item.idcobroventa}"/>
+                            <h:outputText value="#{item.idcobroventa.numerofact.numerofact}"/>
                         </p:column>
                         <p:column style="text-align: center">
                             <f:facet name="header">

@@ -34,7 +34,7 @@
                                            itemValue="#{especificocontableItem.idespecificocontable}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundlecontable.EditPlandecuentaLabel_subespecificocontable}" for="subespecificocontable" />
-                        <p:selectOneMenu id="subespecificocontable" value="#{plandecuentaController.selected.idsubespecificocontable}" required="true" requiredMessage="#{bundlecontable.EditPlandecuentaRequiredMessage_subespecificocontable}">
+                        <p:selectOneMenu id="subespecificocontable" value="#{plandecuentaController.selected.idsubespecificocontable}" required="false" requiredMessage="#{bundlecontable.EditPlandecuentaRequiredMessage_subespecificocontable}">
                             <f:selectItem itemLabel="#{bundlecontable.SelectOneMessage}"/>
                             <f:selectItems value="#{plandecuentaController.lstSubespecificos}"
                                            var="subespecificocontableItem"

@@ -29,7 +29,7 @@
                                  paginator="true"
                                  rowKey="#{item.idplandecuenta}"
                                  rows="30"
-                                 rowStyleClass="#{item.idgeneralcuenta> 0 ? 'facturaabonada' : null}"
+                                 rowStyleClass="#{item.idgeneralcuenta> 0 ? 'facturaabonada' : null} #{item.idgeneralcuenta== 0 ? 'asientocuadrado' : null}"
                                  rowsPerPageTemplate="30,40,50"
                                  >
 
@@ -76,7 +76,7 @@
                             <f:facet name="header">
                                 <h:outputText value="#{bundlecontable.ListPlandecuentaTitle_descripcioncuenta}"/>
                             </f:facet>
-                            <h:outputText value="#{item.descripcioncuenta}"/>
+                            <h:outputText  value="#{item.descripcioncuenta}"/>
                         </p:column>
                         <p:column style="text-align: right" width="100" >
                             <f:facet name="header">

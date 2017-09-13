@@ -983,6 +983,7 @@ public class AsientoscontablesController implements Serializable {
 
     public void anexar() {
         listadetalleslibrodiario.clear();
+        empresa=empresaEJB.devolverEmpresabase();
         id = 0;
         visualizar = 0;
         Detallecompra detalle1 = detallecompraFiltrados.get(0);
@@ -992,7 +993,7 @@ public class AsientoscontablesController implements Serializable {
             detallelib.setIdplandecuenta(arti.getIdplandecuenta());
             detallelibroventa.setIdplandecuenta(arti.getIdplandecuenta());
         } else {
-            int codcta = 6121100;
+            int codcta = empresa.getCtagastoprovisional();
             Plandecuenta cuentaprovisional = plandecuentaEJB.buscarcuenta(codcta);
             detallelib.setIdplandecuenta(cuentaprovisional);
             detallelibroventa.setIdplandecuenta(detallelib.getIdplandecuenta());
@@ -1005,7 +1006,7 @@ public class AsientoscontablesController implements Serializable {
         if (compra.getIva() > 0.0) {
             Detallelibrodiario detallelibr = new Detallelibrodiario();
 
-            int codcta = 12425;
+            int codcta = empresa.getCredfiscal();
             Plandecuenta cuentacredfiscal = plandecuentaEJB.buscarcuenta(codcta);
             detallelibr.setIdplandecuenta(cuentacredfiscal);
             detallelibr.setDebe(compra.getIva());
@@ -1017,9 +1018,9 @@ public class AsientoscontablesController implements Serializable {
         Detallelibrodiario detallelibro = new Detallelibrodiario();
         int codctahaber = 0;
         if (arti.getIdgrupo().getIdgrupo()<3){
-            codctahaber = 21115;
+            codctahaber = empresa.getCtaxpagarproved();
         }else if (arti.getIdgrupo().getIdgrupo()==3){        
-            codctahaber = 211110;    
+            codctahaber = empresa.getCtaxpagarinterna();    
         }
         Plandecuenta cuentaporpagar = plandecuentaEJB.buscarcuenta(codctahaber);
         detallelibro.setIdplandecuenta(cuentaporpagar);
@@ -1033,9 +1034,9 @@ public class AsientoscontablesController implements Serializable {
         listadetalleslibrodiario.clear();
         id = 0;
         visualizar = 0;
+        empresa=empresaEJB.devolverEmpresabase();
 
         Detallelibrodiario detallelibro = new Detallelibrodiario();
-        empresa=empresaEJB.devolverEmpresabase();
         int codctadebe = empresa.getCtaxpagarproved();
         Plandecuenta cuentaporpagar = plandecuentaEJB.buscarcuenta(codctadebe);
         detallelibro.setIdplandecuenta(cuentaporpagar);
@@ -1064,7 +1065,7 @@ public class AsientoscontablesController implements Serializable {
 
             if (pagocompra.getMontoretenido() == retiva) {
                 Detallelibrodiario detallelib = new Detallelibrodiario();
-                int codcta = 21235;
+                int codcta = empresa.getRetivaxenterar();
                 Plandecuenta cuentaretencioniva = plandecuentaEJB.buscarcuenta(codcta);
                 detallelib.setIdplandecuenta(cuentaretencioniva);
                 detallelib.setHaber(pagocompra.getMontoretenido());
@@ -1073,7 +1074,7 @@ public class AsientoscontablesController implements Serializable {
                 id++;
             } else if (pagocompra.getMontoretenido() > retiva) {
                 Detallelibrodiario detallelib = new Detallelibrodiario();
-                int codcta = 21235;
+                int codcta = empresa.getRetivaxenterar();
                 Plandecuenta cuentaretencioniva = plandecuentaEJB.buscarcuenta(codcta);
                 detallelib.setIdplandecuenta(cuentaretencioniva);
                 detallelib.setHaber(retiva);
@@ -1082,7 +1083,7 @@ public class AsientoscontablesController implements Serializable {
                 id++;
                 
                 Detallelibrodiario detallelibr1 = new Detallelibrodiario();
-                int codcta1 = 212310;
+                int codcta1 = empresa.getRetislrxenterar();
                 Plandecuenta cuentaretencionislr = plandecuentaEJB.buscarcuenta(codcta1);
                 detallelibr1.setIdplandecuenta(cuentaretencionislr);
                 detallelibr1.setHaber(retislr);
