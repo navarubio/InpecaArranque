@@ -61,6 +61,11 @@ public class DetallecompraController implements Serializable {
         List <Detallecompra> listaactualizada =ejbFacade.findAll();
         return listaactualizada;
     } 
+    
+    public List<Detallecompra> devolverMateriaprima(){
+        List <Detallecompra> listaactualizada =ejbFacade.buscarMateriaprima();
+        return listaactualizada;
+    } 
 
     public void create() {
         persist(PersistAction.CREATE, ResourceBundle.getBundle("/Bundle").getString("DetallecompraCreated"));

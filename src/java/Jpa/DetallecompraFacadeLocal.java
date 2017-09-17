@@ -25,4 +25,6 @@ public interface DetallecompraFacadeLocal {
     Detallecompra ultimodetalleInsertado ();
     
     List<Detallecompra> buscardetallecompra (Compra compra);
+    
+    List<Detallecompra> buscarMateriaprima(); 
 }

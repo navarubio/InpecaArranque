@@ -64,4 +64,20 @@ public class DetallecompraFacade extends AbstractFacade<Detallecompra> implement
         }
         return lista;
     }
+    
+    @Override
+    public List<Detallecompra> buscarMateriaprima() {
+        String consulta;
+        int subg=2;
+        List<Detallecompra> lista = null;
+        try {
+            consulta = "From Detallecompra d where d.codigo.idsubgrupo.idsubgrupo = ?1";
+            Query query = em.createQuery(consulta);
+            query.setParameter(1, subg);
+            lista = query.getResultList();
+        } catch (Exception e) {
+            throw e;
+        }
+        return lista;
+    }
 }
