@@ -734,7 +734,8 @@ public class AsientoscontablesController implements Serializable {
 
     public List<Detallelibrodiario> detallesasientopago() {
         List<Detallelibrodiario> detallesasiento = null;
-        anexarpagocompra();
+//        anexarpagocompra();
+        anexarComprapago();
         detallesasiento = listadetalleslibrodiario;
         return detallesasiento;
     }
@@ -1029,6 +1030,82 @@ public class AsientoscontablesController implements Serializable {
         this.listadetalleslibrodiario.add(detallelibro);
         id++;
     }
+    
+        public void anexarComprapago() {
+        listadetalleslibrodiario.clear();
+        empresa=empresaEJB.devolverEmpresabase();
+        id = 0;
+        visualizar = 0;
+        Detallecompra detalle1 = detallecompraFiltrados.get(0);
+        Articulo arti = detalle1.getCodigo();
+        Detallelibrodiario detallelib = new Detallelibrodiario();
+        if (arti.getIdplandecuenta() != null) {
+            detallelib.setIdplandecuenta(arti.getIdplandecuenta());
+            detallelibroventa.setIdplandecuenta(arti.getIdplandecuenta());
+        } else {
+            int codcta = empresa.getCtagastoprovisional();
+            Plandecuenta cuentaprovisional = plandecuentaEJB.buscarcuenta(codcta);
+            detallelib.setIdplandecuenta(cuentaprovisional);
+            detallelibroventa.setIdplandecuenta(detallelib.getIdplandecuenta());
+        }
+        detallelib.setDebe(compra.getSubtotal());
+        detallelib.setIddetallelibrodiario(id);
+        this.listadetalleslibrodiario.add(detallelib);
+        id++;
+
+        if (compra.getIva() > 0.0) {
+            Detallelibrodiario detallelibr = new Detallelibrodiario();
+
+            int codcta = empresa.getCredfiscal();
+            Plandecuenta cuentacredfiscal = plandecuentaEJB.buscarcuenta(codcta);
+            detallelibr.setIdplandecuenta(cuentacredfiscal);
+            detallelibr.setDebe(compra.getIva());
+            detallelibr.setIddetallelibrodiario(id);
+            this.listadetalleslibrodiario.add(detallelibr);
+            id++;
+        }
+
+        if (pagocompra.getMontoretenido() > 0) {
+
+            if (pagocompra.getMontoretenido() == retiva) {
+                Detallelibrodiario detallelibr = new Detallelibrodiario();
+                int codcta = empresa.getRetivaxenterar();
+                Plandecuenta cuentaretencioniva = plandecuentaEJB.buscarcuenta(codcta);
+                detallelibr.setIdplandecuenta(cuentaretencioniva);
+                detallelibr.setHaber(pagocompra.getMontoretenido());
+                detallelibr.setIddetallelibrodiario(id);
+                this.listadetalleslibrodiario.add(detallelibr);
+                id++;
+            } else if (pagocompra.getMontoretenido() > retiva) {
+                Detallelibrodiario detallelibr = new Detallelibrodiario();
+                int codcta = empresa.getRetivaxenterar();
+                Plandecuenta cuentaretencioniva = plandecuentaEJB.buscarcuenta(codcta);
+                detallelibr.setIdplandecuenta(cuentaretencioniva);
+                detallelibr.setHaber(retiva);
+                detallelibr.setIddetallelibrodiario(id);
+                this.listadetalleslibrodiario.add(detallelibr);
+                id++;
+                
+                Detallelibrodiario detallelibr1 = new Detallelibrodiario();
+                int codcta1 = empresa.getRetislrxenterar();
+                Plandecuenta cuentaretencionislr = plandecuentaEJB.buscarcuenta(codcta1);
+                detallelibr1.setIdplandecuenta(cuentaretencionislr);
+                detallelibr1.setHaber(retislr);
+                detallelibr1.setIddetallelibrodiario(id);
+                this.listadetalleslibrodiario.add(detallelibr1);
+                id++;
+            }
+            
+        }
+
+        Detallelibrodiario detallelibr = new Detallelibrodiario();
+        detallelibr.setIdplandecuenta(pagocompra.getIdcuentabancaria().getIdplandecuenta());
+        detallelibr.setHaber(pagocompra.getTotalpago());
+        detallelibr.setIddetallelibrodiario(id);
+        this.listadetalleslibrodiario.add(detallelibr);
+        id++;
+    }
+
 
     public void anexarpagocompra() {
         listadetalleslibrodiario.clear();

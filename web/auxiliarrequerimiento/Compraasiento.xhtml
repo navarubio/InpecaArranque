@@ -146,7 +146,7 @@
                             </p:panelGrid>
                         </p:fieldset-->
                     </p:panel>
-                    <p:panel id="panelart" rendered="#{asientoscontablesController.vercasilla== 1 ? true:false}">
+                    <p:panel id="panelart" rendered="#{asientoscontablesController.vercasilla== 1 || asientoscontablesController.vercasilla== 2 ? true:false}">
                         <p:dataTable id="listado" value="#{asientoscontablesController.detallecompraFiltrados}"
                                      var="req" emptyMessage="No hay articulos para mostrar" 
                                      rowStyleClass="#{req.codigo.idplandecuenta.idplandecuenta != null ? 'articulosinclasificar' : null}">
