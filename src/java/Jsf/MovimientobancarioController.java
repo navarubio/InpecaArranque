@@ -40,6 +40,7 @@ public class MovimientobancarioController implements Serializable {
     @EJB
     private BancoFacadeLocal bancoEJB;
     private List<Movimientobancario> items = null;
+    private List <Movimientobancario> itemsfiltrados=null;
     private Movimientobancario selected=new Movimientobancario();
     private List<Banco> bancos;
     private Banco bancoselec;
@@ -139,7 +140,15 @@ public class MovimientobancarioController implements Serializable {
     }
 
     public void actualizar(){
-        items= ejbFacade.buscarmovimientoporfecha(selected.getIdcuentabancaria(), fechadesde, fechahasta);
+        itemsfiltrados= ejbFacade.buscarmovimientoporfecha(selected.getIdcuentabancaria(), fechadesde, fechahasta);
+    }
+
+    public List<Movimientobancario> getItemsfiltrados() {
+        return itemsfiltrados;
+    }
+
+    public void setItemsfiltrados(List<Movimientobancario> itemsfiltrados) {
+        this.itemsfiltrados = itemsfiltrados;
     }
 
     public void create() {

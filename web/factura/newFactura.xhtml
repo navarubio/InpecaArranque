@@ -38,7 +38,7 @@
                                     <f:selectItem noSelectionOption="true" itemLabel="Seleccione" itemValue="#{null}"/>
                                     <f:selectItems value="#{facturasController.clientes}"
                                                    var="idarticuloItem"
-                                                   itemLabel="#{idarticuloItem.razonsocial}"  itemValue="#{idarticuloItem}"/> 
+                                                   itemLabel=" #{idarticuloItem.rifcliente} #{idarticuloItem.razonsocial}"  itemValue="#{idarticuloItem}"/> 
                                 </p:selectOneMenu>
 
                                 <p:outputLabel for="rif" styleClass="text-ouput" value="R.I.F." />

@@ -24,7 +24,7 @@
 
                     <p:panel id="panel1" header="#{bundlebancario.ListMovimientobancarioTitle}">
                         <p:panelGrid columns="1" >
-                            <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="true" >
+                            <p:fieldset  legend="Seleccion por Fecha"  toggleable="true" toggleSpeed="500" collapsed="false" >
                                 <p:panelGrid columns="8" styleClass="ui-custompanelgrid1">
                                     <p:outputLabel for="banco" value="Banco" styleClass="text-ouput"/>
                                     <p:selectOneMenu id="banco" value="#{movimientobancarioController.bancoselec}" converter="omnifaces.SelectItemsConverter" required="true" > 
@@ -52,7 +52,7 @@
                         </p:panelGrid>
                     </p:panel>
                     <p:panel id="panelart">
-                        <p:dataTable id="datalist" value="#{movimientobancarioController.items}" var="item" widgetVar="movimientosencta"
+                        <p:dataTable id="datalist" value="#{movimientobancarioController.itemsfiltrados}" var="item" widgetVar="movimientosencta"
                                      paginator="true" emptyMessage="No hay movimientos para cuenta seleccionada"
                                      rows="25"
                                      rowsPerPageTemplate="25,30,40,50"

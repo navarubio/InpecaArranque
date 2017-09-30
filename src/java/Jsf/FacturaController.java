@@ -15,6 +15,7 @@ import Modelo.Inventariopicadora;
 import java.io.Serializable;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -56,6 +57,8 @@ public class FacturaController implements Serializable {
     private Date fechadesde;
     private Date fechahasta; 
     private  Estatusfacturaventa estatusfactutaventa;
+    private Date fechaactual = new Date();
+    SimpleDateFormat formateador = new SimpleDateFormat("dd-MM-yyyy");
 
     public FacturaController() {
     }
@@ -63,6 +66,7 @@ public class FacturaController implements Serializable {
     @PostConstruct
     public void init() {
         facturasactivas = ejbFacade.buscarfacturasporCobrar();
+        fechadesde=fechaactual;
     }
 
     public Factura getSelected() {
