@@ -13,8 +13,8 @@
                 <h:panelGroup id="display">
                     <p:panelGrid columns="2" rendered="#{empresaController.selected != null}">
                         <p:outputLabel value="#{bundleEmpresa.EditEmpresaLabel_rif}" for="rif" />
-                        <p:inputText id="rif" value="#{empresaController.selected.rif}" title="#{bundleEmpresa.EditEmpresaTitle_rif}" required="true" requiredMessage="#{bundleEmpresa.EditEmpresaRequiredMessage_rif}"/>
-                        <p:outputLabel value="#{bundleEmpresa.EditEmpresaLabel_razonsocial}" for="razonsocial" />
+                        <p:inputText id="rif" value="#{empresaController.selected.rif}" title="#{bundleEmpresa.EditEmpresaTitle_rif}" required="true" requiredMessage="#{bundleEmpresa.EditEmpresaRequiredMessage_rif}" />
+                        <p:outputLabel value="#{bundleEmpresa.EditEmpresaLabel_razonsocial}" for="razonsocial"  />
                         <p:inputText size="50"  id="razonsocial" value="#{empresaController.selected.razonsocial}" title="#{bundleEmpresa.EditEmpresaTitle_razonsocial}" />
                         <p:outputLabel value="#{bundleEmpresa.EditEmpresaLabel_nombrecomercial}" for="nombrecomercial" />
                         <p:inputText id="nombrecomercial" value="#{empresaController.selected.nombrecomercial}" title="#{bundleEmpresa.EditEmpresaTitle_nombrecomercial}" />

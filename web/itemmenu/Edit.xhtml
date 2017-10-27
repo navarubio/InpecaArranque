@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ItemmenuEditDlg" widgetVar="ItemmenuEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlemenurol.EditItemmenuTitle}">
+            <h:form id="ItemmenuEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{itemmenuController.selected != null}">
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_iditemmenu}" for="iditemmenu" />
+                        <p:inputText id="iditemmenu" value="#{itemmenuController.selected.iditemmenu}" title="#{bundlemenurol.EditItemmenuTitle_iditemmenu}" required="true" requiredMessage="#{bundlemenurol.EditItemmenuRequiredMessage_iditemmenu}"/>
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_descripcion}" for="descripcion" />
+                        <p:inputText id="descripcion" value="#{itemmenuController.selected.descripcion}" title="#{bundlemenurol.EditItemmenuTitle_descripcion}" />
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_url}" for="url" />
+                        <p:inputText id="url" value="#{itemmenuController.selected.url}" title="#{bundlemenurol.EditItemmenuTitle_url}" />
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_icon}" for="icon" />
+                        <p:inputText id="icon" value="#{itemmenuController.selected.icon}" title="#{bundlemenurol.EditItemmenuTitle_icon}" />
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_estado}" for="estado" />
+                        <p:selectBooleanCheckbox id="estado" value="#{itemmenuController.selected.estado}" />
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_idsubmenu}" for="idsubmenu" />
+                        <p:selectOneMenu id="idsubmenu" value="#{itemmenuController.selected.idsubmenu}" >
+                            <f:selectItem itemLabel="#{bundlemenurol.SelectOneMessage}"/>
+                            <f:selectItems value="#{submenuController.itemsAvailableSelectOne}"
+                                           var="idsubmenuItem"
+                                           itemValue="#{idsubmenuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlemenurol.EditItemmenuLabel_idsubnivel}" for="idsubnivel" />
+                        <p:selectOneMenu id="idsubnivel" value="#{itemmenuController.selected.idsubnivel}" >
+                            <f:selectItem itemLabel="#{bundlemenurol.SelectOneMessage}"/>
+                            <f:selectItems value="#{subnivelController.itemsAvailableSelectOne}"
+                                           var="idsubnivelItem"
+                                           itemValue="#{idsubnivelItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{itemmenuController.update}" value="#{bundlemenurol.Save}" update="display,:ItemmenuListForm:datalist,:growl" oncomplete="handleSubmit(args, 'ItemmenuEditDialog');"/>
+                    <p:commandButton value="#{bundlemenurol.Cancel}" onclick="ItemmenuEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

@@ -94,6 +94,9 @@ public class Usuario implements Serializable {
     private Collection<Produccionpicadora> produccionpicadoraCollection;
     @OneToMany(mappedBy = "idusuario")
     private Collection<Notacarga> notacargaCollection;
+    @JoinColumn(name = "idrol", referencedColumnName = "idrol")
+    @ManyToOne
+    private Rol idrol;
 
     public Usuario() {
     }
@@ -166,6 +169,14 @@ public class Usuario implements Serializable {
         this.clave = clave;
     }
 
+    public Rol getIdrol() {
+        return idrol;
+    }
+
+    public void setIdrol(Rol idrol) {
+        this.idrol = idrol;
+    }
+    
     @XmlTransient
     public Collection<Auxiliarrequerimiento> getAuxiliarrequerimientoCollection() {
         return auxiliarrequerimientoCollection;

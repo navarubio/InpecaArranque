@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundlemenu.ListSubmenuTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="SubmenuListForm">
+                <p:panel header="#{bundlemenu.ListSubmenuTitle}">
+                    <p:dataTable id="datalist" value="#{submenuController.itemsOrdenados}" var="item" style="width: 400px;"
+                                 selectionMode="single" selection="#{submenuController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idsubmenu}"
+                                 rows="20"
+                                 rowsPerPageTemplate="20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenu.ListSubmenuTitle_idsubmenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idsubmenu}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenu.ListSubmenuTitle_submenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.submenu}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.CreateItemmenuTitle_icon}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.icon}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlemenu.Create}" actionListener="#{submenuController.prepareCreate}" update=":SubmenuCreateForm" oncomplete="PF('SubmenuCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlemenu.View}" update=":SubmenuViewForm" oncomplete="PF('SubmenuViewDialog').show()" disabled="#{empty submenuController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlemenu.Edit}" update=":SubmenuEditForm" oncomplete="PF('SubmenuEditDialog').show()" disabled="#{empty submenuController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlemenu.Delete}" actionListener="#{submenuController.destroy}" update=":growl,datalist" disabled="#{empty submenuController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

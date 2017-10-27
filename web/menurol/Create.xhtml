@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenurolCreateDlg" widgetVar="MenurolCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlemenurol.CreateMenurolTitle}">
+            <h:form id="MenurolCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menurolController.selected != null}">
+                        <p:outputLabel value="#{bundlemenurol.CreateMenurolLabel_iditemmenu}" for="iditemmenu" />
+                        <p:selectOneMenu id="iditemmenu" value="#{menurolController.selected.iditemmenu}" filter="true" filterMatchMode="contains" >
+                            <f:selectItems value="#{itemmenuController.itemsAvailableSelectOne}"
+                                           var="iditemmenuItem"
+                                           itemValue="#{iditemmenuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlemenurol.CreateMenurolLabel_idrol}" for="idrol" />
+                        <p:selectOneMenu id="idrol" value="#{menurolController.selected.idrol}" >
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="idrolItem"
+                                           itemValue="#{idrolItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{menurolController.create}" value="#{bundlemenurol.Save}" update="display,:MenurolListForm:datalist,:growl" oncomplete="handleSubmit(args,'MenurolCreateDialog');"/>
+                    <p:commandButton value="#{bundlemenurol.Cancel}" onclick="MenurolCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

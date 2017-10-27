@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundlemenurol.ListMenurolTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="MenurolListForm">
+                <p:panel header="#{bundlemenurol.ListMenurolTitle}">
+                    <p:dataTable id="datalist" value="#{menurolController.items}" var="item" style="width:1000px"
+                                 selectionMode="single" selection="#{menurolController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idmenurol}"
+                                 rows="30"
+                                 rowsPerPageTemplate="30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListMenurolTitle_idmenurol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idmenurol}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idrol.rol}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListMenurolTitle_idrol}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idrol.rol}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.iditemmenu.idsubmenu.submenu}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Sub Menu"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iditemmenu.idsubmenu.submenu}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.iditemmenu.idsubnivel.subnivel}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Sub Nivel"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iditemmenu.idsubnivel.subnivel}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.iditemmenu.descripcion}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="Item Menu"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iditemmenu.descripcion}"/>
+                        </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlemenurol.Create}" actionListener="#{menurolController.prepareCreate}" update=":MenurolCreateForm" oncomplete="PF('MenurolCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlemenurol.View}" update=":MenurolViewForm" oncomplete="PF('MenurolViewDialog').show()" disabled="#{empty menurolController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlemenurol.Edit}" update=":MenurolEditForm" oncomplete="PF('MenurolEditDialog').show()" disabled="#{empty menurolController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlemenurol.Delete}" actionListener="#{menurolController.destroy}" update=":growl,:MenurolListForm,datalist" disabled="#{empty menurolController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenurolEditDlg" widgetVar="MenurolEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlemenurol.EditMenurolTitle}">
+            <h:form id="MenurolEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menurolController.selected != null}">
+                        <p:outputLabel value="#{bundlemenurol.EditMenurolLabel_idmenurol}" for="idmenurol" />
+                        <p:inputText id="idmenurol" value="#{menurolController.selected.idmenurol}" title="#{bundlemenurol.EditMenurolTitle_idmenurol}" required="true" requiredMessage="#{bundlemenurol.EditMenurolRequiredMessage_idmenurol}"/>
+                        <p:outputLabel value="#{bundlemenurol.EditMenurolLabel_iditemmenu}" for="iditemmenu" />
+                        <p:selectOneMenu id="iditemmenu" value="#{menurolController.selected.iditemmenu}" >
+                            <f:selectItem itemLabel="#{bundlemenurol.SelectOneMessage}"/>
+                            <f:selectItems value="#{itemmenuController.itemsAvailableSelectOne}"
+                                           var="iditemmenuItem"
+                                           itemValue="#{iditemmenuItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundlemenurol.EditMenurolLabel_idrol}" for="idrol" />
+                        <p:selectOneMenu id="idrol" value="#{menurolController.selected.idrol}" >
+                            <f:selectItem itemLabel="#{bundlemenurol.SelectOneMessage}"/>
+                            <f:selectItems value="#{rolController.itemsAvailableSelectOne}"
+                                           var="idrolItem"
+                                           itemValue="#{idrolItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{menurolController.update}" value="#{bundlemenurol.Save}" update="display,:MenurolListForm:datalist,:growl" oncomplete="handleSubmit(args, 'MenurolEditDialog');"/>
+                    <p:commandButton value="#{bundlemenurol.Cancel}" onclick="MenurolEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

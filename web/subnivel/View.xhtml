@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SubnivelViewDlg" widgetVar="SubnivelViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlemenurol.ViewSubnivelTitle}">
+            <h:form id="SubnivelViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{subnivelController.selected != null}">
+                        <h:outputText value="#{bundlemenurol.ViewSubnivelLabel_idsubnivel}"/>
+                        <h:outputText value="#{subnivelController.selected.idsubnivel}" title="#{bundlemenurol.ViewSubnivelTitle_idsubnivel}"/>
+                        <h:outputText value="#{bundlemenurol.ViewSubnivelLabel_idsubmenu}"/>
+                        <h:outputText value="#{subnivelController.selected.idsubmenu.submenu}" title="#{bundlemenurol.ViewSubnivelTitle_idsubmenu}"/>
+                        <h:outputText value="#{bundlemenurol.ViewSubnivelLabel_subnivel}"/>
+                        <h:outputText value="#{subnivelController.selected.subnivel}" title="#{bundlemenurol.ViewSubnivelTitle_subnivel}"/>
+                        <h:outputText value="#{bundlemenurol.CreateItemmenuTitle_icon}"/>
+                        <h:outputText value="#{subnivelController.selected.icon}" title="#{bundlemenurol.ViewSubnivelTitle_subnivel}"/>                    
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundlemenurol.Close}" onclick="SubnivelViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

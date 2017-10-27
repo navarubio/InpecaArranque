@@ -68,5 +68,14 @@
             <base-name>/Bundlenotacarga</base-name>
             <var>bundlenotacarga</var>
         </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundlemenurol</base-name>
+            <var>bundlemenurol</var>
+        </resource-bundle>
+        <resource-bundle>
+            <base-name>/Bundlemenu</base-name>
+            <var>bundlemenu</var>
+        </resource-bundle>
+        
     </application>
 </faces-config>

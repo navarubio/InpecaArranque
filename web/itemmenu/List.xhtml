@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundlemenurol.ListItemmenuTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="ItemmenuListForm">
+                <p:panel header="#{bundlemenurol.ListItemmenuTitle}">
+                    <p:dataTable id="datalist" value="#{itemmenuController.itemsordenados}" var="item" style="width: 1200px"
+                                 selectionMode="single" selection="#{itemmenuController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.iditemmenu}"
+                                 rows="25"
+                                 rowsPerPageTemplate="25,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column width="50">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_iditemmenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.iditemmenu}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idsubmenu.submenu}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_idsubmenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idsubmenu.submenu}"/>
+                        </p:column>
+                        <p:column filterBy="#{item.idsubnivel}" filterMatchMode="contains">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_idsubnivel}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idsubnivel.subnivel}"/>
+                        </p:column>
+
+                        <p:column width="150" filterBy="#{item.descripcion}" filterMatchMode="contains" >
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_descripcion}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.descripcion}"/>
+                        </p:column>
+                        <p:column width="250">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_url}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.url}"/>
+                        </p:column>
+                        <p:column style="text-align: center">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_icon}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.icon}"/>
+                        </p:column>
+                        <p:column style="text-align: center">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundlemenurol.ListItemmenuTitle_estado}"/>
+                            </f:facet>
+                            <p:selectBooleanCheckbox value="#{item.estado}" disabled="true"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundlemenurol.Create}" actionListener="#{itemmenuController.prepareCreate}" update=":ItemmenuCreateForm" oncomplete="PF('ItemmenuCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundlemenurol.View}" update=":ItemmenuViewForm" oncomplete="PF('ItemmenuViewDialog').show()" disabled="#{empty itemmenuController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundlemenurol.Edit}" update=":ItemmenuEditForm" oncomplete="PF('ItemmenuEditDialog').show()" disabled="#{empty itemmenuController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundlemenurol.Delete}" actionListener="#{itemmenuController.destroy}" update=":growl,datalist" disabled="#{empty itemmenuController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

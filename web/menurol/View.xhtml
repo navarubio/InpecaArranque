@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="MenurolViewDlg" widgetVar="MenurolViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundlemenurol.ViewMenurolTitle}">
+            <h:form id="MenurolViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{menurolController.selected != null}">
+                        <h:outputText value="#{bundlemenurol.ViewMenurolLabel_idmenurol}"/>
+                        <h:outputText value="#{menurolController.selected.idmenurol}" title="#{bundlemenurol.ViewMenurolTitle_idmenurol}"/>
+                        <h:outputText value="#{bundlemenurol.ViewMenurolLabel_iditemmenu}"/>
+                        <h:outputText value="#{menurolController.selected.iditemmenu}" title="#{bundlemenurol.ViewMenurolTitle_iditemmenu}"/>
+                        <h:outputText value="#{bundlemenurol.ViewMenurolLabel_idrol}"/>
+                        <h:outputText value="#{menurolController.selected.idrol}" title="#{bundlemenurol.ViewMenurolTitle_idrol}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundlemenurol.Close}" onclick="MenurolViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
