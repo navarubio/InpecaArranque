@@ -105,6 +105,9 @@ public class FacturasController implements Serializable {
     private List<Requerimiento> requerimientos = null;
     private String siguiente;
     private Empresa empresa;
+    private String totalgeneralform;
+    private String totalivaform;
+    private String totalsubtotalform;
 
     @Inject
     private Factura factura;
@@ -235,8 +238,30 @@ public class FacturasController implements Serializable {
     public void setRequerimientos(List<Requerimiento> requerimientos) {
         this.requerimientos = requerimientos;
     }
-    
-    
+
+    public String getTotalgeneralform() {
+        return totalgeneralform;
+    }
+
+    public void setTotalgeneralform(String totalgeneralform) {
+        this.totalgeneralform = totalgeneralform;
+    }
+
+    public String getTotalivaform() {
+        return totalivaform;
+    }
+
+    public void setTotalivaform(String totalivaform) {
+        this.totalivaform = totalivaform;
+    }
+
+    public String getTotalsubtotalform() {
+        return totalsubtotalform;
+    }
+
+    public void setTotalsubtotalform(String totalsubtotalform) {
+        this.totalsubtotalform = totalsubtotalform;
+    }
 
     @PostConstruct
     public void init() {
@@ -291,14 +316,14 @@ public class FacturasController implements Serializable {
                 detalle.setSubtotal(rq.getSubtotal());
                 detalle.setTributoiva(rq.getTributoiva());
                 detalle.setTotal(rq.getTotal());
-                material = material + detalle.getCodigo().getDescripcion() + 
-                         " CANTIDAD: " + detalle.getUnidades()+ " "+detalle.getCodigo().getIdmedida().getMedida()+" PRECIO: "+ detalle.getPrecioventa()+"  ";
+                material = material + detalle.getCodigo().getDescripcion()
+                        + " CANTIDAD: " + detalle.getUnidades() + " " + detalle.getCodigo().getIdmedida().getMedida() + " PRECIO: " + detalle.getPrecioventa() + "  ";
                 detallefacturaEJB.create(detalle);
             }
             String subject;
             String ultimafactura = facturaEJB.ultimafacturaformat();
             String fechafactu = formateador.format(factura.getFecha());
-            empresa= empresaEJB.devolverEmpresabase();
+            empresa = empresaEJB.devolverEmpresabase();
             correo = "FACTURA NRO: " + ultimafactura
                     + "  CONTROL: " + factura.getNumerocontrol()
                     + "  USUARIO: " + factura.getIdusuario().getNombre()
@@ -312,7 +337,7 @@ public class FacturasController implements Serializable {
                     + "  TOTAL: " + formatearnumero.format(factura.getTotalgeneral())
                     + "  OBSERVACIONES: " + factura.getObservacionesfact();
 
-            subject = empresa.getNombrecomercial()+" Emisión de Factura N° " + ultimafactura;
+            subject = empresa.getNombrecomercial() + " Emisión de Factura N° " + ultimafactura;
             enviomail = new envioCorreo(correo, subject);
             enviomail.start();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "La Factura se registro exitosamente con el numero " + facturaEJB.ultimafacturaformat()));
@@ -333,7 +358,7 @@ public class FacturasController implements Serializable {
     public String devolversiguientefactura() {
 
         siguiente = facturaEJB.siguientefacturaformat();
-        
+
         return siguiente;
     }
 
@@ -362,11 +387,27 @@ public class FacturasController implements Serializable {
             pventa = 0;
             cantidad = 0;
             requer.setCodigo(null);
+            totaltotales();
 //            requer.setCodigo(null);
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "", "No puede dejar el campo Cantidad en 0.0"));
         }
 
+    }
+
+    public void totaltotales() {
+        double montotgeneral = 0;
+        double montotiva = 0;
+        double montotsubtotal = 0;
+
+        for (Requerimiento requeri : listarequerimiento) {
+            montotgeneral += requeri.getTotal();
+            montotiva += requeri.getTributoiva();
+            montotsubtotal += requeri.getSubtotal();
+        }
+        totalgeneralform = formatearnumero.format(montotgeneral);
+        totalivaform = formatearnumero.format(montotiva);
+        totalsubtotalform = formatearnumero.format(montotsubtotal);
     }
 
     public double totaltotal() {
@@ -431,6 +472,7 @@ public class FacturasController implements Serializable {
         if (requerim.hashCode() == 0) {
             id = 0;
         }
+        totaltotales();
 
     }
 

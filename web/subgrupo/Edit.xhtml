@@ -22,7 +22,7 @@
                                            itemValue="#{idgrupoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditSubgrupoLabel_subgrupo}" for="subgrupo" />
-                        <p:inputText id="subgrupo" value="#{subgrupoController.selected.subgrupo}" title="#{bundle.EditSubgrupoTitle_subgrupo}" />
+                        <p:inputText id="subgrupo" value="#{subgrupoController.selected.subgrupo}" title="#{bundle.EditSubgrupoTitle_subgrupo}" size="80" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{subgrupoController.update}" value="#{bundle.Save}" update="display,:SubgrupoListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SubgrupoEditDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SubgrupoEditDialog.hide()"/>

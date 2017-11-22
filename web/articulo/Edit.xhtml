@@ -39,14 +39,14 @@
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{subgrupoController.itemsAvailableSelectOne}"
                                            var="idsubgrupoItem"
-                                           itemValue="#{idsubgrupoItem}"/>
+                                           itemValue="#{idsubgrupoItem}" itemLabel="#{idsubgrupoItem.subgrupo}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditArticuloLabel_idgravamen}" for="idgravamen" />
                         <p:selectOneMenu id="idgravamen" value="#{articuloController.selected.idgravamen}" required="true" >
                             <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
                             <f:selectItems value="#{gravamenController.itemsAvailableSelectOne}"
                                            var="idgravamenItem"
-                                           itemValue="#{idgravamenItem}"/>
+                                           itemValue="#{idgravamenItem}" itemLabel="#{idgravamenItem.alicuota}%  #{idgravamenItem.categoria}" />
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.EditArticuloLabel_cuentacontable}" for="idplandecuenta" />
                         <p:selectOneMenu id="idplandecuenta" value="#{articuloController.selected.idplandecuenta}" converter="omnifaces.SelectItemsConverter" filter="true" filterMatchMode="contains" >

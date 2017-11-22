@@ -21,7 +21,7 @@
                                            itemValue="#{idgrupoItem}"/>
                         </p:selectOneMenu>
                         <p:outputLabel value="#{bundle.CreateSubgrupoLabel_subgrupo}" for="subgrupo" />
-                        <p:inputText id="subgrupo" value="#{subgrupoController.selected.subgrupo}" title="#{bundle.CreateSubgrupoTitle_subgrupo}" />
+                        <p:inputText id="subgrupo" value="#{subgrupoController.selected.subgrupo}" title="#{bundle.CreateSubgrupoTitle_subgrupo}" size="80" />
                     </p:panelGrid>
                     <p:commandButton actionListener="#{subgrupoController.create}" value="#{bundle.Save}" update="display,:SubgrupoListForm:datalist,:growl" oncomplete="handleSubmit(args,'SubgrupoCreateDialog');"/>
                     <p:commandButton value="#{bundle.Cancel}" onclick="SubgrupoCreateDialog.hide()"/>

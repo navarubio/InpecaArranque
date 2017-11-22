@@ -14,10 +14,10 @@
                     <p:panelGrid columns="2" rendered="#{subgrupoController.selected != null}">
                         <h:outputText value="#{bundle.ViewSubgrupoLabel_idsubgrupo}"/>
                         <h:outputText value="#{subgrupoController.selected.idsubgrupo}" title="#{bundle.ViewSubgrupoTitle_idsubgrupo}"/>
+                        <h:outputText value="#{bundle.ViewSubgrupoLabel_idgrupo}"/>
+                        <h:outputText value="#{subgrupoController.selected.idgrupo.grupo}" title="#{bundle.ViewSubgrupoTitle_idgrupo}"/>
                         <h:outputText value="#{bundle.ViewSubgrupoLabel_subgrupo}"/>
                         <h:outputText value="#{subgrupoController.selected.subgrupo}" title="#{bundle.ViewSubgrupoTitle_subgrupo}"/>
-                        <h:outputText value="#{bundle.ViewSubgrupoLabel_idgrupo}"/>
-                        <h:outputText value="#{subgrupoController.selected.idgrupo}" title="#{bundle.ViewSubgrupoTitle_idgrupo}"/>
                     </p:panelGrid>
                     <p:commandButton value="#{bundle.Close}" onclick="SubgrupoViewDialog.hide()"/>
                 </h:panelGroup>
