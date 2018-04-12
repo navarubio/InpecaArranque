@@ -69,7 +69,10 @@ public class AuxiliarrequerimientoController1 implements Serializable {
     }
     
     public List<Auxiliarrequerimiento> buscarRequerimientosActivos() {
-        requerimientosactivos = ejbFacade.buscarrequerimientosActivos();
+        List<Auxiliarrequerimiento> auxilio = null;
+//        requerimientosactivos.clear();
+        auxilio = ejbFacade.buscarrequerimientosActivos();
+        requerimientosactivos=auxilio;
         return requerimientosactivos;
     }
 

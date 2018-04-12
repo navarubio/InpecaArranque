@@ -907,9 +907,9 @@ public class AsientosespecificosController implements Serializable {
             detalleaanexar.setDebe(0.0);
             detalleaanexar.setHaber(0.0);
             cuentaseleccionada=0;
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Cuenta fue amexada"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "Su Cuenta fue anexada extosamente"));
         }else{
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "La Cuenta Seleccionada no es de movimiento"));
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_FATAL, "Aviso", "La Cuenta seleccionada no es de movimiento"));
             
         }
     }
