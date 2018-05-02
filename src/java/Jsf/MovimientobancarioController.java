@@ -9,9 +9,12 @@ import Jpa.MovimientobancarioFacade;
 import Jpa.MovimientobancarioFacadeLocal;
 import Modelo.Banco;
 import Modelo.Cuentabancaria;
+import Modelo.Detallecompra;
 
 import java.io.Serializable;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -22,6 +25,7 @@ import javax.ejb.EJB;
 import javax.ejb.EJBException;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
+import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
@@ -39,17 +43,22 @@ public class MovimientobancarioController implements Serializable {
     private CuentabancariaFacadeLocal cuentabancariaEJB;
     @EJB
     private BancoFacadeLocal bancoEJB;
+    @EJB
+    private MovimientobancarioFacadeLocal movimientobancarioEJB;
+
     private List<Movimientobancario> items = null;
-    private List <Movimientobancario> itemsfiltrados=null;
-    private Movimientobancario selected=new Movimientobancario();
+    private List<Movimientobancario> itemsfiltrados = null;
+    private Movimientobancario selected = new Movimientobancario();
     private List<Banco> bancos;
     private Banco bancoselec;
     private Cuentabancaria cuentaselec;
     private Date fechadesde;
     private Date fechahasta;
     private List<Cuentabancaria> lstCuentasSelecc;
-   
-    
+    ArrayList<Movimientobancario> listaerrores = new ArrayList();
+    ArrayList<Movimientobancario> listaerrores1 = new ArrayList();
+    DecimalFormat formatearnumero = new DecimalFormat("###,###.##");
+//    private List<Movimientobancario> listaerrores=new ArrayList<>;
 
     public MovimientobancarioController() {
     }
@@ -126,10 +135,30 @@ public class MovimientobancarioController implements Serializable {
         return selected;
     }
 
+    public ArrayList<Movimientobancario> getListaerrores() {
+        return listaerrores;
+    }
+
+    public void setListaerrores(ArrayList<Movimientobancario> listaerrores) {
+        this.listaerrores = listaerrores;
+    }
+
+    public ArrayList<Movimientobancario> getListaerrores1() {
+        return listaerrores1;
+    }
+
+    public void setListaerrores1(ArrayList<Movimientobancario> listaerrores1) {
+        this.listaerrores1 = listaerrores1;
+    }
+
     @PostConstruct
     public void init() {
-        bancos=bancoEJB.findAll();
+        bancos = bancoEJB.findAll();
+        if (itemsfiltrados!=null){
+            itemsfiltrados.clear();
+        }
     }
+
     public List<Cuentabancaria> refrescarCuentasBancarias() {
         try {
             lstCuentasSelecc = cuentabancariaEJB.espxBanco(bancoselec.getIdbanco());
@@ -139,8 +168,96 @@ public class MovimientobancarioController implements Serializable {
         return lstCuentasSelecc;
     }
 
-    public void actualizar(){
-        itemsfiltrados= ejbFacade.buscarmovimientoporfecha(selected.getIdcuentabancaria(), fechadesde, fechahasta);
+    public void actualizar() {
+//        itemsfiltrados.clear();
+        itemsfiltrados = ejbFacade.buscarmovimientoporfecha(selected.getIdcuentabancaria(), fechadesde, fechahasta);
+
+    }
+
+    public void conciliar() {
+        listaerrores1.clear();
+        itemsfiltrados = ejbFacade.buscarmovimientoporfecha(selected.getIdcuentabancaria(), fechadesde, fechahasta);
+        conciliarSaldos();
+    }
+
+    public void conciliarSaldos() {
+        double saldoant = 0;
+        double saldoact = 0;
+        double saldopost = 0;
+        int marcador = 0;
+        int sinnovedad = 0;
+        String cadena = null;
+        String cadenaactual;
+        String anterior;
+        for (Movimientobancario seleccion : itemsfiltrados) {
+            saldoant = seleccion.getSaldoanterior();
+            anterior = formatearnumero.format(saldoant);
+            cadena = formatearnumero.format(saldopost);
+            if (marcador == 0) {
+                cadena = anterior;
+            }
+
+            if (anterior.equals(cadena)) {
+                if (seleccion.getDebito() == null) {
+                    saldopost = saldoant + seleccion.getCredito();
+                } else {
+                    saldopost = saldoant - seleccion.getDebito();
+
+                }
+                cadena = formatearnumero.format(saldopost);
+                saldoact = seleccion.getSaldoactual();
+                cadenaactual = formatearnumero.format(saldoact);
+
+                if (cadena.equals(cadenaactual)) {
+
+                } else {
+                    seleccion.setSaldoactual(saldopost);
+                    sinnovedad = 1;
+                }
+                listaerrores1.add(seleccion);
+            } else {
+                saldoant = saldopost;
+                seleccion.setSaldoanterior(saldopost);
+                if (seleccion.getDebito() == null) {
+                    saldopost = saldoant + seleccion.getCredito();
+                } else {
+                    saldopost = saldoant - seleccion.getDebito();
+
+                }
+                cadena = formatearnumero.format(saldopost);
+                saldoact = seleccion.getSaldoactual();
+                cadenaactual = formatearnumero.format(saldoact);
+
+                if (cadena.equals(cadenaactual)) {
+
+                } else {
+                    seleccion.setSaldoactual(saldopost);
+                    sinnovedad = 1;
+                }
+                listaerrores1.add(seleccion);
+            }
+            if (marcador == 0) {
+                marcador++;
+            }
+        }
+        if (marcador == 0) {
+            marcador++;
+        }
+        if (sinnovedad == 0) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "LOS SALDOS ESTAN AJUSTADOS"));
+        } else {
+            corregirSaldos();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Aviso", "LOS SALDOS FUERON AJUSTADOS SATISFACTORIAMENTE"));
+        }
+
+    }
+
+    public void corregirSaldos() {
+        Movimientobancario movimientoListo;
+        for (Movimientobancario movicorreg : listaerrores1) {
+            movimientoListo = movicorreg;
+            movimientobancarioEJB.edit(movimientoListo);
+        }
     }
 
     public List<Movimientobancario> getItemsfiltrados() {
@@ -215,6 +332,7 @@ public class MovimientobancarioController implements Serializable {
 
     public List<Movimientobancario> getItemsAvailableSelectOne() {
         return getFacade().findAll();
+
     }
 
     @FacesConverter(forClass = Movimientobancario.class)
@@ -257,6 +375,7 @@ public class MovimientobancarioController implements Serializable {
         }
 
     }
+
     public void verMovimiento() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 
         //Instancia hacia la clase reporteClientes        
@@ -267,7 +386,7 @@ public class MovimientobancarioController implements Serializable {
         ServletContext servletContext = (ServletContext) facesContext.getExternalContext().getContext();
         String ruta = servletContext.getRealPath("/resources/reportes/movimientobancario.jasper");
 
-        rArticulo.getMovimientoBancario(ruta, codigocuenta,fechadesde,fechahasta);
+        rArticulo.getMovimientoBancario(ruta, codigocuenta, fechadesde, fechahasta);
         FacesContext.getCurrentInstance().responseComplete();
     }
 }

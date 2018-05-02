@@ -53,7 +53,7 @@ public class MovimientobancarioFacade extends AbstractFacade<Movimientobancario>
         String consulta;
         List<Movimientobancario> lista = null;
         try {
-            consulta = "From Movimientobancario m where m.idcuentabancaria.idcuentabancaria= ?1 and m.fecha between ?2 and ?3";
+            consulta = "From Movimientobancario m where m.idcuentabancaria.idcuentabancaria= ?1 and m.fecha between ?2 and ?3 order by m.fecha,m.idmovimiento";
             Query query = em.createQuery(consulta);
             query.setParameter(1, cuenta.getIdcuentabancaria());
             query.setParameter(2, fechaini);
